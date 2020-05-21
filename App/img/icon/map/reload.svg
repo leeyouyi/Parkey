@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon/map/reload</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/map/reload" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#FFFFFF" cx="20" cy="20" r="20"></circle>
+        <path d="M20,18 L14,13.5 L20,9 L20,12 L20,12 C24.9705627,12 29,16.0294373 29,21 C29,25.9705627 24.9705627,30 20,30 C15.0294373,30 11,25.9705627 11,21 C11,20.4477153 11.4477153,20 12,20 C12.5522847,20 13,20.4477153 13,21 C13,24.8659932 16.1340068,28 20,28 C23.8659932,28 27,24.8659932 27,21 C27,17.1340068 23.8659932,14 20,14 L20,18 Z" id="Combined-Shape" fill="#FF9500"></path>
+    </g>
+</svg>

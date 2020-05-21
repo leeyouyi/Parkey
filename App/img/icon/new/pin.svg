@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon/pin</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/pin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M15,0 C9,0 4.2,4.86319567 4.2,10.9421903 C4.2,12.6443088 4.84,14.4274805 5.48,15.9674925 C7.48,20.2633153 10.12,24.4780849 12.52,28.6118012 C13.64,30.4760262 16.36,30.4760262 17.48,28.530748 C19.8,24.5591382 22.28,20.5064751 24.28,16.3727588 C25.08,14.6706403 25.8,12.8064153 25.8,10.9421903 C25.8,4.86319567 20.92,0 15,0 Z" id="Path" fill="#212121"></path>
+    </g>
+</svg>

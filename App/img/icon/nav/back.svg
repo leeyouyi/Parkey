@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>icon/nav/back</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M15.1353067,0.438977194 L4.45143135,10.0113338 C3.84952288,10.5498272 3.84952288,11.4487906 4.45143135,11.9894955 L15.1353067,21.5596406 C15.7905338,22.1467865 16.8249159,22.1467865 17.480143,21.5596406 C18.1732857,20.938217 18.1732857,19.9032481 17.480143,19.2807187 L8.53208641,11.2641327 C8.3697607,11.1192813 8.3697607,10.8793366 8.53208641,10.7344851 L17.480143,2.7178991 C18.1732857,2.09647547 18.1732857,1.06150657 17.480143,0.438977194 C17.151937,0.147062889 16.7301272,0 16.3083173,0 C15.8853226,0 15.4635127,0.147062889 15.1353067,0.438977194 Z" id="path-1"></path>
+    </defs>
+    <g id="icon/nav/back" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Back" fill="#F57C00" xlink:href="#path-1"></use>
+    </g>
+</svg>
