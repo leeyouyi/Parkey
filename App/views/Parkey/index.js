@@ -77,7 +77,6 @@ const Parkey = props => {
     }
   }, [loginReducer.login]);
   useEffect(() => {
-    console.log(userInfoReducer.status)
     if(userInfoReducer.status === 4){
       navigation.navigate('Verification');
     }

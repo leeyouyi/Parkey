@@ -264,7 +264,8 @@ class Edit extends React.Component {
               let chengeData = item.data[index];
               navigation.navigate(navigationTxt, {chengeData: chengeData});
             }}
-            onLongPress={doDrag}>
+            // onLongPress={doDrag}
+            >
             <View style={styles.row}>
               <Text style={styles.txt}>
                 {item.data[index] ? item.data[index].txt : ''}

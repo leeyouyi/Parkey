@@ -93,6 +93,7 @@ const ButtonItem = props => {
             userPasswordReducer.newPassword1,
             navigation,
             navigateTxt,
+            userInfoReducer.status
           );
         } else if (buttonTxt === '確認新增車牌') {
           addLp(
@@ -231,7 +232,11 @@ const loginFn = (
       } else if(res.data.status === 20){
         navigation.navigate('OldMember');
       }else {
-        Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+        if( res.data.msg === 'PhoneNo不存在'){
+          Alert.alert('錯誤', '您輸入的手機帳號尚未註冊', [{text: '確定'}]);
+        }else{
+          Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+        }
       }
     })
     .catch(err => {
@@ -486,7 +491,9 @@ const resetFn = (
   newPassword1,
   navigation,
   navigateTxt,
+  status
 ) => {
+  
   let req = {
     PhoneNo: phone,
     Password: password,
@@ -498,7 +505,11 @@ const resetFn = (
       if (res.data.status === 0) {
         dispatch(login(true, phone, newPassword1));
         uPassword(phone, password, newPassword1, dispatch);
-        navigation.navigate(navigateTxt);
+        if(status===20){
+          navigation.navigate('Accont');
+        }else{
+          navigation.navigate(navigateTxt);
+        }
       } else {
         Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
       }

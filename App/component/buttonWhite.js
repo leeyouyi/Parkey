@@ -36,10 +36,8 @@ const ButtonWhite = props => {
     userService
       .userLogout(req)
       .then(function(res) {
-        if (res.data.status == 0) {
-          if(AsyncStorage.getItem('login_phone')){
-            AsyncStorage.multiRemove(['token', 'login_phone','login_pw','random']);
-          }
+        if (res.data.status === 0) {
+          AsyncStorage.multiRemove(['token', 'login_phone','login_pw','random']);
           dispatch(login(false, '', '',null))
           dispatch(userinfo('登入帳戶', '', '','','',''))
           dispatch(userSelectLP('', '',''))
