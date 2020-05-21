@@ -80,6 +80,7 @@ class Home extends React.Component {
   }
   _login_event(){
     const loginReducer =  store.getState().loginReducer
+    const userInfoReducer =  store.getState().userInfoReducer
     if(!loginReducer.login){
       AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
         let token = data[0][1] || null;
@@ -106,7 +107,7 @@ class Home extends React.Component {
                 .then(res => {
                   if (res.data.status === 0) {
                     let {UName, email, FName, PID} = res.data;
-                    store.dispatch(userinfo(UName, FName, phone, email, PID));
+                    store.dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
                   }
                 })
                 .catch(err => {

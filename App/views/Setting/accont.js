@@ -3,12 +3,14 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
 import {useSelector} from 'react-redux';
 import ButtonWhute from '../../component/buttonWhite'
+import * as userService from '../../axios/user';
 
 const Accont = props => {
   const {navigation, route} = props;
@@ -17,7 +19,7 @@ const Accont = props => {
     navigateTxt: 'Setting',
     buttonTxt: '登出',
   };
-  // console.log(userInfoReducer)
+  const loginReducer = useSelector(state => state.loginReducer);
   const [name,setName] = useState('Fancy')
   const [Fname,setFname] = useState('Lin')
   const [email,setEmail] = useState('A123@gmail.com')
@@ -25,6 +27,45 @@ const Accont = props => {
   const [pid,setPid] = useState('3366')
   const [status,setStatus] = useState('')
   useEffect(()=>{
+    AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
+      console.log(data)
+      let token = data[0][1] || null;
+      if (token == 'asdfghjkl410') {
+        let phone = data[1][1]
+        let password = data[2][1]
+        let random = data[3][1]
+        let req = {
+          PhoneNo: phone,
+          Password: password,
+          ptime: userService.time(),
+        };
+        userService
+        .userLogin(req)
+        .then(res => {
+          if (res.data.status === 0) {
+            dispatch(login(true, phone, password,random));
+            let req2 = {
+              PhoneNo: phone,
+              ptime: userService.time(),
+            };
+            userService
+              .userQMemberInfo(req2)
+              .then(res => {
+                if (res.data.status === 0) {
+                  let {UName, email, FName, PID} = res.data;
+                  dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              })
+            } 
+          })
+        .catch(err => {
+          console.log(err);
+        })      
+      }
+    });
     setName(userInfoReducer.name)
     setEmail(userInfoReducer.email)
     setPhone(userInfoReducer.phone)

@@ -56,7 +56,7 @@ const List = props => {
               .then(res => {
                 if (res.data.status === 0) {
                   let {UName, email, FName, PID} = res.data;
-                  dispatch(userinfo(UName, FName, phone, email, PID));
+                  dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
                 }
               })
               .catch(err => {

@@ -38,6 +38,7 @@ class Edit extends React.Component {
     };
   }
   _login_event(){
+    const userInfoReducer =  store.getState().userInfoReducer
       AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
         let token = data[0][1] || null;
         if (token == 'asdfghjkl410') {
@@ -63,7 +64,7 @@ class Edit extends React.Component {
                 .then(res => {
                   if (res.data.status === 0) {
                     let {UName, email, FName, PID} = res.data;
-                    store.dispatch(userinfo(UName, FName, phone, email, PID));
+                    store.dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
                   }
                 })
                 .catch(err => {
@@ -96,7 +97,11 @@ class Edit extends React.Component {
           store.dispatch(userSelectLP('','',''))
           this.getList();
         }else{
-          Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+          if(res.data.msg === '錯誤的登入資訊'){
+            console.log(res.data.msg);
+          }else{
+             Alert.alert('錯誤', res.data.msg, [{text: '確定'}])
+          }
           this.setState({loading:false})
         }
       })
@@ -192,7 +197,11 @@ class Edit extends React.Component {
             this.setState({refreshList: !this.state.refreshList});
           }else{
             if(res.data.msg !== '會員尚未認證'){
-              Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+              if(res.data.msg === '錯誤的登入資訊'){
+                console.log(res.data.msg);
+              }else{
+                 Alert.alert('錯誤', res.data.msg, [{text: '確定'}])
+              }
             }
             this.setState({loading:false})
           }

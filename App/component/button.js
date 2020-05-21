@@ -51,7 +51,7 @@ const ButtonItem = props => {
           let refs= props.modal.refs;
           confirmPwd(
             userConfirmPwdReducer,
-            userRegisterReducer,
+            userInfoReducer,
             dispatch,
             navigation,
             navigateTxt,
@@ -170,19 +170,20 @@ const ButtonItem = props => {
   );
 };
 const _login_event = (phone, password,random) => {
-  AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then(data => {
-    let token = data[0][1] || null;
-    if (token == 'asdfghjkl410') {
+  console.log(phone,password,random)
+  // AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then(data => {
+    // let token = data[0][1] || null;
+    // if (token == 'asdfghjkl410') {
 
-    } else {
+    // } else {
       AsyncStorage.multiSet([
         ['token', 'asdfghjkl410'],
         ['login_phone', phone],
         ['login_pw', password],
         ['random', random],
       ]);
-    }
-  });
+    // }
+  // });
 };
 
 //登入
@@ -217,7 +218,7 @@ const loginFn = (
           .then(res => {
             if (res.data.status === 0) {
               let {UName, email, FName, PID} = res.data;
-              dispatch(userinfo(UName, FName, phone, email, PID,status));
+              dispatch(userinfo(UName, FName, phone, email, PID, status));
               if(status === 4){
                 navigation.navigate('Verification');
               }else{
@@ -292,12 +293,14 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
   userService
     .userRegister(req)
     .then(res => {
+      console.log(res.data)
       if (res.data.status === 0) {
+        let status = 4
         let random = getRandom(1,999)
         random =  random + ''
         _login_event(userRegisterReducer.phone, userRegisterReducer.password,random);
         dispatch(
-          login(true, userRegisterReducer.phone, userRegisterReducer.password),
+          login(true, userRegisterReducer.phone, userRegisterReducer.password,random),
         );
         dispatch(
           userinfo(
@@ -306,9 +309,8 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
             userRegisterReducer.phone,
             userRegisterReducer.email,
             userRegisterReducer.pid,
-            userRegisterReducer.pid,
-            true
-          ),
+            status
+          )
         );
         navigation.navigate(navigateTxt);
       } else {
@@ -322,7 +324,7 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
 //驗證碼確認
 const confirmPwd = (
   userConfirmPwdReducer,
-  userRegisterReducer,
+  userInfoReducer,
   dispatch,
   navigation,
   navigateTxt,
@@ -344,19 +346,16 @@ const confirmPwd = (
     .userConfirmPwd(req)
     .then(res => {
       if (res.data.status === 0) {
-        if(!loginReducer.login){
-          dispatch(login(true, userRegisterReducer.phone, ''));
           dispatch(
             userinfo(
-              userRegisterReducer.name,
-              userRegisterReducer.Fname,
-              userRegisterReducer.phone,
-              userRegisterReducer.email,
-              userRegisterReducer.pid,
+              userInfoReducer.name,
+              userInfoReducer.Fname,
+              userInfoReducer.email,
+              userInfoReducer.phone,
+              userInfoReducer.pid,
               true
-            ),
+            )
           );
-        }
         refs.modal2.open();
         navigation.navigate(navigateTxt);
       } else {
@@ -417,6 +416,7 @@ const uMemberInfo = (
             userInfoReducer.phone,
             email,
             userInfoReducer.pid,
+            userInfoReducer.status
           ),
         );
         navigation.navigate(navigateTxt);

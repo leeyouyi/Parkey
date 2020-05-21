@@ -41,7 +41,7 @@ const ButtonWhite = props => {
             AsyncStorage.multiRemove(['token', 'login_phone','login_pw','random']);
           }
           dispatch(login(false, '', '',null))
-          dispatch(userinfo('登入帳戶', '', '','',''))
+          dispatch(userinfo('登入帳戶', '', '','','',''))
           dispatch(userSelectLP('', '',''))
           navigation.navigate(navigateTxt);
         }

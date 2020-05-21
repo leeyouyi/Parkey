@@ -59,7 +59,7 @@ const Parkey = props => {
                 .then(res => {
                   if (res.data.status === 0) {
                     let {UName, email, FName, PID} = res.data;
-                    dispatch(userinfo(UName, FName, phone, email, PID));
+                    dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
                   }
                 })
                 .catch(err => {
@@ -77,6 +77,7 @@ const Parkey = props => {
     }
   }, [loginReducer.login]);
   useEffect(() => {
+    console.log(userInfoReducer.status)
     if(userInfoReducer.status === 4){
       navigation.navigate('Verification');
     }
@@ -334,7 +335,11 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
 
       }else {
         if(res.data.msg !== '會員尚未認證'){
-          Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+          if(res.data.msg === '錯誤的登入資訊'){
+            console.log(res.data.msg);
+          }else{
+             Alert.alert('錯誤', res.data.msg, [{text: '確定'}])
+          }
         }
         setLoading(false)
       }
