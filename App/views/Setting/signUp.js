@@ -111,7 +111,7 @@ const SignUp = props => {
                         />
                         :
                         <TextInput
-                        keyboardType={item.type === 'phone'?'numeric':'default'}
+                        keyboardType={item.type === 'phone'?'numeric':'email'?'email-address':'default'}
                         style={styles.textInput}
                         onChangeText={(text)=>{
                           let phone = item.type === 'phone'? text :  userRegisterReducer.phone 

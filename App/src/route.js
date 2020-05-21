@@ -186,7 +186,7 @@ const Route = () => {
                     style={
                       Platform.OS === 'android'
                         ? ''
-                        : {hight: 50, position: 'absolute', top: 20, left: 5}
+                        : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
                     }>
                     <Text
                       style={{
@@ -252,7 +252,7 @@ const Route = () => {
                       Platform.OS === 'android'
                         ? ''
                         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5}
+                        : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
                     }>
                     <Text
                       style={{
@@ -310,7 +310,7 @@ const Route = () => {
                       Platform.OS === 'android'
                         ? ''
                         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5}
+                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
                     }>
                     <Text
                       style={{
@@ -455,7 +455,7 @@ const Route = () => {
                       Platform.OS === 'android'
                         ? ''
                         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5}
+                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
                     }>
                     <Text
                       style={{
@@ -483,7 +483,7 @@ const Route = () => {
           name="Verification"
           component={Verification}
           options={({navigation, route}) => ({
-            title: '重新設定密碼',
+            title: '繼續綁定手機',
             headerLeft() {
               return (
                 <TouchableOpacity
@@ -495,7 +495,7 @@ const Route = () => {
                       Platform.OS === 'android'
                         ? ''
                         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5}
+                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
                     }>
                     <Text
                       style={{
@@ -527,7 +527,7 @@ const Route = () => {
                       Platform.OS === 'android'
                         ? ''
                         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top:15, left: 5}
+                        : {hight: 50, position: 'absolute', top:15, left: 5, zIndex:999}
                     }>
                     <Text
                       style={{
