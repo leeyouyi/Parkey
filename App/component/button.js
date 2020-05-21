@@ -170,7 +170,6 @@ const ButtonItem = props => {
   );
 };
 const _login_event = (phone, password,random) => {
-  console.log(phone,password,random)
   // AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then(data => {
     // let token = data[0][1] || null;
     // if (token == 'asdfghjkl410') {
@@ -293,7 +292,6 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
   userService
     .userRegister(req)
     .then(res => {
-      console.log(res.data)
       if (res.data.status === 0) {
         let status = 4
         let random = getRandom(1,999)
@@ -606,11 +604,9 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
     LPNo: lockData.LPNo,
     ptime: userService.time(),
   };
-  // console.log(req)
   userService
     .userBindDevice(req)
     .then(res => {
-      // console.log(res.data)
       if (res.data.status === 0) {
         navigation.navigate(navigateTxt, {
           lockData,

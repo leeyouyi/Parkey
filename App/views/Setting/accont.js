@@ -8,13 +8,17 @@ import {
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import ButtonWhute from '../../component/buttonWhite'
 import * as userService from '../../axios/user';
-
+import {
+  login,
+  userinfo,
+} from '../../src/action';
 const Accont = props => {
   const {navigation, route} = props;
   const userInfoReducer = useSelector(state => state.userInfoReducer);
+  const dispatch = useDispatch();
   const buttonData = {
     navigateTxt: 'Setting',
     buttonTxt: '登出',
@@ -28,7 +32,6 @@ const Accont = props => {
   const [status,setStatus] = useState('')
   useEffect(()=>{
     AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
-      console.log(data)
       let token = data[0][1] || null;
       if (token == 'asdfghjkl410') {
         let phone = data[1][1]
