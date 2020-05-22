@@ -18,8 +18,7 @@ import {
   AsyncStorage,
   Keyboard,
   ActivityIndicator,
-  Platform,
-  Alert
+  Platform
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../img/icon/new/svgs';
@@ -28,14 +27,12 @@ import navSvgs from '../img/icon/nav/svgs';
 import MapView, {Marker} from 'react-native-maps';
 import FootItem from '../component/footer';
 import mapStyle from '../component/mapStyle';
-import Modal from 'react-native-modalbox';
+// import Modal from 'react-native-modalbox';
 import Geolocation from '@react-native-community/geolocation';
 import * as userService from '../axios/user';
 import store from '../src/store'
-import {
-  login,
-  userinfo,
-} from '../src/action';
+import {login,userinfo} from '../src/action';
+import Modal from '../component/modalbox'
 
 class Home extends React.Component {
   constructor(props) {
@@ -311,10 +308,12 @@ class Home extends React.Component {
               ref={'modal'+item.ID}
               isOpen={false}
               position={'bottom'}
-              backdropOpacity={0}>
+              backdropOpacity={0.5}
+              top={ Dimensions.get('window').height * 0.6}
+              >
               <View style={styles.modal2Wrap}>
                 <View style={styles.modal2Item}>
-                  <Text style={styles.modal2Txt}>{ !info[index] ? 'test' : info[index].SC}</Text>
+                  <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].SC}</Text>
                   <TouchableOpacity style={styles.modal2Button}
                   onPress={()=>{
                     const loginReducer =  store.getState().loginReducer
@@ -603,15 +602,18 @@ class Home extends React.Component {
                         latitude: item.Lat,
                         longitude: item.Lon,
                       }}
-                      title= {!info[index] ? 'test' : info[index].Area}
+                      title= {!info[index] ? '' : info[index].Area}
                       onPress={() => {
+                        list.forEach(el => {
+                          this.refs['modal'+el.ID].close();
+                        });
                         this.refs['modal'+item.ID].open();
                       }}>
                         {
                           item.FreeSp !== 0 ?
-                          <SvgXml xml={Svgs.mark_g} width="62" height="62" />
+                          <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
                           :
-                          <SvgXml xml={Svgs.mark_d} width="62" height="62" />
+                          <SvgXml xml={Svgs.mark_d} width="62" height="62"/>
                         }
                       
                       </Marker>
@@ -643,7 +645,6 @@ class Home extends React.Component {
                     userService
                     .userQDevice(req)
                     .then(res => {
-                      // console.log(res.data)
                       if (res.data.status === 0) {
                         navigation.navigate('Locked',{
                           lockData: {
@@ -775,7 +776,7 @@ class Modalbox extends React.Component {
     const none = this.state.none
     const num = this.state.page
     const loginReducer =  store.getState().loginReducer
-    const login = loginReducer.login
+    // const login = loginReducer.login
     return (
       <>
         {
@@ -858,7 +859,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    zIndex: 999,
   },
   modal2Wrap: {
     width: '90%',
@@ -1063,6 +1063,8 @@ const styles = StyleSheet.create({
   map: {
     height: '100%',
     width: '100%',
+    position:'relative',
+    zIndex:1
   },
   mapType:{
     width:'100%',
