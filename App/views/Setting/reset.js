@@ -72,10 +72,9 @@ const Reset = props => {
               <TouchableOpacity style={styles.paddingRight}
               onPress={()=>{
                 let req = {
-                  PhoneNo : phone,
+                  PhoneNo : forgetData,
                   ptime: userService.time()
                 }
-                console.log(req);
                 userService.userRPassword_2(req)
                 .then(res => {
                   if (res.data.status === 0) {

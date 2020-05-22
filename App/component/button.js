@@ -41,7 +41,7 @@ const ButtonItem = props => {
             loginReducer.password,
             dispatch,
             navigation,
-            navigateTxt,
+            // navigateTxt,
             goPage,
           );
         } else if (buttonTxt === '確認註冊') {
@@ -93,7 +93,8 @@ const ButtonItem = props => {
             userPasswordReducer.newPassword1,
             navigation,
             navigateTxt,
-            userInfoReducer.status
+            userInfoReducer.status,
+            loginReducer
           );
         } else if (buttonTxt === '確認新增車牌') {
           addLp(
@@ -192,7 +193,7 @@ const loginFn = (
   password,
   dispatch,
   navigation,
-  navigateTxt,
+  // navigateTxt,
   goPage,
 ) => {
   let req = {
@@ -204,7 +205,7 @@ const loginFn = (
     .userLogin(req)
     .then(res => {
       let status = res.data.status
-      if (res.data.status === 0 || res.data.status === 4 ) {
+      if (res.data.status === 0 || res.data.status === 4) {
         let random = getRandom(1,999)
         random =  random + ''
         dispatch(login(true, phone, password,random));
@@ -230,6 +231,7 @@ const loginFn = (
             console.log(err);
           });
       } else if(res.data.status === 20){
+        dispatch(userinfo('', '', '', '', '', res.data.status));
         navigation.navigate('OldMember');
       }else {
         if( res.data.msg === 'PhoneNo不存在'){
@@ -491,7 +493,8 @@ const resetFn = (
   newPassword1,
   navigation,
   navigateTxt,
-  status
+  status,
+  loginReducer
 ) => {
   
   let req = {
@@ -506,7 +509,13 @@ const resetFn = (
         dispatch(login(true, phone, newPassword1));
         uPassword(phone, password, newPassword1, dispatch);
         if(status===20){
-          navigation.navigate('Accont');
+          loginFn(
+            loginReducer.phone,
+            loginReducer.password,
+            dispatch,
+            navigation,
+            'Setting'
+          );
         }else{
           navigation.navigate(navigateTxt);
         }
