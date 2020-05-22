@@ -18,7 +18,8 @@ import {
   AsyncStorage,
   Keyboard,
   ActivityIndicator,
-  Platform
+  Platform,
+  Linking
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../img/icon/new/svgs';
@@ -289,7 +290,7 @@ class Home extends React.Component {
               width: Dimensions.get('window').width,
               height: Dimensions.get('window').height - 90,
             }}>
-            <ActivityIndicator size="large" color="#000" />
+            <ActivityIndicator size="large" color="#ff9500" />
           </View>
         ) : (
           <></>

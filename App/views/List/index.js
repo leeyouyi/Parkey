@@ -210,7 +210,7 @@ const List = props => {
                 flex: 1,
                 height: Dimensions.get('window').height - 150,
               }}>
-              <ActivityIndicator size="large" color="#000" />
+              <ActivityIndicator size="large" color="#ff9500" />
             </View>
           ) : (
             <></>

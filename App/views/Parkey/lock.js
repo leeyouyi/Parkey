@@ -155,7 +155,7 @@ const Lock = props => {
             width: Dimensions.get('window').width,
             height: Dimensions.get('window').height - 90,
           }}>
-          <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#ff9500" />
         </View>
        ) : (
         <></>

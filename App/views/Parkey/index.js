@@ -169,7 +169,7 @@ const ListItem = props => {
             alignItems: 'center',
             flex: 1,
           }}>
-          <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#ff9500" />
         </View>
       ) : (
         <></>

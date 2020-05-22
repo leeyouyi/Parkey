@@ -15,7 +15,7 @@ const About = props => {
       <View style={styles.container}>
         <View style={styles.wrap}>
           <View style={styles.item}>
-            <Text>
+            <Text style={styles.txt}>
               關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們關於我們
             </Text>
           </View>
@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   itemTxt: {
+    paddingLeft: 10,
+  },
+  txt:{
     fontSize: 18,
     color: '#757575',
-    paddingLeft: 10,
   },
   row: {
     width: '100%',
