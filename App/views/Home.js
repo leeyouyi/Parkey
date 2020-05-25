@@ -277,7 +277,6 @@ class Home extends React.Component {
     const marker = this.state.marker
     const loading = this.state.loading
     const typeAry = this.state.typeAry
-
     return (
       <>
         {loading ? (
@@ -776,7 +775,7 @@ class Modalbox extends React.Component {
     const flex = this.state.flex
     const none = this.state.none
     const num = this.state.page
-    const loginReducer =  store.getState().loginReducer
+    // const loginReducer =  store.getState().loginReducer
     // const login = loginReducer.login
     return (
       <>
