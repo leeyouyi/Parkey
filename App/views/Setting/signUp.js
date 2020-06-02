@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlignVertical: 'center',
     color:'#000',
-    marginTop:5,
+    // marginTop:5,
     paddingTop:5,
   },
   inputWrap1:{
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     color:'#000',
     fontSize:17,
     paddingTop:5,
-    marginTop:5
+    // marginTop:5
   },
   nameTxt:{
     justifyContent: 'flex-end',
