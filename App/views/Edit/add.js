@@ -177,7 +177,7 @@ const Add = props => {
                     onChangeText={text => {
                       let regex = new RegExp("^[a-zA-Z0-9 ]+$")
                       if (text!== '' && !regex.test(text)){
-                        alert('車牌為英文或數字')
+                        // alert('車牌為英文或數字')
                       }else{
                         dispatch(
                           userAddLP(
@@ -208,7 +208,7 @@ const Add = props => {
                     onChangeText={text => {
                       let regex = new RegExp("^[a-zA-Z0-9 ]+$")
                       if (text!== '' && !regex.test(text)){
-                        alert('車牌為英文或數字')
+                        // alert('車牌為英文或數字')
                       }else{
                         dispatch(
                           userAddLP(

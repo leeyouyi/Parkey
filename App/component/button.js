@@ -97,6 +97,11 @@ const ButtonItem = props => {
             loginReducer
           );
         } else if (buttonTxt === '確認新增車牌') {
+          let  {LPNo1,LPNo2} = userAddLPReducer
+          if(LPNo1 ==='' || LPNo2 === ''){
+            alert('車牌為英文或數字')
+            return false
+          }
           addLp(
             userInfoReducer,
             userAddLPReducer,

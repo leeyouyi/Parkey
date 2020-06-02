@@ -71,13 +71,13 @@ const Accont = props => {
       num: 3,
       type:'email'
     },
-    {
-      txt: '身分證後4碼',
-      txt2: pid,
-      navigationTxt: 'Accont',
-      space: 10,
-      click: false,
-    },
+    // {
+    //   txt: '身分證後4碼',
+    //   txt2: pid,
+    //   navigationTxt: 'Accont',
+    //   space: 10,
+    //   click: false,
+    // },
     {
       txt: '',
       txt2: '修改密碼',

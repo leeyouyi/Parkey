@@ -28,7 +28,7 @@ const SignUp = props => {
     {txt: '手機號碼',txt2:' 手機號碼將作為帳號使用',type:'phone'},
     {txt: '您的稱呼',name:true ,type:''},
     {txt: 'email 信箱' ,type:'email'},
-    {txt: '身分證後四碼',txt2:'僅用於確認使用者身份' ,type:'pid'},
+    // {txt: '身分證後四碼',txt2:'僅用於確認使用者身份' ,type:'pid'},
   ];
   return (
     <>
@@ -37,7 +37,7 @@ const SignUp = props => {
       // keyboardVerticalOffset={100}
       style={{flex:1,flexDirection: 'column',justifyContent: 'center'}}
       >
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: '#fff'}}>
         <View style={styles.container}>
           {data.map(item => {
             return (
@@ -92,24 +92,24 @@ const SignUp = props => {
                   : 
                     <View style={styles.inputWrap}>
                       {
-                        item.type === 'pid'?
-                          <TextInput
-                          keyboardType='numeric'
-                          maxLength={4} 
-                          style={styles.textInput}
-                          onChangeText={(text)=>{
-                            dispatch(register(
-                                userRegisterReducer.phone,
-                                userRegisterReducer.name,
-                                userRegisterReducer.Fname,
-                                userRegisterReducer.password,
-                                userRegisterReducer.again_password,
-                                userRegisterReducer.email,
-                                text
-                              ))
-                          }}
-                        />
-                        :
+                        // item.type === 'pid'?
+                        //   <TextInput
+                        //   keyboardType='numeric'
+                        //   maxLength={4} 
+                        //   style={styles.textInput}
+                        //   onChangeText={(text)=>{
+                        //     dispatch(register(
+                        //         userRegisterReducer.phone,
+                        //         userRegisterReducer.name,
+                        //         userRegisterReducer.Fname,
+                        //         userRegisterReducer.password,
+                        //         userRegisterReducer.again_password,
+                        //         userRegisterReducer.email,
+                        //         text
+                        //       ))
+                        //   }}
+                        // />
+                        // :
                         <TextInput
                         keyboardType={item.type === 'phone'?'numeric':'email'?'email-address':'default'}
                         style={styles.textInput}
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '90%',
-    height: 60,
+    height: 65,
     margin:5,
   },
   nameItem:{
@@ -227,8 +227,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlignVertical: 'center',
     color:'#000',
-    // marginTop:5,
     paddingTop:5,
+    marginTop:Platform.OS === 'android' ? 5 : 0,
   },
   inputWrap1:{
     justifyContent: 'center',
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     color:'#000',
     fontSize:17,
     paddingTop:5,
-    // marginTop:5
+    marginTop:Platform.OS === 'android' ? 5 : 0,
   },
   nameTxt:{
     justifyContent: 'flex-end',
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    paddingTop: 30,
+    paddingTop: 40,
   },
 });
 export default SignUp;

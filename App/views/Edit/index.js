@@ -280,12 +280,12 @@ class Edit extends React.Component {
               </Text>
             </View>
             <View style={{position: 'absolute', right: 20}}>
-              <SvgXml
+              {/* <SvgXml
                 xml={formSvgs.order}
                 width="25"
                 height="25"
                 style={{display: this.state.display2}}
-              />
+              /> */}
             </View>
           </TouchableOpacity>
         </View>

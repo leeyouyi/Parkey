@@ -25,7 +25,7 @@ const register = {
   password: '',
   again_password: '',
   email: '',
-  pid: ''
+  pid: '0000'
 };
 
 export const userRegisterReducer = (state = register, action) => {
@@ -43,7 +43,7 @@ const userinfo = {
   Fname: '',
   email: '',
   phone: '',
-  pid: '',
+  pid: '0000',
   status:''
 };
 

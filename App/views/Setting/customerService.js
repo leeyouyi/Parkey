@@ -28,7 +28,7 @@ const CustomerService = props => {
                 style={styles.item}
                 onPress={() =>{
                   if(index === 0) Linking.openURL('mailto:smartwaysolutions.service@gmail.com')
-                  if(index === 1) Linking.openURL('tel:02-2547-1291')
+                  if(index === 1) Linking.openURL('tel:02-2222-2065')
                   navigation.navigate(item.navigationTxt)
                 }}>
                 <View style={styles.row}>
