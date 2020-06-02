@@ -604,14 +604,18 @@ class Home extends React.Component {
                       }}
                       title= {!info[index] ? '' : info[index].Area}
                       onPress={() => {
+                       
                         list.forEach(el => {
+                          console.log(el.ID)
                           this.refs['modal'+el.ID].close();
                         });
                         this.refs['modal'+item.ID].open();
+                        console.log('_____________')
                       }}>
                         {
                           item.FreeSp !== 0 ?
-                          <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
+                          index===0?  <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
+                          : <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
                           :
                           <SvgXml xml={Svgs.mark_d} width="62" height="62"/>
                         }
