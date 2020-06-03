@@ -19,8 +19,10 @@ const License = props => {
   const list = route.params.list;
   const dispatch = useDispatch();
   const [listData, setListData] = useState([]);
+
   useEffect(() => {
     let listData = list.data.map(item => {
+      // console.log(list)
       let LPType = '';
       switch (item.LPType) {
         case 9:
@@ -47,10 +49,12 @@ const License = props => {
 
   const tick = [];
   const setTick = [];
-  for (let i = 0; i < 3; i++) {
+ 
+  for (let i = 0; i < list.data.length; i++) {
     [tick[i], setTick[i]] = useState(false);
   }
   useEffect(() => {
+
     listData.forEach((item, index) => {
       if (item.txt1 === userSelectLPReducer.selectLP) {
         setTick[index](true);

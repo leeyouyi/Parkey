@@ -8,7 +8,8 @@ import {
   Dimensions,
   SafeAreaView,
   AsyncStorage,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
 import FootItem from '../../component/footer';
 import ButtonItem from '../../component/button';
@@ -355,9 +356,10 @@ class Edit extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-
+        <ScrollView >
         <View style={styles.container}>
-          <View style={{flex: 1, position: 'absolute', width: '100%'}}>
+          {/* <View style={{flex: 1, position: 'absolute', width: '100%'}}> */}
+          <View style={{height: Dimensions.get('window').height - 250,width: '100%'}}>
             {login ? (
               <DraggableFlatList
                 style={{width: '100%'}}
@@ -393,6 +395,7 @@ class Edit extends React.Component {
             </View>
           </View>
         </View>
+        </ScrollView>
         </SafeAreaView> 
         <FootItem navigation={navigation} num={num} />
       </>
@@ -416,7 +419,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#EFEFF5',
     paddingTop: 5,
-    height: Dimensions.get('window').height - 150,
+    height: Dimensions.get('window').height - 120,
   },
   wrap: {
     flex: 1,

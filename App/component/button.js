@@ -162,10 +162,10 @@ const ButtonItem = props => {
           payTicket(userInfoReducer.phone,tickInfo,navigation, navigateTxt,dispatch)
         }else if (buttonTxt === '新增車牌'){
           let QLPList = props.QLPList;
-          if(QLPList.length < 3 ){
+          if(QLPList.length < 10 ){
             navigation.navigate(navigateTxt);
           }else{
-            alert('最多新增3個車牌')
+            alert('最多新增10個車牌')
           }
         }
         else {

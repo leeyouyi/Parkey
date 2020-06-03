@@ -267,7 +267,7 @@ const ListItem = props => {
           </View>
           <View style={styles.row4}>
             <Text style={styles.txt3}>{item.txt3}</Text>
-            <Text style={styles.txt4}>{item.txt4}</Text>
+            <Text style={styles.txt4}>{item.txt4}{item.txt4==='未計費'?'':'元'}</Text>
           </View>
         </TouchableOpacity>
       </>

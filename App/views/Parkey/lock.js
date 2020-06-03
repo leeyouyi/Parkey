@@ -46,6 +46,7 @@ const Lock = props => {
 
   useEffect(()=>{
     if(loginReducer.login){
+      dispatch(userSelectLP('','',''))
       let req = {
         PhoneNo: loginReducer.phone,
         ptime: userService.time(),
@@ -56,12 +57,12 @@ const Lock = props => {
         if (res.data.status === 0) {
             setList(res.data)
             if(userSelectLPReducer.selectLP === '') {
-              setLPNo(res.data.data[0].LPNo)
-              dispatch(userSelectLP(
-                  res.data.data[0].LPNo,
-                  res.data.data[0].LPNickname,
-                  res.data.data[0].LPType
-                ))
+              // setLPNo(res.data.data[0].LPNo)
+              // dispatch(userSelectLP(
+              //     res.data.data[0].LPNo,
+              //     res.data.data[0].LPNickname,
+              //     res.data.data[0].LPType
+              //   ))
             }else if(propsLP !== ''){
               setLPNo(propsLP)
               res.data.data.forEach(item => {
