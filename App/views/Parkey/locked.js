@@ -388,7 +388,7 @@ const TxtItem = props => {
     },
     {
       txt: '目前累計費用',
-      txt1: pakingInfo.Amount?pakingInfo.Amount:0,
+      txt1: pakingInfo.Amount ? pakingInfo.Amount + '元' : 0 +'元',
       payTxt: '您尚未繳交停車費',
       payTxt2: '已完成繳費',
     },
@@ -515,7 +515,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   scrollView: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
@@ -562,9 +562,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   txtItemWrap: {
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height:'8%',
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: '#fff',
@@ -613,7 +614,7 @@ const styles = StyleSheet.create({
   },
   mapWrap: {
     width: '100%',
-    height: '15%',
+    height: '20%',
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 1,

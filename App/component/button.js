@@ -99,7 +99,13 @@ const ButtonItem = props => {
         } else if (buttonTxt === '確認新增車牌') {
           let  {LPNo1,LPNo2} = userAddLPReducer
           if(LPNo1 ==='' || LPNo2 === ''){
-            alert('車牌為英文或數字')
+            Alert.alert(
+              "錯誤",
+              "車牌為英文或數字",
+              [
+                { text: "確認" }
+              ]
+            );
             return false
           }
           addLp(
@@ -130,6 +136,17 @@ const ButtonItem = props => {
         ) {
           let lockData = props.lockData;
           let paking = props.paking;
+          let {LPNo} = lockData
+          if( LPNo ===''){
+            Alert.alert(
+              "錯誤",
+              "請選擇車牌",
+              [
+                { text: "確認" }
+              ]
+            );
+            return false
+          }
           if(btnFlag){
             bindDevice(
               userInfoReducer.phone,
@@ -165,7 +182,13 @@ const ButtonItem = props => {
           if(QLPList.length < 10 ){
             navigation.navigate(navigateTxt);
           }else{
-            alert('最多新增10個車牌')
+            Alert.alert(
+              "錯誤",
+              "最多新增10個車牌",
+              [
+                { text: "確認" }
+              ]
+            );
           }
         }
         else {
@@ -275,7 +298,14 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
           txt = '身分證後4碼'
           break;         
       }
-      alert(`"${txt}"`+'不得為空')
+      Alert.alert(
+        "請輸入完整資料以註冊",
+        `請完整填寫"${txt}"資訊`,
+        [
+          { text: "確認" }
+        ],
+      );
+
       return false
     }
   }
@@ -283,12 +313,24 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
   const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
   if(strEmail.search(emailRule) === -1){
-    alert("信箱格式不正確")
+    Alert.alert(
+      "錯誤",
+      '信箱格式不正確',
+      [
+        { text: "確認" }
+      ]
+    );
     return false
   }
 
   if(userRegisterReducer.password !== userRegisterReducer.again_password ){
-    alert('密碼不相同')
+    Alert.alert(
+      "錯誤",
+      '密碼不相同',
+      [
+        { text: "確認" }
+      ]
+    );
     return false
   }
 
@@ -541,7 +583,13 @@ const addLp = (
   navigateTxt,
 ) => {
   if (!userAddLPReducer.LPNo1 || !userAddLPReducer.LPNo2) {
-    alert('資料不得為空');
+    Alert.alert(
+      "錯誤",
+      '資料不得為空',
+      [
+        { text: "確認" }
+      ]
+    );
     return;
   }
   let LPNo = userAddLPReducer.LPNo1 + '-' + userAddLPReducer.LPNo2;
@@ -640,7 +688,19 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
         dispatch(userUpdateLP(true))
         btnFlag = true
       } else {
-        Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+        if(res.data.msg === '車牌不能重複鎖定'){
+          Alert.alert(
+            "這個車牌無法上鎖",
+            `車輛${lockData.LPNo}目前已經上鎖於其他機車鎖，您無法再以同一台機車上鎖。`,
+            [
+              { text: "確定" }
+            ]
+          );
+      
+        }else{
+          Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+        }
+
         btnFlag = true
       }
 

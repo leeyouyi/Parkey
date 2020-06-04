@@ -35,7 +35,8 @@ class Edit extends React.Component {
       display: 'flex',
       display2: 'none',
       loading: true,
-      QLPList:[]
+      QLPList:[],
+      height:250
     };
   }
   _login_event(){
@@ -305,7 +306,7 @@ class Edit extends React.Component {
       ? this.props.route.params.login
       : false;
     const loading = this.state.loading;
-
+    const height = this.state.height
     return (
       <>
       <SafeAreaView style={{flex:1,backgroundColor:'#fff'}}> 
@@ -339,8 +340,10 @@ class Edit extends React.Component {
               navigation.navigate('Edit');
               const css = this.state.display === 'none' ? 'flex' : 'none';
               const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
+              const changeHight = height === 250 ?200:250
               this.setState({display: css});
               this.setState({display2: css2});
+              this.setState({height: changeHight});
               this.setState({
                 refresh: !this.state.refresh,
               });
@@ -356,10 +359,10 @@ class Edit extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <ScrollView >
+        {/* <ScrollView > */}
         <View style={styles.container}>
           {/* <View style={{flex: 1, position: 'absolute', width: '100%'}}> */}
-          <View style={{height: Dimensions.get('window').height - 250,width: '100%'}}>
+          <View style={{height: Dimensions.get('window').height - height , width: '100%'}}>
             {login ? (
               <DraggableFlatList
                 style={{width: '100%'}}
@@ -387,7 +390,7 @@ class Edit extends React.Component {
           ) : (
             <></>
           )}
-          <View style={{width: '100%', position: 'absolute', bottom: 50}}>
+          <View style={{width: '100%', position: 'absolute', bottom: 30}}>
             <View style={{width: '100%', display: this.state.display}}>
               <View style={styles.button}>
                 <ButtonItem data={buttonData} navigation={navigation} QLPList={this.state.QLPList} />
@@ -395,7 +398,7 @@ class Edit extends React.Component {
             </View>
           </View>
         </View>
-        </ScrollView>
+        {/* </ScrollView> */}
         </SafeAreaView> 
         <FootItem navigation={navigation} num={num} />
       </>

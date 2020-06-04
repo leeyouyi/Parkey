@@ -132,7 +132,7 @@ const Lock = props => {
 
   const data1 = {
     text1: '您要上鎖的機車車號為',
-    text2: '重選車牌',
+    text2: '選擇車牌',
     text3: LPNo,
     navigationTxt: 'License',
   };

@@ -267,7 +267,8 @@ const ListItem = props => {
           </View>
           <View style={styles.row4}>
             <Text style={styles.txt3}>{item.txt3}</Text>
-            <Text style={styles.txt4}>{item.txt4}{item.txt4==='未計費'?'':'元'}</Text>
+            <Text style={styles.txt4}>{item.txt4}元</Text>
+            {/* {item.txt4==='未計費'?'':'元'} */}
           </View>
         </TouchableOpacity>
       </>
@@ -468,8 +469,8 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   txt4: {
-    width: '20%',
-    fontSize: 18,
+    width: '25%',
+    fontSize: 17,
     color: '#757575',
     textAlign: 'center',
     paddingRight: 0,
