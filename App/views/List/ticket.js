@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: isIphoneX()? 60 : 20,
+    bottom: isIphoneX()? 60 : 0,
   },
   mapWrap: {
     width: '100%',

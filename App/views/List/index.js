@@ -456,7 +456,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   txt2: {
-    width: '45%',
+    width: '50%',
     fontSize: 14,
     color: '#757575',
     paddingTop: 10,
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     width: '25%',
     fontSize: 17,
     color: '#757575',
-    textAlign: 'center',
+    textAlign: 'right',
     paddingRight: 0,
   },
   txt5: {
