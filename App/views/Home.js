@@ -606,11 +606,11 @@ class Home extends React.Component {
                       onPress={() => {
                        
                         list.forEach(el => {
-                          console.log(el.ID)
+                          // console.log(el.ID)
                           this.refs['modal'+el.ID].close();
                         });
                         this.refs['modal'+item.ID].open();
-                        console.log('_____________')
+                        // console.log('_____________')
                       }}>
                         {
                           item.FreeSp !== 0 ?

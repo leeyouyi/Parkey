@@ -6,7 +6,8 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  Linking
+  Linking,
+  Platform
 } from 'react-native';
 import ButtonItem from '../../component/button';
 import MapView, {Marker} from 'react-native-maps';
@@ -424,7 +425,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: isIphoneX()? 60 : 0,
+    bottom: isIphoneX()? 60 : Platform.OS === 'ios' ? 0 : 20,
   },
   mapWrap: {
     width: '100%',
