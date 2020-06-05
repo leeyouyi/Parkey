@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'App' do
+target 'Parkey' do
   # Pods for App
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
@@ -48,7 +48,7 @@ target 'App' do
 
   pod 'RNCzPermission', :path => '../node_modules/react-native-cz-permission/ios/RNCzPermission.podspec'
   
-  target 'AppTests' do
+  target 'ParkeyTests' do
     inherit! :search_paths
     # Pods for testingß
   end
@@ -83,10 +83,10 @@ post_install do |installer|
   end
 end
 
-target 'App-tvOS' do
-  # Pods for App-tvOS
+target 'Parkey-tvOS' do
+  # Pods for Parkey-tvOS
 
-  target 'App-tvOSTests' do
+  target 'Parkey-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
