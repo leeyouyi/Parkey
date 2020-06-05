@@ -18,7 +18,6 @@ const Verification = props => {
     navigateTxt: 'Code',
     buttonTxt: '發送驗證碼以綁定手機',
   };
-  // const {navigateTxt, buttonTxt} = props.data;
   const loginReducer = useSelector(state => state.loginReducer);
   const dispatch = useDispatch();
   return (

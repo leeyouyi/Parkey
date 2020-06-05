@@ -309,19 +309,19 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
       return false
     }
   }
-  // const strEmail = userRegisterReducer.email;
-  // const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+  const strEmail = userRegisterReducer.email;
+  const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
-  // if(strEmail.search(emailRule) === -1){
-  //   Alert.alert(
-  //     "錯誤",
-  //     '信箱格式不正確',
-  //     [
-  //       { text: "確認" }
-  //     ]
-  //   );
-  //   return false
-  // }
+  if(strEmail.search(emailRule) === -1){
+    Alert.alert(
+      "錯誤",
+      '信箱格式不正確',
+      [
+        { text: "確認" }
+      ]
+    );
+    return false
+  }
 
   if(userRegisterReducer.password !== userRegisterReducer.again_password ){
     Alert.alert(
@@ -520,6 +520,7 @@ const rPassword_2 = (phone, navigation, navigateTxt) => {
     .userRPassword_2(req)
     .then(res => {
       //後端需提供email
+      console.log(res.data)
       if (res.data.status === 0) {
         navigation.navigate(navigateTxt, {
           forgetData: phone,
@@ -552,6 +553,7 @@ const resetFn = (
   userService
     .userLogin(req)
     .then(res => {
+      console.log(res.data)
       if (res.data.status === 0) {
         dispatch(login(true, phone, newPassword1));
         uPassword(phone, password, newPassword1, dispatch);

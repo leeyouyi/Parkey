@@ -92,28 +92,28 @@ const Parkey = props => {
   },[userInfoReducer.status])
   return (
     <>
-          <ScrollView style={styles.scrollView}>
-            <View style={styles.container}>
-                <View style={styles.leftItem}>
-                  <Text style={styles.leftItemTxt}>正在上鎖的機車</Text>
-                </View>
-
-                {hasLock ? (
-
-                  <ListItem
-                    navigation={navigation}
-                    setRegion={setRegion}
-                    setHasLock={setHasLock}
-                    list={list}
-                    loading={loading}
-                  />
-                ) : (
-                  <View style={styles.topItem}>
-                    <Text style={styles.topItemTxt}>您目前沒有綁定任何車輛</Text>
-                  </View>
-                )}
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+            <View style={styles.leftItem}>
+              <Text style={styles.leftItemTxt}>正在上鎖的機車</Text>
             </View>
-          </ScrollView>
+
+            {hasLock ? (
+
+              <ListItem
+                navigation={navigation}
+                setRegion={setRegion}
+                setHasLock={setHasLock}
+                list={list}
+                loading={loading}
+              />
+            ) : (
+              <View style={styles.topItem}>
+                <Text style={styles.topItemTxt}>您目前沒有綁定任何車輛</Text>
+              </View>
+            )}
+        </View>
+      </ScrollView>
 
       <View style={styles.qrItemWrap}>
             <View style={styles.qrItem}>

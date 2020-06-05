@@ -447,29 +447,30 @@ const Route = () => {
             title: '重新設定密碼',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    const loginReducer = store.getState().loginReducer
-                    let txt = loginReducer.login ? 'Setting': 'SignIn'
-                    navigation.navigate(txt);
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#ff9500',
-                        paddingLeft: 15,
-                        fontSize: 14,
-                      }}>
-                      取消
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     const loginReducer = store.getState().loginReducer
+                //     let txt = loginReducer.login ? 'Setting': 'SignIn'
+                //     navigation.navigate(txt);
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
+                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#ff9500',
+                //         paddingLeft: 15,
+                //         fontSize: 14,
+                //       }}>
+                //       取消
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               );
             },
           })}
@@ -522,27 +523,28 @@ const Route = () => {
             title: '重新設定密碼',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Setting');
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top:15, left: 5, zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#A3A3A3',
-                        paddingLeft: 15,
-                        fontSize: 16,
-                      }}>
-                      先不要
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     navigation.navigate('Setting');
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
+                //         : {hight: 50, position: 'absolute', top:15, left: 5, zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#A3A3A3',
+                //         paddingLeft: 15,
+                //         fontSize: 16,
+                //       }}>
+                //       先不要
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               );
             },
           })}

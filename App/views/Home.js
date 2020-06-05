@@ -19,7 +19,6 @@ import {
   Keyboard,
   ActivityIndicator,
   Platform,
-  Linking
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../img/icon/new/svgs';

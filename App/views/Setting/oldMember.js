@@ -5,6 +5,7 @@ import {
   View,
   Text,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import ButtonItem from '../../component/button';
 
@@ -14,7 +15,6 @@ const Info = props => {
     navigateTxt: 'Reset',
     buttonTxt: '開始重設密碼',
   };
- 
   const [value, setValue] = useState('');
 
   return (
@@ -41,8 +41,9 @@ const Info = props => {
             </View>
           </View>
         </View>
-
-        <View style={styles.buttonItem}>
+      </View>
+      </ScrollView>
+      <View style={styles.buttonItem}>
           <ButtonItem 
           data={buttonData} 
           navigation={navigation} 
@@ -50,12 +51,22 @@ const Info = props => {
             phone:value
           }}
           ></ButtonItem>
+          <View style={styles.buttonBox}>
+            <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonBoxItem}
+            onPress={() => {
+              navigation.navigate('SignIn');
+            }}>
+            <Text style={styles.buttonItemTxt}>暫不登入</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      </ScrollView>
+
     </>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -66,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '90%',
-    height: 100,
+    // height: 100,
     paddingTop:40
   },
   topTxt: {
@@ -109,13 +120,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     height: 80,
+    paddingBottom:10
   },
   buttonItem: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    paddingTop:50
+    backgroundColor:'#fafafa',
   },
-
+  buttonBox:{
+    width:'100%',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingTop:20,
+    paddingBottom:30,
+    backgroundColor:'#fafafa'
+  },
+  buttonBoxItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    padding: 10,
+    backgroundColor: '#E5E5EB',
+    borderRadius: 20,
+  },
+  buttonItemTxt: {
+    fontSize: 18,
+    color: '#7C7C7E',
+  },
 });
 export default Info;

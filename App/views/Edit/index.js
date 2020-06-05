@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   AsyncStorage,
   Alert,
+  Platform
 } from 'react-native';
 import FootItem from '../../component/footer';
 import ButtonItem from '../../component/button';
@@ -35,7 +36,7 @@ class Edit extends React.Component {
       display2: 'none',
       loading: true,
       QLPList:[],
-      height:200
+      height: Platform.OS == 'ios' ? 200 :250
     };
   }
   _login_event(){
@@ -339,7 +340,8 @@ class Edit extends React.Component {
               navigation.navigate('Edit');
               const css = this.state.display === 'none' ? 'flex' : 'none';
               const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
-              const changeHight = height === 200 ?150:200
+              const platformHight = Platform.OS == 'ios' ? 200 : 250
+              const changeHight = height === platformHight ? platformHight - 50 : platformHight
               this.setState({display: css});
               this.setState({display2: css2});
               this.setState({height: changeHight});
@@ -361,6 +363,18 @@ class Edit extends React.Component {
         {/* <ScrollView > */}
         <View style={styles.container}>
           {/* <View style={{flex: 1, position: 'absolute', width: '100%'}}> */}
+          {loading ? (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+              }}>
+              <ActivityIndicator size="large" color="#ff9500" />
+            </View>
+          ) : (
+            <></>
+          )}
           <View style={{height: Dimensions.get('window').height - height , width: '100%'}}>
             {login ? (
               <DraggableFlatList
@@ -377,18 +391,7 @@ class Edit extends React.Component {
               <></>
             )}
           </View>
-          {loading ? (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
-              }}>
-              <ActivityIndicator size="large" color="#ff9500" />
-            </View>
-          ) : (
-            <></>
-          )}
+
           <View style={{width: '100%', position: 'absolute', bottom: 30}}>
             <View style={{width: '100%', display: this.state.display}}>
               <View style={styles.button}>
