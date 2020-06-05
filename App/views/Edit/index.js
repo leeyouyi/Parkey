@@ -9,7 +9,6 @@ import {
   SafeAreaView,
   AsyncStorage,
   Alert,
-  ScrollView
 } from 'react-native';
 import FootItem from '../../component/footer';
 import ButtonItem from '../../component/button';
@@ -36,7 +35,7 @@ class Edit extends React.Component {
       display2: 'none',
       loading: true,
       QLPList:[],
-      height:250
+      height:200
     };
   }
   _login_event(){
@@ -340,7 +339,7 @@ class Edit extends React.Component {
               navigation.navigate('Edit');
               const css = this.state.display === 'none' ? 'flex' : 'none';
               const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
-              const changeHight = height === 250 ?200:250
+              const changeHight = height === 200 ?150:200
               this.setState({display: css});
               this.setState({display2: css2});
               this.setState({height: changeHight});
