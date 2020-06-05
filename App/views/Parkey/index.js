@@ -8,7 +8,7 @@ import {
   ScrollView,
   Dimensions,
   AsyncStorage,
-  Alert
+  Alert,
 } from 'react-native';
 import { isIphoneX } from 'react-native-iphone-x-helper'
 import FootItem from '../../component/footer';
@@ -92,25 +92,30 @@ const Parkey = props => {
   },[userInfoReducer.status])
   return (
     <>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.container}>
-          <View style={styles.leftItem}>
-            <Text style={styles.leftItemTxt}>正在上鎖的機車</Text>
-          </View>
-          {hasLock ? (
-            <ListItem
-              navigation={navigation}
-              setRegion={setRegion}
-              setHasLock={setHasLock}
-              list={list}
-              loading={loading}
-            />
-          ) : (
-            <View style={styles.topItem}>
-              <Text style={styles.topItemTxt}>您目前沒有綁定任何車輛</Text>
+          <ScrollView style={styles.scrollView}>
+            <View style={styles.container}>
+                <View style={styles.leftItem}>
+                  <Text style={styles.leftItemTxt}>正在上鎖的機車</Text>
+                </View>
+
+                {hasLock ? (
+
+                  <ListItem
+                    navigation={navigation}
+                    setRegion={setRegion}
+                    setHasLock={setHasLock}
+                    list={list}
+                    loading={loading}
+                  />
+                ) : (
+                  <View style={styles.topItem}>
+                    <Text style={styles.topItemTxt}>您目前沒有綁定任何車輛</Text>
+                  </View>
+                )}
             </View>
-          )}
-          <View style={styles.qrItemWrap}>
+          </ScrollView>
+
+      <View style={styles.qrItemWrap}>
             <View style={styles.qrItem}>
               <TouchableOpacity
                 style={styles.row}
@@ -147,10 +152,8 @@ const Parkey = props => {
                 <Text style={styles.qrTxt}>掃QRCODE新綁定機車</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </View>
-      </ScrollView>
-      <FootItem navigation={navigation} num={num} />            
+          </View> 
+      <FootItem navigation={navigation} num={num} />         
     </>
   );
 };
@@ -356,7 +359,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#EFEFF5',
-    height:Platform.OS === 'ios' ? Dimensions.get('window').height - 120:Dimensions.get('window').height - 150,
+
   },
   leftItem: {
     justifyContent: 'center',
@@ -388,15 +391,18 @@ const styles = StyleSheet.create({
   },
   qrItemWrap: {
     width: '90%',
+    height:60,
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
-    position: 'absolute',
-    bottom: isIphoneX()?90:15,
+    // position: 'absolute',
+    bottom: isIphoneX() ? 90:20,
+    left:10,
   },
   qrItem: {
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '90%',
+
   },
   qrTxt: {
     color: '#ff9500',
@@ -404,10 +410,12 @@ const styles = StyleSheet.create({
   },
   itemWrap: {
     width: '100%',
+    height:'90%',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
-    height: '25%',
+    // height: '25%',
+    height: 150,
   },
   item: {
     alignItems: 'flex-start',

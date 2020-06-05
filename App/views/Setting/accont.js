@@ -56,9 +56,9 @@ const Accont = props => {
     {
       txt: '手機號碼',
       txt2: phone,
-      navigationTxt: status === 4 ? 'Verification' : Accont,//false Accont
+      navigationTxt:  Accont,//false Accont
       space: 10,
-      click: status === 4 ? true : false,
+      click: false,
       rightTxt:'前往驗證'
     },
     {

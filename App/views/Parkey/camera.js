@@ -18,18 +18,15 @@ class Camera extends React.Component {
       flag: true
     };
   }
-  renderBarcodes = () => (
-    <View>{this.state.barcodes.map(this.renderBarcode)}</View>
-  );
-  renderBarcode = ({data}) =>{
-    const {navigation} = this.props;
-    navigation.navigate('Lock',{
-      devid:data,
-    });
-  } 
 
   barcodeRecognized = ({barcodes}) => {
-    this.setState({barcodes});
+    let data = barcodes.map(item => {
+      return item.data
+    });
+    const {navigation} = this.props;
+    navigation.navigate('Lock',{
+      devid:data[0],
+    });
   };
 
   onBarCodeRead = (e) => {
@@ -51,8 +48,12 @@ class Camera extends React.Component {
               ref={ref => {
                 this.camera = ref;
               }}
-              onGoogleVisionBarcodesDetected={this.barcodeRecognized}>
-              {this.renderBarcodes}
+              onGoogleVisionBarcodesDetected={(e)=>{
+                if(this.state.flag){
+                  this.barcodeRecognized(e)
+                }
+                this.setState({flag:false})
+              }}>
 
             </RNCamera>
             :

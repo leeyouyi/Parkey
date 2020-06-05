@@ -159,7 +159,7 @@ const ButtonItem = props => {
             )
             btnFlag = false
           }
-        } else if (buttonTxt === '解鎖我的機車') {
+        } else if (buttonTxt === '解鎖機車') {
           let modal2 = props.modal2;
           if(btnFlag){
             modal2.open();
@@ -309,19 +309,19 @@ const register = (userRegisterReducer, dispatch, navigation, navigateTxt) => {
       return false
     }
   }
-  const strEmail = userRegisterReducer.email;
-  const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+  // const strEmail = userRegisterReducer.email;
+  // const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
-  if(strEmail.search(emailRule) === -1){
-    Alert.alert(
-      "錯誤",
-      '信箱格式不正確',
-      [
-        { text: "確認" }
-      ]
-    );
-    return false
-  }
+  // if(strEmail.search(emailRule) === -1){
+  //   Alert.alert(
+  //     "錯誤",
+  //     '信箱格式不正確',
+  //     [
+  //       { text: "確認" }
+  //     ]
+  //   );
+  //   return false
+  // }
 
   if(userRegisterReducer.password !== userRegisterReducer.again_password ){
     Alert.alert(

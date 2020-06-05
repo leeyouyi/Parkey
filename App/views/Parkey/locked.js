@@ -6,7 +6,7 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { isIphoneX } from 'react-native-iphone-x-helper'
 import ButtonItem from '../../component/button';
@@ -188,7 +188,7 @@ class Locked extends React.Component {
     const region = route.params.region ? route.params.region : this.state.region;
     const buttonData = {
       navigateTxt: 'Parkey',
-      buttonTxt: '解鎖我的機車',
+      buttonTxt: '解鎖機車',
     };
     const loading = this.state.loading
     const LPNickname = this.state.LPNickname
@@ -336,16 +336,31 @@ class Locked extends React.Component {
                 </MapView>
               </View>
             </View>
-            <View style={styles.button}>
-              <ButtonItem
-                data={buttonData}
-                navigation={navigation}
-                lockData={lockData}
-                modal2={this.refs.modal2}
-              />
-            </View>
+
           </View>
         </ScrollView>
+          <View style={styles.button}>
+          <View style={styles.buttonWrap}>
+            <TouchableOpacity
+                activeOpacity={0.5}
+                style={styles.buttonItem}
+                onPress={() => {
+                  navigation.navigate('Parkey');
+                  store.dispatch(userUpdateLP(true));
+                }}>
+                <Text style={styles.buttonItemTxt}>所有停放</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonWrap}>
+              <ButtonItem
+                  data={buttonData}
+                  navigation={navigation}
+                  lockData={lockData}
+                  modal2={this.refs.modal2}
+              />
+            </View>
+
+          </View>
       </>
     );
   }
@@ -515,13 +530,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   scrollView: {
-    backgroundColor: '#fff',
+    backgroundColor: '#EFEFF5',
   },
   container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    height: Dimensions.get('window').height - 90,
+    // height: Dimensions.get('window').height - 90,
   },
   titleItemWrap: {
     justifyContent: 'center',
@@ -565,7 +580,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height:'8%',
+    height:60,
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: '#fff',
@@ -606,15 +621,35 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
+    height: 100,
+    flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 15,
-    position: 'absolute',
-    bottom: isIphoneX()? 60 : 20,
+    backgroundColor:'#fff'
+    // position: 'absolute',
+    // bottom: isIphoneX()? 60 : 20,
+  },
+  buttonWrap:{
+    width:'45%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    padding: 10,
+    backgroundColor: '#E5E5EB',
+    borderRadius: 20,
+  },
+  buttonItemTxt: {
+    fontSize: 18,
+    color: '#7C7C7E',
   },
   mapWrap: {
     width: '100%',
-    height: '20%',
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 1,

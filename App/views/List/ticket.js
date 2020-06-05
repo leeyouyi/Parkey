@@ -139,19 +139,21 @@ class Ticket extends React.Component {
                 </MapView>
               </View>
             </View>
-            <View style={styles.button}>
-              {!pay ? (
-                <ButtonItem
-                  data={buttonData}
-                  navigation={navigation}
-                  tickInfo={tickInfo}
-                  ></ButtonItem>
-              ) : (
-                <></>
-              )}
-            </View>
           </View>
         </ScrollView>
+        
+          {!pay ? (
+            <View style={styles.button}>
+              <ButtonItem
+                data={buttonData}
+                navigation={navigation}
+                tickInfo={tickInfo}
+                ></ButtonItem>
+            </View>
+          ) : (
+            <></>
+          )}
+
       </>
     )
   }
@@ -353,13 +355,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    height: Dimensions.get('window').height - 90,
+    // height: Dimensions.get('window').height - 90,
   },
   titleItemWrap: {
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    height:'10%',
+    height:70,
     backgroundColor: '#fafafa',
     borderBottomColor: '#e5e5ea',
     borderBottomWidth: 1,
@@ -390,7 +392,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height:'8%',
+    height:55,
     backgroundColor: '#fff',
     borderBottomColor: '#e5e5ea',
     borderBottomWidth: 1,
@@ -424,24 +426,26 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: isIphoneX()? 60 : Platform.OS === 'ios' ? 0 : 20,
+    height:100,
+    backgroundColor: '#ffffff',
+    // position: 'absolute',
+    // bottom: isIphoneX()? 60 : Platform.OS === 'ios' ? 0 : 20,
   },
   mapWrap: {
     width: '100%',
-    height: Dimensions.get('window').height < 600 ? '10%' : 130,
+    height: Dimensions.get('window').height < 600 ? 70 : 150,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#bdbdbd',
-    marginTop: 5,
+    marginTop: 15,
   },
   mapWrap2: {
     width: '100%',
-    height: 130,
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 15,
   },
   mapItem: {
     width: '90%',

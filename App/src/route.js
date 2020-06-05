@@ -178,27 +178,28 @@ const Route = () => {
             title: '設定上鎖資訊',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Parkey');
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#ff9500',
-                        paddingLeft: 15,
-                        fontSize: 14,
-                        height:25
-                      }}>
-                      取消
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     navigation.navigate('Parkey');
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#ff9500',
+                //         paddingLeft: 15,
+                //         fontSize: 14,
+                //         height:25
+                //       }}>
+                //       取消
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               )
             }
           })}
@@ -242,29 +243,30 @@ const Route = () => {
             title: 'Parkey 智慧機車鎖',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Parkey');
-                    store.dispatch(userUpdateLP(true));
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#ff9500',
-                        paddingLeft: 15,
-                        height:25,
-                        fontSize: 14
-                      }}>
-                      所有停放
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     navigation.navigate('Parkey');
+                //     store.dispatch(userUpdateLP(true));
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
+                //         : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#ff9500',
+                //         paddingLeft: 15,
+                //         height:25,
+                //         fontSize: 14
+                //       }}>
+                //       所有停放
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               );
             }
           })}
@@ -301,27 +303,28 @@ const Route = () => {
             title: '付款',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('List');
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#ff9500',
-                        paddingLeft: 15,
-                        fontSize: 14,
-                      }}>
-                      完成
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     navigation.navigate('List');
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
+                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#ff9500',
+                //         paddingLeft: 15,
+                //         fontSize: 14,
+                //       }}>
+                //       完成
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               );
             },
           })}
@@ -486,27 +489,28 @@ const Route = () => {
             title: '繼續綁定手機',
             headerLeft() {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Setting');
-                  }}>
-                  <View
-                    style={
-                      Platform.OS === 'android'
-                        ? ''
-                        :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                        : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                    }>
-                    <Text
-                      style={{
-                        color: '#A3A3A3',
-                        paddingLeft: 15,
-                        fontSize: 16,
-                      }}>
-                      先不要
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <></>
+                // <TouchableOpacity
+                //   onPress={() => {
+                //     navigation.navigate('Setting');
+                //   }}>
+                //   <View
+                //     style={
+                //       Platform.OS === 'android'
+                //         ? ''
+                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
+                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
+                //     }>
+                //     <Text
+                //       style={{
+                //         color: '#A3A3A3',
+                //         paddingLeft: 15,
+                //         fontSize: 16,
+                //       }}>
+                //       先不要
+                //     </Text>
+                //   </View>
+                // </TouchableOpacity>
               );
             },
           })}

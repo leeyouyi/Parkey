@@ -205,14 +205,26 @@ const Lock = props => {
               </MapView>
             </View>
           </View>
-          <View style={styles.buttonWrap}>
-            <ButtonItem data={buttonData} navigation={navigation} paking={paking} lockData={{
-              devid:devid,
-              LPNo:LPNo
-            }}></ButtonItem>
-          </View>
         </View>
       </ScrollView>
+      <View style={styles.buttonWrap}>
+        <View style={styles.buttonBox}>
+          <ButtonItem data={buttonData} navigation={navigation} paking={paking} lockData={{
+            devid:devid,
+            LPNo:LPNo
+          }}></ButtonItem>
+        </View>
+          <View style={styles.buttonBox}>
+            <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.buttonItem}
+            onPress={() => {
+              navigation.navigate('Parkey');
+            }}>
+            <Text style={styles.buttonItemTxt}>取消</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </>
   );
 };
@@ -263,11 +275,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fafafa',
     paddingTop: 10,
-    height: Dimensions.get('window').height - 90,
   },
   message: {
     width: '70%',
-    height: '10%',
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -279,7 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
+    height: 60,
     marginTop: 20,
     marginBottom: 20,
   },
@@ -313,12 +324,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     width: '90%',
-    height: '30%',
+    height: 350,
     backgroundColor: '#fff',
     borderRadius: 10,
     marginTop: 10,
+    paddingTop:5,
   },
   bottomItemTxt: {
+    width:'100%',
+    paddingTop:5,
+    paddingBottom:5,
     fontSize: 14,
     color: '#757575',
   },
@@ -335,8 +350,28 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    position: 'absolute',
-    bottom: isIphoneX()? 60 : 20,
+    backgroundColor: '#fafafa',
+    height:150,
+    // position: 'absolute',
+    // bottom: isIphoneX()? 60 : 20,
+  },
+  buttonBox:{
+    width:'100%',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingBottom:20
+  },
+  buttonItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    padding: 10,
+    backgroundColor: '#E5E5EB',
+    borderRadius: 20,
+  },
+  buttonItemTxt: {
+    fontSize: 18,
+    color: '#7C7C7E',
   },
 });
 export default Lock;
