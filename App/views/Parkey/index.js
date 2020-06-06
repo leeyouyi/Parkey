@@ -10,7 +10,6 @@ import {
   AsyncStorage,
   Alert,
 } from 'react-native';
-import { isIphoneX } from 'react-native-iphone-x-helper'
 import FootItem from '../../component/footer';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
@@ -354,6 +353,7 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#EFEFF5',
+    // backgroundColor:'#ff0'
   },
   container: {
     flex: 1,
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '90%',
-    height: '5%',
+    height: 35,
     marginTop: 10,
     marginBottom: 5,
   },
@@ -393,10 +393,10 @@ const styles = StyleSheet.create({
     width: '90%',
     height:60,
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    // position: 'absolute',
-    bottom: isIphoneX() ? 90:20,
+    alignItems: 'flex-start', 
+    bottom: 20,
     left:10,
+    backgroundColor: '#EFEFF5',
   },
   qrItem: {
     justifyContent: 'center',

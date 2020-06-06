@@ -20,6 +20,7 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 import * as userService from '../../axios/user';
 import store from '../../src/store';
 import {userAddLP, userModifyLP,login,userinfo,userSelectLP} from '../../src/action';
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
 class Edit extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class Edit extends React.Component {
       display2: 'none',
       loading: true,
       QLPList:[],
-      height: Platform.OS == 'ios' ? 200 :250
+      height: isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250,
     };
   }
   _login_event(){
@@ -111,7 +112,6 @@ class Edit extends React.Component {
         console.log(err);
       });
   }
-
   getSnapshotBeforeUpdate(prevProps, prevState) {
     const userAddLPReducer = store.getState().userAddLPReducer;
     const storeAdd = userAddLPReducer.add;
@@ -321,8 +321,11 @@ class Edit extends React.Component {
               navigation.navigate('Edit');
               const css = this.state.display === 'none' ? 'flex' : 'none';
               const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
+              const platformHight = isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250
+              const changeHight = height === platformHight ? platformHight - 50 : platformHight
               this.setState({display: css});
               this.setState({display2: css2});
+              this.setState({height: changeHight});
               this.setState({
                 refresh: !this.state.refresh,
               });
@@ -340,7 +343,7 @@ class Edit extends React.Component {
               navigation.navigate('Edit');
               const css = this.state.display === 'none' ? 'flex' : 'none';
               const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
-              const platformHight = Platform.OS == 'ios' ? 200 : 250
+              const platformHight = isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250
               const changeHight = height === platformHight ? platformHight - 50 : platformHight
               this.setState({display: css});
               this.setState({display2: css2});

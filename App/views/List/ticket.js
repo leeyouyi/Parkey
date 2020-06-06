@@ -7,14 +7,12 @@ import {
   Dimensions,
   TouchableOpacity,
   Linking,
-  Platform
 } from 'react-native';
 import ButtonItem from '../../component/button';
 import MapView, {Marker} from 'react-native-maps';
 import mapStyle from '../../component/mapStyle';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
-import { isIphoneX } from 'react-native-iphone-x-helper'
 import Modal from 'react-native-modalbox';
 
 class Ticket extends React.Component {
