@@ -179,14 +179,16 @@ class Home extends React.Component {
       userService.userQMapPinList(req)
       .then(res => {
         if (res.data.status === 0) {
-          // console.log('res',res.data)
-          this.setState({list: res.data.data})
+          let resAry=[]
+          let resData = res.data.data
+           resData.forEach(el => {
+            resAry[el.ID]= el
+           });
+          this.setState({list: resAry})
+          // this.setState({list: res.data.data})
           let list = this.state.list
           let ary = []
-          // let ary2 = []
-          // let ary3 = []
           list.forEach(item=>{
-            // ary3.push(item.ID)
             let req2 = {
               PhoneNo: '',
               ID:item.ID,
@@ -196,26 +198,16 @@ class Home extends React.Component {
             userService.userQMapPin(req2)
             .then(res => {
               if (res.data.status === 0) {
-                // console.log('res2',res.data)
                 let data ={ ...res.data,ID:item.ID}
-                // let data2 ={ID:item.ID}
-                ary.push(data)
-                // ary2.push(data2)
-                
+                // ary.push(data)
+                ary[item.ID] = data
+                this.setState({info: ary})
               }
             })
             .catch(err => {
               console.log(err)
             })
           })
-          setTimeout(()=>{
-            let sortData = ary.sort((a,b)=>{
-              return a.ID - b.ID
-           })
-            this.setState({info: sortData})
-            // console.log('ary2',ary2)
-            // console.log('ary3',ary3)
-          },1000)
         }
         this.setState({loading: false})
       })
@@ -328,6 +320,7 @@ class Home extends React.Component {
               <View style={styles.modal2Wrap}>
                 <View style={styles.modal2Item}>
                   <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].SC}</Text>
+                  {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID}</Text> */}
                   {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID }</Text> */}
                   <TouchableOpacity style={styles.modal2Button}
                   onPress={()=>{
@@ -620,13 +613,10 @@ class Home extends React.Component {
                       }}
                       title= {!info[index] ? '' : info[index].Area}
                       onPress={() => {
-                        // console.log(item.ID)
                         list.forEach(el => {
- 
                           this.refs['modal'+el.ID].close();
                         });
                         this.refs['modal'+item.ID].open();
-                        // console.log('_____________')
                       }}>
                         {
                           item.FreeSp !== 0 ?
