@@ -57,9 +57,8 @@ class Home extends React.Component {
         longitudeDelta: 0.05,
       },
       list:[],
-      info:[{
-        Area:'test'
-      }],
+      info:[],
+      infoTest:[],
       userParking:[],
       predictions:[],
       marker:false,
@@ -180,10 +179,14 @@ class Home extends React.Component {
       userService.userQMapPinList(req)
       .then(res => {
         if (res.data.status === 0) {
+          // console.log('res',res.data)
           this.setState({list: res.data.data})
           let list = this.state.list
           let ary = []
+          // let ary2 = []
+          // let ary3 = []
           list.forEach(item=>{
+            // ary3.push(item.ID)
             let req2 = {
               PhoneNo: '',
               ID:item.ID,
@@ -193,15 +196,26 @@ class Home extends React.Component {
             userService.userQMapPin(req2)
             .then(res => {
               if (res.data.status === 0) {
+                // console.log('res2',res.data)
                 let data ={ ...res.data,ID:item.ID}
+                // let data2 ={ID:item.ID}
                 ary.push(data)
-                this.setState({info: ary})
+                // ary2.push(data2)
+                
               }
             })
             .catch(err => {
               console.log(err)
             })
           })
+          setTimeout(()=>{
+            let sortData = ary.sort((a,b)=>{
+              return a.ID - b.ID
+           })
+            this.setState({info: sortData})
+            // console.log('ary2',ary2)
+            // console.log('ary3',ary3)
+          },1000)
         }
         this.setState({loading: false})
       })
@@ -310,9 +324,11 @@ class Home extends React.Component {
               backdropOpacity={0.5}
               top={ Dimensions.get('window').height * 0.6}
               >
+   
               <View style={styles.modal2Wrap}>
                 <View style={styles.modal2Item}>
                   <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].SC}</Text>
+                  {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID }</Text> */}
                   <TouchableOpacity style={styles.modal2Button}
                   onPress={()=>{
                     const loginReducer =  store.getState().loginReducer
@@ -383,6 +399,7 @@ class Home extends React.Component {
                   <Text style={styles.modal2Txt4}>元</Text>
                 </View>
               </View>
+
             </Modal>
             )
           })
@@ -603,9 +620,9 @@ class Home extends React.Component {
                       }}
                       title= {!info[index] ? '' : info[index].Area}
                       onPress={() => {
-                       
+                        // console.log(item.ID)
                         list.forEach(el => {
-                          // console.log(el.ID)
+ 
                           this.refs['modal'+el.ID].close();
                         });
                         this.refs['modal'+item.ID].open();

@@ -363,15 +363,16 @@ class Edit extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* <ScrollView > */}
         <View style={styles.container}>
-          {/* <View style={{flex: 1, position: 'absolute', width: '100%'}}> */}
           {loading ? (
             <View
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
+                width:'100%',
                 flex: 1,
+                top: (Dimensions.get('window').height - height ) /2,
+                position:'absolute',
               }}>
               <ActivityIndicator size="large" color="#ff9500" />
             </View>
@@ -403,7 +404,6 @@ class Edit extends React.Component {
             </View>
           </View>
         </View>
-        {/* </ScrollView> */}
         </SafeAreaView> 
         <FootItem navigation={navigation} num={num} />
       </>

@@ -26,7 +26,7 @@ const Parkey = props => {
   const loginReducer = useSelector(state => state.loginReducer);
   const {navigation, route} = props;
   const num = 1;
-  const [hasLock, setHasLock] = useState(true);
+  const [hasLock, setHasLock] = useState(false);
   const [list, seList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [region, setRegion] = useState({});
@@ -98,7 +98,6 @@ const Parkey = props => {
             </View>
 
             {hasLock ? (
-
               <ListItem
                 navigation={navigation}
                 setRegion={setRegion}
@@ -170,6 +169,7 @@ const ListItem = props => {
             justifyContent: 'center',
             alignItems: 'center',
             flex: 1,
+            height:(Dimensions.get('window').height +200 )/2
           }}>
           <ActivityIndicator size="large" color="#ff9500" />
         </View>
@@ -377,8 +377,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    position: 'absolute',
-    top: (Dimensions.get('window').height - 200) / 2,
+    // position: 'absolute',
+    height:(Dimensions.get('window').height + 100) / 2,
+    // top: (Dimensions.get('window').height - 200) / 2,
   },
   topItemTxt: {
     fontSize: 20,
