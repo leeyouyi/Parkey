@@ -204,7 +204,7 @@ class Home extends React.Component {
                 // ary.push(data)
                 ary[item.ID] = data
                 this.setState({info: ary})
-                this.setState({modalLoading:false})
+                // this.setState({modalLoading:false})
               }
             })
             .catch(err => {
@@ -636,9 +636,9 @@ class Home extends React.Component {
                         });
                         this.setState({modalLoading:true})
                         this.refs['modal'+item.ID].open();
-                      //  setTimeout(()=>{
-                      //   this.setState({modalLoading:false})
-                      //  },800)
+                       setTimeout(()=>{
+                        this.setState({modalLoading:false})
+                       },800)
 
                       }}>
                         {
