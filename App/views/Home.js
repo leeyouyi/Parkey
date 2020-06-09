@@ -634,11 +634,12 @@ class Home extends React.Component {
                         list.forEach(el => {
                           this.refs['modal'+el.ID].close();
                         });
-                        this.setState({modalLoading:true})
                         this.refs['modal'+item.ID].open();
-                       setTimeout(()=>{
-                        this.setState({modalLoading:false})
-                       },800)
+                      //   this.setState({modalLoading:true})
+                      //   this.refs['modal'+item.ID].open();
+                      //  setTimeout(()=>{
+                      //   this.setState({modalLoading:false})
+                      //  },800)
 
                       }}>
                         {
