@@ -71,7 +71,8 @@ class Home extends React.Component {
         {txt:'地形',type:'terrain',active:false},
         {txt:'街道',active:false},
       ],
-      random:null
+      random:null,
+      modalLoading:false
     };
   }
   _login_event(){
@@ -159,6 +160,7 @@ class Home extends React.Component {
     this.getApi()
   }
   getApi(northWest,southEast,region) {
+      // this.setState({info: []})
       const loginReducer =  store.getState().loginReducer
       this.setState({random:loginReducer.random})
       let lat1 = northWest ? northWest.latitude : 25.043885
@@ -202,6 +204,7 @@ class Home extends React.Component {
                 // ary.push(data)
                 ary[item.ID] = data
                 this.setState({info: ary})
+                this.setState({modalLoading:false})
               }
             })
             .catch(err => {
@@ -282,6 +285,7 @@ class Home extends React.Component {
     const marker = this.state.marker
     const loading = this.state.loading
     const typeAry = this.state.typeAry
+    const modalLoading = this.state.modalLoading
     return (
       <>
         {loading ? (
@@ -316,82 +320,96 @@ class Home extends React.Component {
               backdropOpacity={0.5}
               top={ Dimensions.get('window').height * 0.6}
               >
-   
-              <View style={styles.modal2Wrap}>
-                <View style={styles.modal2Item}>
-                  <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].SC}</Text>
-                  {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID}</Text> */}
-                  {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID }</Text> */}
-                  <TouchableOpacity style={styles.modal2Button}
-                  onPress={()=>{
-                    const loginReducer =  store.getState().loginReducer
-                    let req = {
-                      PhoneNo: loginReducer.phone,
-                      ptime: userService.time(),
-                    };
-                    userService
-                    .userQLPList(req)
-                    .then(res => {
-                      if (res.data.status === 0) {
-                        if(!res.data.data){
-                          alert('請先設定車牌')
-                          navigation.navigate('Edit');
+                {
+                  modalLoading ? 
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      position:'absolute',
+                      zIndex:2,
+                      width: Dimensions.get('window').width,
+                      height: Dimensions.get('window').height - 90,
+                    }}>
+                    <ActivityIndicator size="large" color="#ccc" />
+                  </View>
+                  :
+                  <View style={styles.modal2Wrap}>
+                  <View style={styles.modal2Item}>
+                    <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].SC}</Text>
+                    {/* <Text style={styles.modal2Txt}>{ !info[index] ? '' : info[index].ID}</Text> */}
+                    <TouchableOpacity style={styles.modal2Button}
+                    onPress={()=>{
+                      const loginReducer =  store.getState().loginReducer
+                      let req = {
+                        PhoneNo: loginReducer.phone,
+                        ptime: userService.time(),
+                      };
+                      userService
+                      .userQLPList(req)
+                      .then(res => {
+                        if (res.data.status === 0) {
+                          if(!res.data.data){
+                            alert('請先設定車牌')
+                            navigation.navigate('Edit');
+                          }else{
+                            navigation.navigate('Camera');
+                          }
                         }else{
-                          navigation.navigate('Camera');
+                          console.log(res.data.msg);
                         }
-                      }else{
-                        console.log(res.data.msg);
-                      }
-                    })
-                    .catch(err => {
-                      console.log(err);
-                    });
-                  }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                      <SvgXml xml={Svgs.start} width="20" height="20" />
-                      <Text style={styles.modal2ButtonTxt}>開始使用</Text>
+                      })
+                      .catch(err => {
+                        console.log(err);
+                      });
+                    }}>
+                      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <SvgXml xml={Svgs.start} width="20" height="20" />
+                        <Text style={styles.modal2ButtonTxt}>開始使用</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.modal2Item2}>
+                    <Text style={styles.modal2Txt2}>剩餘車位</Text>
+                  </View>
+                  <View style={styles.modal2Row}>
+                    <View
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.modal2Txt3}>一般車位 : { !info[index] ? 0 : info[index].FreeSp}席</Text>
+                      
                     </View>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.modal2Item2}>
-                  <Text style={styles.modal2Txt2}>剩餘車位</Text>
-                </View>
-                <View style={styles.modal2Row}>
-                  <View
-                    style={{
-                      width: '50%',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Text style={styles.modal2Txt3}>一般車位 : { !info[index] ? 0 : info[index].FreeSp}席</Text>
-                    
+                    <View
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.modal2Txt3}>殘障車位 : { !info[index] ? 0 : info[index].FreeHandicapeSp}席</Text>
+                    </View>
                   </View>
-                  <View
-                    style={{
-                      width: '50%',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Text style={styles.modal2Txt3}>殘障車位 : { !info[index] ? 0 : info[index].FreeHandicapeSp}席</Text>
+  
+                  
+                  <View style={styles.modal2Row2}>
+                    <Text style={styles.modal2Txt4}>收費時段:周</Text>
+                    <Text style={styles.modal2Txt5}>{strAry[index][1]}</Text>
+                    <Text style={styles.modal2Txt4}>至周</Text>
+                    <Text style={styles.modal2Txt5}>{strAry[index][4]}</Text>
+                    <Text style={styles.modal2Txt4}>，</Text>
+                    <Text style={styles.modal2Txt5}>{strAry[index][5]}</Text>
+                    <Text style={styles.modal2Txt4}>至</Text>
+                    <Text style={styles.modal2Txt5}>{strAry[index][8]}{strAry[index][9]}</Text>
+                    <Text style={styles.modal2Txt4}>時 </Text>
+                    <Text style={styles.modal2Txt4}> 停車費率:每小時</Text>
+                    <Text style={styles.modal2Txt5}>{strAry2[index][0]}{strAry2[index][1]}</Text>
+                    <Text style={styles.modal2Txt4}>元</Text>
                   </View>
                 </View>
-
-                
-                <View style={styles.modal2Row2}>
-                  <Text style={styles.modal2Txt4}>收費時段:周</Text>
-                  <Text style={styles.modal2Txt5}>{strAry[index][1]}</Text>
-                  <Text style={styles.modal2Txt4}>至周</Text>
-                  <Text style={styles.modal2Txt5}>{strAry[index][4]}</Text>
-                  <Text style={styles.modal2Txt4}>，</Text>
-                  <Text style={styles.modal2Txt5}>{strAry[index][5]}</Text>
-                  <Text style={styles.modal2Txt4}>至</Text>
-                  <Text style={styles.modal2Txt5}>{strAry[index][8]}{strAry[index][9]}</Text>
-                  <Text style={styles.modal2Txt4}>時 </Text>
-                  <Text style={styles.modal2Txt4}> 停車費率:每小時</Text>
-                  <Text style={styles.modal2Txt5}>{strAry2[index][0]}{strAry2[index][1]}</Text>
-                  <Text style={styles.modal2Txt4}>元</Text>
-                </View>
-              </View>
+  
+                }
 
             </Modal>
             )
@@ -616,12 +634,18 @@ class Home extends React.Component {
                         list.forEach(el => {
                           this.refs['modal'+el.ID].close();
                         });
+                        this.setState({modalLoading:true})
                         this.refs['modal'+item.ID].open();
+                      //  setTimeout(()=>{
+                      //   this.setState({modalLoading:false})
+                      //  },800)
+
                       }}>
                         {
                           item.FreeSp !== 0 ?
-                          index===0?  <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
-                          : <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
+                          // index===0?  <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
+                          // : 
+                          <SvgXml xml={Svgs.mark_g} width="62" height="62"/>
                           :
                           <SvgXml xml={Svgs.mark_d} width="62" height="62"/>
                         }

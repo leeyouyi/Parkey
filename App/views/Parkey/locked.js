@@ -331,7 +331,9 @@ class Locked extends React.Component {
                     }}
                     title="Demo"
                     description="A location to test">
-                    <SvgXml xml={Svgs.mark} width="50" height="50" />
+                      <View>
+                        <SvgXml xml={Svgs.mark} width="50" height="50" />
+                      </View>
                   </Marker>
                 </MapView>
               </View>
