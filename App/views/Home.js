@@ -240,6 +240,7 @@ class Home extends React.Component {
     try{
       const result = await fetch(apiUrl)
       const json = await result.json()
+      // console.log(json.predictions)
       this.setState({
         predictions:json.predictions
       })
@@ -464,6 +465,8 @@ class Home extends React.Component {
           borderRadius:10
         }}>
           {predictions.map( prediction => {
+            // console.log(prediction.description)
+            let description = prediction.description
               return (
                 <TouchableOpacity
                 style={{
@@ -481,7 +484,7 @@ class Home extends React.Component {
                     padding:10,
                     borderBottomColor:'#ccc',
                     borderBottomWidth:1
-                  }} key={prediction.id}>{prediction.description}</Text>
+                  }} key={prediction.id}>{description}</Text>
                 </TouchableOpacity> 
               )
             })
