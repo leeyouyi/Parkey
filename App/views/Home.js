@@ -467,6 +467,9 @@ class Home extends React.Component {
           {predictions.map( prediction => {
             // console.log(prediction.description)
             let description = prediction.description
+            let strAry = description.split(',')
+            let str = strAry[strAry.length - 1]
+            // console.log(str)
               return (
                 <TouchableOpacity
                 style={{
@@ -484,7 +487,7 @@ class Home extends React.Component {
                     padding:10,
                     borderBottomColor:'#ccc',
                     borderBottomWidth:1
-                  }} key={prediction.id}>{description}</Text>
+                  }} key={prediction.id}>{str}</Text>
                 </TouchableOpacity> 
               )
             })
@@ -1071,9 +1074,9 @@ const styles = StyleSheet.create({
     height: 36,
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 2,
+    marginTop: 3,
     color:'#000',
-    fontSize:Platform.OS === 'ios' ? 17 : 14
+    fontSize:Platform.OS === 'ios' ? 17 : 13,
   },
   location: {
     position: 'absolute',
