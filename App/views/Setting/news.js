@@ -22,7 +22,7 @@ const News = props => {
     userService
       .userQInfo(req)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.status === 0) {
           setData(res.data.data)
         } else {

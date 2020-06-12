@@ -29,6 +29,7 @@ const List = props => {
   const [listInfo, setListInfo] = useState([]);
   const [oldList, setOldList] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const [phone, setPhone] = useState(loginReducer.phone);
  
   useEffect(() => {
     AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
@@ -83,6 +84,18 @@ const List = props => {
       dispatch(userUpdateList(false))
     }
   }, [userUpdateListReducer.updateList]);
+
+  // useEffect(() => {
+  //   const loginReducer_phone = loginReducer.phone
+  //   if(phone !== loginReducer_phone){
+  //     console.log('loginReducer_phone',loginReducer_phone)
+  //     console.log('phone',phone)
+  //     setListInfo([])
+  //     setLoading(true)
+  //     getApi(loginReducer,setListInfo,setOldList,setLoading)
+  //     setPhone(loginReducer_phone)
+  //   }
+  // },[])
 
   const [data, setData] = useState([
     {

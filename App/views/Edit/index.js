@@ -38,6 +38,7 @@ class Edit extends React.Component {
       loading: true,
       QLPList:[],
       height: isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250,
+      phone: store.getState().loginReducer.phone
     };
   }
   _login_event(){
@@ -136,6 +137,14 @@ class Edit extends React.Component {
       store.dispatch(userModifyLP(false));
       this.getList();
     }
+   const phone =  store.getState().loginReducer.phone
+    if(phone !== this.state.phone){
+      this.setState({dragItemData: []});
+      this.setState({loading:true})
+      this.getList();
+      this.setState({phone:phone})
+    }
+   
   }
   componentDidMount() {
     const {navigation} = this.props;
