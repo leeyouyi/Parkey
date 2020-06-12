@@ -15,7 +15,6 @@
 		14FDAFE10C9D0A2D053C28A3 /* libPods-ParkeyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2562F4B719A9D904C7C670C /* libPods-ParkeyTests.a */; };
 		26B7AB4037819FAADCDB4CC0 /* libPods-Parkey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CD4BB7FC7CAEBC1100D032 /* libPods-Parkey.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AppTests.m */; };
 		3B9E60B1428E59AEB4FEECC3 /* libPods-Parkey-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFAEF98F46D7E37A6952DE74 /* libPods-Parkey-tvOSTests.a */; };
@@ -55,6 +54,7 @@
 		1B56FBBFE20E5E3F6C145917 /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
 		1DE4A72B7C03522D9CDA83F7 /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		1E117976159D3563EE474FA6 /* libPods-Parkey-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parkey-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E71A9D024927C3000D75EB2 /* 40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 40.png; path = App/Images.xcassets/AppIcon.appiconset/40.png; sourceTree = "<group>"; };
 		248F2F88E6C29F509203A0B0 /* Pods-App-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-App-tvOS/Pods-App-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Parkey-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parkey-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Parkey-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parkey-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +190,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1E71A9D024927C3000D75EB2 /* 40.png */,
 				13B07FAE1A68108700A75B9A /* App */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AppTests */,
@@ -366,7 +367,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +731,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.09;
+				MARKETING_VERSION = 1.10;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -812,7 +812,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.09;
+				MARKETING_VERSION = 1.10;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
