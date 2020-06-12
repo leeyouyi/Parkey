@@ -22,6 +22,7 @@ const News = props => {
     userService
       .userQInfo(req)
       .then(res => {
+        console.log(res.data)
         if (res.data.status === 0) {
           setData(res.data.data)
         } else {
@@ -40,10 +41,18 @@ const News = props => {
         <View style={styles.wrap}>
           {data.length !==0 ?
             data.map(item => {
+              let time = item.BTime
+              let year = time.substring(0,4)
+              let mon = time.substring(4,6)
+              let day = time.substring(6,8)
+              let hour = time.substring(8,10) ;
+              let minute = time.substring(10,12) ;
+              let date = `${year}年${mon}月${day}日${hour}時${minute}分`
               return (
                 <View style={styles.item}>
                   <View style={styles.column}>
-                    <Text style={styles.itemtitle}>{item.BTime}</Text>
+                    <Text style={styles.itemtitle}>{item.BTitle}</Text>
+                    <Text style={styles.itemTxt}>{date}</Text>
                     <Text style={styles.itemTxt}>{item.BMsg}</Text>
                   </View>
                 </View>

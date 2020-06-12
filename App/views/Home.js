@@ -767,9 +767,17 @@ class Modalbox extends React.Component {
           if (res.data.status === 0) {
             let data = res.data.data
             let newData = data.map((item,index)=>{
+              let time = item.BTime
+              let year = time.substring(0,4)
+              let mon = time.substring(4,6)
+              let day = time.substring(6,8)
+              let hour = time.substring(8,10) ;
+              let minute = time.substring(10,12) ;
+              let date = `${year}年${mon}月${day}日${hour}時${minute}分`
               return{
-                title:item.BTime,
-                txt:item.BMsg,
+                title:item.BTitle,
+                date:date,
+                msg:item.BMsg,
                 active:
                 index === 0
                   ? (item.active = true)
@@ -841,9 +849,8 @@ class Modalbox extends React.Component {
                     <Text style={styles.modalTitle}>{item.title}</Text>
                   </View>
                   <View style={styles.modalItem2}>
-                    <Text style={styles.modalTxt}>
-                      {item.txt}
-                    </Text>
+                    <Text style={styles.modalTxt}>{item.date}</Text>
+                    <Text style={styles.modalTxt}>{item.msg}</Text>
                   </View>
                 </View>
               )
@@ -980,7 +987,7 @@ const styles = StyleSheet.create({
   },
   modalItem2: {
     width: '90%',
-    height: '30%',
+    height: '40%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1011,14 +1018,14 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
     padding: 10,
-    paddingBottom: 5,
+    paddingBottom: 30,
     paddingTop: 15,
   },
   modalTxt: {
     width: '100%',
     fontSize: 16,
     textAlign: 'center',
-    padding: 10,
+    padding: 5,
   },
   modalButtonIRow: {
     flex: 1,

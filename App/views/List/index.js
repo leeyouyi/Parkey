@@ -292,6 +292,7 @@ const getApi = (loginReducer,setListInfo,setOldList,setLoading)=>{
       userService
         .userQTickets(req)
         .then(res => {
+          // console.log(res.data)
           if (!Number(res.data.data)) setLoading(false);
           if (res.data.status === 0) {
             let data = res.data.data.map(item => {
