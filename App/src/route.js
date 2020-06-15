@@ -48,9 +48,6 @@ import News from '../views/Setting/news';
 import Verification from '../views/Setting/verification';
 import OldMember from '../views/Setting/oldMember';
 
-import store from './store';
-import {userUpdateLP} from './action';
-
 const Stack = createStackNavigator();
 
 const Route = () => {
@@ -179,27 +176,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     navigation.navigate('Parkey');
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#ff9500',
-                //         paddingLeft: 15,
-                //         fontSize: 14,
-                //         height:25
-                //       }}>
-                //       取消
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               )
             }
           })}
@@ -244,29 +220,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     navigation.navigate('Parkey');
-                //     store.dispatch(userUpdateLP(true));
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                //         : {hight: 50, position: 'absolute', top: 20, left: 5, zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#ff9500',
-                //         paddingLeft: 15,
-                //         height:25,
-                //         fontSize: 14
-                //       }}>
-                //       所有停放
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               );
             }
           })}
@@ -304,27 +257,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     navigation.navigate('List');
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#ff9500',
-                //         paddingLeft: 15,
-                //         fontSize: 14,
-                //       }}>
-                //       完成
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               );
             },
           })}
@@ -448,29 +380,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     const loginReducer = store.getState().loginReducer
-                //     let txt = loginReducer.login ? 'Setting': 'SignIn'
-                //     navigation.navigate(txt);
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#ff9500',
-                //         paddingLeft: 15,
-                //         fontSize: 14,
-                //       }}>
-                //       取消
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               );
             },
           })}
@@ -491,27 +400,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     navigation.navigate('Setting');
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                //         : {hight: 50, position: 'absolute', top: 20, left: 5,zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#A3A3A3',
-                //         paddingLeft: 15,
-                //         fontSize: 16,
-                //       }}>
-                //       先不要
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               );
             },
           })}
@@ -524,27 +412,6 @@ const Route = () => {
             headerLeft() {
               return (
                 <></>
-                // <TouchableOpacity
-                //   onPress={() => {
-                //     navigation.navigate('Setting');
-                //   }}>
-                //   <View
-                //     style={
-                //       Platform.OS === 'android'
-                //         ? ''
-                //         :isIphoneX()?{hight: 50, position: 'absolute', bottom: 15, left: 5 } 
-                //         : {hight: 50, position: 'absolute', top:15, left: 5, zIndex:999}
-                //     }>
-                //     <Text
-                //       style={{
-                //         color: '#A3A3A3',
-                //         paddingLeft: 15,
-                //         fontSize: 16,
-                //       }}>
-                //       先不要
-                //     </Text>
-                //   </View>
-                // </TouchableOpacity>
               );
             },
           })}

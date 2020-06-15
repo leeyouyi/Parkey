@@ -40,6 +40,7 @@ class Edit extends React.Component {
       height: isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250,
       phone: store.getState().loginReducer.phone
     };
+
   }
   _login_event(){
     const userInfoReducer =  store.getState().userInfoReducer
@@ -144,6 +145,7 @@ class Edit extends React.Component {
       this.getList();
       this.setState({phone:phone})
     }
+
    
   }
   componentDidMount() {
@@ -482,3 +484,4 @@ const styles = StyleSheet.create({
   },
 });
 export default Edit;
+

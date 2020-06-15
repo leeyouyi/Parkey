@@ -16,6 +16,7 @@ import Svgs from '../../img/icon/nav/svgs';
 import {useSelector,useDispatch} from 'react-redux';
 import * as userService from '../../axios/user';
 import {userUpdateList,login,userinfo} from '../../src/action';
+import { useIsFocused } from '@react-navigation/native';
 
 const List = props => {
   const {navigation} = props;
@@ -29,7 +30,8 @@ const List = props => {
   const [listInfo, setListInfo] = useState([]);
   const [oldList, setOldList] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [phone, setPhone] = useState(loginReducer.phone);
+  const isFocused = useIsFocused();
+
  
   useEffect(() => {
     AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
@@ -85,17 +87,13 @@ const List = props => {
     }
   }, [userUpdateListReducer.updateList]);
 
-  // useEffect(() => {
-  //   const loginReducer_phone = loginReducer.phone
-  //   if(phone !== loginReducer_phone){
-  //     console.log('loginReducer_phone',loginReducer_phone)
-  //     console.log('phone',phone)
-  //     setListInfo([])
-  //     setLoading(true)
-  //     getApi(loginReducer,setListInfo,setOldList,setLoading)
-  //     setPhone(loginReducer_phone)
-  //   }
-  // },[])
+  useEffect(() => {
+    if(isFocused){
+      setListInfo([])
+      setLoading(true)
+      getApi(loginReducer,setListInfo,setOldList,setLoading)
+    }
+  },[isFocused])
 
   const [data, setData] = useState([
     {
