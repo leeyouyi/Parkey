@@ -188,30 +188,31 @@ class Home extends React.Component {
            });
           this.setState({list: resAry})
           // this.setState({list: res.data.data})
-          let list = this.state.list
-          let ary = []
-          list.forEach(item=>{
-            let req2 = {
-              PhoneNo: '',
-              ID:item.ID,
-              QType: 0,          
-              ptime: userService.time()
-            }
-            userService.userQMapPin(req2)
-            .then(res => {
-              if (res.data.status === 0) {
-                let data ={ ...res.data,ID:item.ID}
-                // ary.push(data)
-                ary[item.ID] = data
-                this.setState({info: ary})
-                // this.setState({modalLoading:false})
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
-          })
+          // let list = this.state.list
+          // let ary = []
+          // list.forEach(item=>{
+          //   let req2 = {
+          //     PhoneNo: '',
+          //     ID:item.ID,
+          //     QType: 0,          
+          //     ptime: userService.time()
+          //   }
+          //   userService.userQMapPin(req2)
+          //   .then(res => {
+          //     if (res.data.status === 0) {
+          //       let data ={ ...res.data,ID:item.ID}
+          //       // ary.push(data)
+          //       ary[item.ID] = data
+          //       // this.setState({info: ary})
+          //       // this.setState({modalLoading:false})
+          //     }
+          //   })
+          //   .catch(err => {
+          //     console.log(err)
+          //   })
+          // })
         }
+     
         this.setState({loading: false})
       })
       .catch(err => {
@@ -308,6 +309,7 @@ class Home extends React.Component {
 
         {
           list.map((item,index)=>{
+  
             let str = !info[index] ? '' : info[index].BZTime
              strAry[index] = str ? str.split('') : ''
             let str2 = !info[index] ? '' : info[index].FeeRate
@@ -641,11 +643,25 @@ class Home extends React.Component {
                           this.refs['modal'+el.ID].close();
                         });
                         this.refs['modal'+item.ID].open();
-                      //   this.setState({modalLoading:true})
-                      //   this.refs['modal'+item.ID].open();
-                      //  setTimeout(()=>{
-                      //   this.setState({modalLoading:false})
-                      //  },800)
+                        let ary = []
+                          let req2 = {
+                            PhoneNo: '',
+                            ID:item.ID,
+                            QType: 0,          
+                            ptime: userService.time()
+                          }
+                          userService.userQMapPin(req2)
+                          .then(res => {
+                            if (res.data.status === 0) {
+                              let data ={ ...res.data,ID:item.ID}
+                              ary[item.ID] = data
+                              ary.push(data) 
+                              this.setState({info: ary})
+                            }
+                          })
+                          .catch(err => {
+                            console.log(err)
+                          })
 
                       }}>
                         {

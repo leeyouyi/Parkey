@@ -309,12 +309,14 @@ const Route = () => {
         <Stack.Screen
           name="Code"
           component={Code}
-          options={{
+          options={()=>({
             title: '綁定手機',
-            headerBackTitleVisible: true,
-            headerBackTitle:null,
-            headerTruncatedBackTitle:null
-          }}
+            headerLeft() {
+              return (
+                <></>
+              );
+            }
+          })}
         />
         <Stack.Screen
           name="Accont"
