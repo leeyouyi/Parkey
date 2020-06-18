@@ -511,7 +511,7 @@ class Home extends React.Component {
         }}>
           <SvgXml xml={mapSvgs.reload} width="35" height="35" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.layer} activeOpacity={1}
+        <TouchableOpacity style={styles.layer} activeOpacity={0.5}
         onPress={()=>{
           let css = this.state.displayType === 'none'? 'flex' : 'none'
           this.setState({displayType:css})
@@ -521,7 +521,7 @@ class Home extends React.Component {
         <View style={{
           width:'70%',
           position: 'absolute',
-          zIndex: 1,
+          zIndex: 9,
           right: 60,
           bottom: 115,
         }}>
@@ -1109,13 +1109,13 @@ const styles = StyleSheet.create({
   },
   reload: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 9,
     right: 20,
     bottom: 170,
   },
   layer: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 9,
     right: 20,
     bottom: 120,
   },
