@@ -229,11 +229,14 @@ const Route = () => {
         <Stack.Screen
           name="Ticket"
           component={Ticket}
-          options={{
+          options={({navigation, route}) =>({
             title: '單筆停車紀錄',
-            headerBackTitleVisible: true,
-            headerBackTitle: '紀錄',
-          }}
+            headerLeft() {
+              return (
+                <></>
+              );
+            }
+          })}
         />
         <Stack.Screen
           name="GoPay"

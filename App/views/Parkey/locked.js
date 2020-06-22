@@ -193,6 +193,7 @@ class Locked extends React.Component {
     const loading = this.state.loading
     const LPNickname = this.state.LPNickname
     const selectLP = this.state.selectLP
+    const devid = route.params.lockData.devid 
     return (
       <>
         <Modal
@@ -286,7 +287,8 @@ class Locked extends React.Component {
                   buttonData.navigateTxt,
                   dispatch,
                   userUpdateLPReducer,
-                  this
+                  this,
+                  devid
                 );
               }}>
               <Text style={styles.modalButtonTxt}>確認解鎖</Text>
@@ -444,7 +446,7 @@ const TxtItem = props => {
 };
 
 //解鎖機車
-const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUpdateLPReducer,component) => {
+const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUpdateLPReducer,component,devid) => {
   const {updateLP} =userUpdateLPReducer
   let req = {
     PhoneNo: phone,
@@ -456,9 +458,89 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
     .userUnlockDevice(req)
     .then(res => {
       if (res.data.status === 0) {
-        navigation.navigate(navigateTxt,{reload:true});
+        // navigation.navigate(navigateTxt,{reload:true});
+        
         dispatch(userUpdateLP(true))
-        component.setState({loading:false})
+        let req2 = {
+          PhoneNo: phone,
+          devid:devid,
+          ptime: userService.time(),
+        };
+        userService
+        .userQDevice(req2)
+        .then(res => {
+          // console.log(res.data)
+          if (res.data.status === 0) {
+            let {TicketNo} = res.data.data[0]
+            // console.log(TicketNo)
+            let req3 = {
+              PhoneNo: phone,
+              ptime: userService.time(),
+            };
+            userService
+            .userQTickets(req3)
+            .then(res => {
+              // console.log(res.data)
+              if (res.data.status === 0) {
+                let data = res.data.data
+                let filterData = data.filter(item=>{
+                  return item.TicketNo === TicketNo
+                })
+                // console.log(filterData)
+                filterData.forEach(item=>{
+                  let date = [];
+                  date[0] = item.BeginTime.substr(0, 4);
+                  date[1] = item.BeginTime.substr(4, 2);
+                  date[2] = item.BeginTime.substr(6, 2);
+                  date[3] = item.BeginTime.substr(8, 2);
+                  date[4] = item.BeginTime.substr(10, 2);
+                  let dateTxt =
+                    date[0] +
+                    '/' +
+                    date[1] +
+                    '/' +
+                    date[2] +
+                    ' ' +
+                    date[3] +
+                    ':' +
+                    date[4];
+                  let pay = item.PStatus === 1 ? true : false;
+                  navigation.navigate('Ticket', {
+                    pay: pay,
+                    tickInfo:{
+                      TicketNo:item.TicketNo,
+                      SC:item.SC,
+                      ParkNo:item.ParkNo,
+                      lat:item.lat,
+                      lon:item.lon,
+                      Amount:item.Amount,
+                      BeginTime:dateTxt,
+                      ParkTime:item.ParkTime,
+                      LpNo:item.LPNo,
+                      Nick:item.Nick,
+                      CarType:item.CarType,
+                      Area:item.Area,
+                      FeeRate:item.FeeRate,
+                      BZTime:item.BZTime
+                    }
+                  });
+                  component.setState({loading:false})
+                  component.refs.modal2.close();
+                })
+
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
+          }else{
+            console.log(res.data.msg);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
       } else {
         console.log(res.data.msg);
       }

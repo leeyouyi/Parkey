@@ -160,7 +160,7 @@ const ListItem = props => {
   const {navigation} = props;
   const {list} = props;
   const {loading} = props;
-
+  // console.console.log(loading);
   return (
     <>
       {loading ? (
@@ -249,7 +249,6 @@ const ListItem = props => {
   );
 };
 const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
-
   const listData = [];
   let req = {
     PhoneNo: loginReducer.phone,
@@ -273,6 +272,7 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
             userService
               .userQDevice(req2)
               .then(res2 => {
+                // console.log(res.data)
                 if (res2.data.status === 0) {
                   for (let i = 0; i < res2.data.data.length; i++) {
                     let paking = res2.data.data[i];

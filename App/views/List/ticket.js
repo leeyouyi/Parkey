@@ -68,7 +68,7 @@ class Ticket extends React.Component {
     const mapHight = pay ? styles.mapWrap2 : styles.mapWrap;
     const buttonData = {
       navigateTxt: 'GoPay',
-      buttonTxt: '前往繳交停車費',
+      buttonTxt: '繳交停車費',
     };
     const type = this.state.type
     const region = this.state.region
@@ -142,11 +142,23 @@ class Ticket extends React.Component {
         
           {!pay ? (
             <View style={styles.button}>
-              <ButtonItem
-                data={buttonData}
-                navigation={navigation}
-                tickInfo={tickInfo}
-                ></ButtonItem>
+              <View style={styles.buttonWrap}>
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  style={styles.buttonItem}
+                  onPress={() => {
+                    navigation.navigate('List');
+                  }}>
+                  <Text style={styles.buttonItemTxt}>所有紀錄</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.buttonWrap}>
+                <ButtonItem
+                  data={buttonData}
+                  navigation={navigation}
+                  tickInfo={tickInfo}
+                  ></ButtonItem>
+              </View>
             </View>
           ) : (
             <></>
@@ -422,9 +434,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
+    height:100,
+    flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height:100,
     backgroundColor: '#ffffff',
     // position: 'absolute',
     // bottom: isIphoneX()? 60 : Platform.OS === 'ios' ? 0 : 20,
@@ -452,6 +465,23 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  buttonWrap:{
+    width:'45%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    padding: 10,
+    backgroundColor: '#E5E5EB',
+    borderRadius: 20,
+  },
+  buttonItemTxt: {
+    fontSize: 18,
+    color: '#7C7C7E',
   },
 });
 export default Ticket;

@@ -20,14 +20,19 @@ class Camera extends React.Component {
   }
 
   barcodeRecognized = ({barcodes}) => {
-    let data = barcodes.map(item => {
-      return item.data
-    });
-    const {navigation} = this.props;
-    navigation.navigate('Lock',{
-      devid:data[0],
-    });
-  };
+    // console.log(barcodes)
+    if (barcodes && barcodes[0].type === 'QR_CODE') {
+      this.setState({flag:false})
+      let data = barcodes.map(item => {
+        return item.data
+      });
+      const {navigation} = this.props;
+        navigation.navigate('Lock',{
+          devid:data[0],
+        });
+      };
+    }
+
 
   onBarCodeRead = (e) => {
     let barcode = e.data
@@ -52,7 +57,7 @@ class Camera extends React.Component {
                 if(this.state.flag){
                   this.barcodeRecognized(e)
                 }
-                this.setState({flag:false})
+
               }}>
 
             </RNCamera>

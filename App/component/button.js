@@ -169,7 +169,7 @@ const ButtonItem = props => {
             },1000)
           }
         
-        } else if (buttonTxt === '前往繳交停車費'){
+        } else if (buttonTxt === '繳交停車費'){
           let tickInfo = props.tickInfo;
           navigation.navigate(navigateTxt,{
             tickInfo:tickInfo

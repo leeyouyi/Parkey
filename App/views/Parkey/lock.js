@@ -13,7 +13,7 @@ import { isIphoneX } from 'react-native-iphone-x-helper'
 import ButtonItem from '../../component/button';
 import MapView, {Marker} from 'react-native-maps';
 import mapStyle from '../../component/mapStyle';
-import {SvgXml} from 'react-native-svg';
+import {SvgXml, Circle} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
 import {useSelector, useDispatch} from 'react-redux';
 import * as userService from '../../axios/user';
@@ -43,8 +43,9 @@ const Lock = props => {
     navigateTxt: 'Locked',
     buttonTxt: '確認上鎖我的機車',
   });
-
+  const [flag,setFlag] = useState(true) 
   useEffect(()=>{
+
     if(loginReducer.login){
       dispatch(userSelectLP('','',''))
       let req = {
@@ -101,15 +102,20 @@ const Lock = props => {
             latitudeDelta: 0,
             longitudeDelta: 0.05,
           })
+          if(res.data.data[0].Lock === '0'){
+            setFlag(false)
+          }
           if(res.data.data[0].Lock === '1'){
-            if(res.data.data[0].LPNo){
+            let LPNo = res.data.data[0].LPNo
+            if(LPNo === '0'){
+              setFlag(false)
               setLocked(true)
               setButtonData({
                 navigateTxt: 'Locked',
                 buttonTxt: '確認綁定我的機車',
               });
               navigation.setOptions({title: '綁定車鎖與機車車牌'});
-            }else{
+            }else if(LPNo === '1'){
               navigation.navigate('Parkey');
               Alert.alert(
                 '錯誤',
@@ -118,7 +124,19 @@ const Lock = props => {
                   {text: '確定'},
                 ]
               )
-            } 
+            }else{
+              if(flag){
+                navigation.navigate('Parkey');
+                Alert.alert(
+                  '錯誤',
+                  '您已上鎖，車牌為:'+ LPNo,
+                  [
+                    {text: '確定'},
+                  ]
+                )
+              }
+
+            }
           } 
         }else{
           console.log(res.data.msg);
