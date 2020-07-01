@@ -14,6 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../img/icon/nav/svgs';
 
+
 import Home from '../views/Home';
 import Parkey from '../views/Parkey';
 import Camera from '../views/Parkey/camera';
@@ -97,6 +98,7 @@ const Route = () => {
             );
           },
         }}>
+
         <Stack.Screen
           name="Home"
           component={Home}
@@ -422,6 +424,7 @@ const Route = () => {
           })}
         />
       </Stack.Navigator>
+
     </NavigationContainer>
   );
 };
