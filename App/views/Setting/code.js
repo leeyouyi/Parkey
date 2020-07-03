@@ -40,44 +40,47 @@ class Code extends React.Component  {
   }
   _login_event(){
     const userInfoReducer =  store.getState().userInfoReducer
-    AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
-      let token = data[0][1] || null;
-      if (token == 'asdfghjkl410') {
-        let phone = data[1][1]
-        let password = data[2][1]
-        let random = data[3][1]
-        let req = {
-          PhoneNo: phone,
-          Password: password,
-          ptime: userService.time(),
-        };
-        userService
-        .userLogin(req)
-        .then(res => {
-          if (res.data.status === 0 || res.data.status === 4) {
-            store.dispatch(login(true, phone, password,random));
-            let req2 = {
-              PhoneNo: phone,
-              ptime: userService.time(),
-            };
-            userService
-              .userQMemberInfo(req2)
-              .then(res => {
-                if (res.data.status === 0) {
-                  let {UName, email, FName, PID} = res.data;
-                  store.dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
-                }
-              })
-              .catch(err => {
-                console.log(err);
-              })
-            } 
-          })
-        .catch(err => {
-          console.log(err);
-        })      
-      }
-    });
+    const loginReducer =  store.getState().loginReducer
+    if(!loginReducer.login){
+      AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
+        let token = data[0][1] || null;
+        if (token == 'asdfghjkl410') {
+          let phone = data[1][1]
+          let password = data[2][1]
+          let random = data[3][1]
+          let req = {
+            PhoneNo: phone,
+            Password: password,
+            ptime: userService.time(),
+          };
+          userService
+          .userLogin(req)
+          .then(res => {
+            if (res.data.status === 0 || res.data.status === 4) {
+              store.dispatch(login(true, phone, password,random));
+              let req2 = {
+                PhoneNo: phone,
+                ptime: userService.time(),
+              };
+              userService
+                .userQMemberInfo(req2)
+                .then(res => {
+                  if (res.data.status === 0) {
+                    let {UName, email, FName, PID} = res.data;
+                    store.dispatch(userinfo(UName, FName, phone, email, PID,userInfoReducer.status));
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+              } 
+            })
+          .catch(err => {
+            console.log(err);
+          })      
+        }
+      });
+    }
 
 }
   render(){

@@ -459,88 +459,174 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
     .then(res => {
       if (res.data.status === 0) {
         // navigation.navigate(navigateTxt,{reload:true});
-        
         dispatch(userUpdateLP(true))
-        let req2 = {
-          PhoneNo: phone,
-          devid:devid,
-          ptime: userService.time(),
-        };
-        userService
-        .userQDevice(req2)
-        .then(res => {
-          // console.log(res.data)
-          if (res.data.status === 0) {
-            let {TicketNo} = res.data.data[0]
-            // console.log(TicketNo)
-            let req3 = {
-              PhoneNo: phone,
-              ptime: userService.time(),
-            };
-            userService
-            .userQTickets(req3)
-            .then(res => {
-              // console.log(res.data)
-              if (res.data.status === 0) {
-                let data = res.data.data
-                let filterData = data.filter(item=>{
-                  return item.TicketNo === TicketNo
-                })
-                // console.log(filterData)
-                filterData.forEach(item=>{
-                  let date = [];
-                  date[0] = item.BeginTime.substr(0, 4);
-                  date[1] = item.BeginTime.substr(4, 2);
-                  date[2] = item.BeginTime.substr(6, 2);
-                  date[3] = item.BeginTime.substr(8, 2);
-                  date[4] = item.BeginTime.substr(10, 2);
-                  let dateTxt =
-                    date[0] +
-                    '/' +
-                    date[1] +
-                    '/' +
-                    date[2] +
-                    ' ' +
-                    date[3] +
-                    ':' +
-                    date[4];
-                  let pay = item.PStatus === 1 ? true : false;
-                  navigation.navigate('Ticket', {
-                    pay: pay,
-                    tickInfo:{
-                      TicketNo:item.TicketNo,
-                      SC:item.SC,
-                      ParkNo:item.ParkNo,
-                      lat:item.lat,
-                      lon:item.lon,
-                      Amount:item.Amount,
-                      BeginTime:dateTxt,
-                      ParkTime:item.ParkTime,
-                      LpNo:item.LPNo,
-                      Nick:item.Nick,
-                      CarType:item.CarType,
-                      Area:item.Area,
-                      FeeRate:item.FeeRate,
-                      BZTime:item.BZTime
-                    }
-                  });
-                  component.setState({loading:false})
-                  component.refs.modal2.close();
-                })
+        let BStatus ;
+        let count = 0
+        let status = 0
+        let interval =setInterval(() => {
+          BStatus = Promise.resolve(userQDeviceFn(phone ,lockData ,status))
+          count = count + 1 
+           BStatus.then(function(result) {
+             console.log('result.BStatus',result.BStatus)
+             if(result.BStatus === 3) {
+               status = result.BStatus
+               clearInterval(interval)
+               let {TicketNo} = result
+               let req3 = {
+                PhoneNo: phone,
+                ptime: userService.time(),
+              };
+              userService
+              .userQTickets(req3)
+              .then(res => {
+                // console.log(res.data)
+                if (res.data.status === 0) {
+                  let data = res.data.data
+                  let filterData = data.filter(item=>{
+                    return item.TicketNo === TicketNo
+                  })
+                  // console.log(filterData)
+                  filterData.forEach(item=>{
+                    let date = [];
+                    date[0] = item.BeginTime.substr(0, 4);
+                    date[1] = item.BeginTime.substr(4, 2);
+                    date[2] = item.BeginTime.substr(6, 2);
+                    date[3] = item.BeginTime.substr(8, 2);
+                    date[4] = item.BeginTime.substr(10, 2);
+                    let dateTxt =
+                      date[0] +
+                      '/' +
+                      date[1] +
+                      '/' +
+                      date[2] +
+                      ' ' +
+                      date[3] +
+                      ':' +
+                      date[4];
+                    let pay = item.PStatus === 1 ? true : false;
+                    navigation.navigate('Ticket', {
+                      pay: pay,
+                      tickInfo:{
+                        TicketNo:item.TicketNo,
+                        SC:item.SC,
+                        ParkNo:item.ParkNo,
+                        lat:item.lat,
+                        lon:item.lon,
+                        Amount:item.Amount,
+                        BeginTime:dateTxt,
+                        ParkTime:item.ParkTime,
+                        LpNo:item.LPNo,
+                        Nick:item.Nick,
+                        CarType:item.CarType,
+                        Area:item.Area,
+                        FeeRate:item.FeeRate,
+                        BZTime:item.BZTime
+                      }
+                    });
+                    component.setState({loading:false})
+                    component.refs.modal2.close();
+                  })
+  
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              });
+  
+             }
+             if(result.BStatus === 2){
+               component.setState({loading:false})
+               component.refs.modal2.close();
+               alert('上鎖失敗')
+             }
+             if(count === 10){
+               clearInterval(interval)
+              component.setState({loading:false})
+              component.refs.modal2.close();
+              alert('超時')
+             }
+           })
+         },1000)
+        // let req2 = {
+        //   PhoneNo: phone,
+        //   devid:devid,
+        //   ptime: userService.time(),
+        // };
+        // userService
+        // .userQDevice(req2)
+        // .then(res => {
+        //   // console.log(res.data)
+        //   if (res.data.status === 0) {
+        //     let {TicketNo} = res.data.data[0]
+        //     // console.log(TicketNo)
+        //     let req3 = {
+        //       PhoneNo: phone,
+        //       ptime: userService.time(),
+        //     };
+        //     userService
+        //     .userQTickets(req3)
+        //     .then(res => {
+        //       // console.log(res.data)
+        //       if (res.data.status === 0) {
+        //         let data = res.data.data
+        //         let filterData = data.filter(item=>{
+        //           return item.TicketNo === TicketNo
+        //         })
+        //         // console.log(filterData)
+        //         filterData.forEach(item=>{
+        //           let date = [];
+        //           date[0] = item.BeginTime.substr(0, 4);
+        //           date[1] = item.BeginTime.substr(4, 2);
+        //           date[2] = item.BeginTime.substr(6, 2);
+        //           date[3] = item.BeginTime.substr(8, 2);
+        //           date[4] = item.BeginTime.substr(10, 2);
+        //           let dateTxt =
+        //             date[0] +
+        //             '/' +
+        //             date[1] +
+        //             '/' +
+        //             date[2] +
+        //             ' ' +
+        //             date[3] +
+        //             ':' +
+        //             date[4];
+        //           let pay = item.PStatus === 1 ? true : false;
+        //           navigation.navigate('Ticket', {
+        //             pay: pay,
+        //             tickInfo:{
+        //               TicketNo:item.TicketNo,
+        //               SC:item.SC,
+        //               ParkNo:item.ParkNo,
+        //               lat:item.lat,
+        //               lon:item.lon,
+        //               Amount:item.Amount,
+        //               BeginTime:dateTxt,
+        //               ParkTime:item.ParkTime,
+        //               LpNo:item.LPNo,
+        //               Nick:item.Nick,
+        //               CarType:item.CarType,
+        //               Area:item.Area,
+        //               FeeRate:item.FeeRate,
+        //               BZTime:item.BZTime
+        //             }
+        //           });
+        //           component.setState({loading:false})
+        //           component.refs.modal2.close();
+        //         })
 
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
+        //       }
+        //     })
+        //     .catch(err => {
+        //       console.log(err);
+        //     });
 
-          }else{
-            console.log(res.data.msg);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+        //   }else{
+        //     console.log(res.data.msg);
+        //   }
+        // })
+        // .catch(err => {
+        //   console.log(err);
+        // });
       } else {
         console.log(res.data.msg);
       }
@@ -549,6 +635,22 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
       console.log(err);
     });
 };
+
+const userQDeviceFn= (phone,lockData,status)=>{
+  if(status === 3) return false
+  console.log('status',status)
+  let req= {
+    PhoneNo: phone,
+    devid: parseInt(lockData.devid),
+    ptime: userService.time(),
+  };
+  return userService.userQDevice(req).then(res =>{
+    if (res.data.status === 0){
+      let data = res.data.data[0]
+      return data
+    }
+  })
+}
 const styles = StyleSheet.create({
   modal: {
     width: Dimensions.get('window').width * 0.9,

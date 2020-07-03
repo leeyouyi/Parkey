@@ -682,13 +682,33 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
   userService
     .userBindDevice(req)
     .then(res => {
-      if (res.data.status === 0) {
-        navigation.navigate(navigateTxt, {
-          lockData,
-          paking,
-        });
-        dispatch(userUpdateLP(true))
-        btnFlag = true
+      if (res.data.status === 0) { 
+        let BStatus ;
+        let count = 0
+        let status = 0
+        let interval =setInterval(() => {
+           BStatus = Promise.resolve(userQDeviceFn(phone ,lockData ,status))
+           count = count + 1 
+            BStatus.then(function(result) {
+              if(result === 1) {
+                status = result
+                clearInterval(interval)
+                navigation.navigate(navigateTxt, {
+                  lockData,
+                  paking,
+                })
+                dispatch(userUpdateLP(true))
+                btnFlag = true
+              }
+              if(result === 2){
+                alert('上鎖失敗')
+              }
+              if(count === 10){
+                clearInterval(interval)
+              }
+            })
+          },1000)
+
       } else {
         if(res.data.msg === '車牌不能重複鎖定'){
           Alert.alert(
@@ -714,12 +734,14 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
 };
 // 確認繳費
 const payTicket = (phone,tickInfo,navigation, navigateTxt,dispatch)=>{
+  console.log('payTicket')
   let req = {
     PhoneNo: phone,
     TicketNo: tickInfo.TicketNo,
     LPNo: tickInfo.LpNo,
     ptime: userService.time(),
   };
+  // console.log(req)
   userService
     .userPayTicket(req)
     .then(res => {
@@ -738,6 +760,21 @@ const getRandom =(min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
+}
+
+const userQDeviceFn= (phone,lockData,status)=>{
+  if(status === 1) return false
+  let req= {
+    PhoneNo: phone,
+    devid: parseInt(lockData.devid),
+    ptime: userService.time(),
+  };
+  return userService.userQDevice(req).then(res =>{
+    if (res.data.status === 0){
+      let data = res.data.data[0]
+      return data.BStatus
+    }
+  })
 }
 const styles = StyleSheet.create({
   buttonItem: {

@@ -27,6 +27,7 @@ import Ticket from '../views/List/ticket';
 import GoPay from '../views/List/goPay';
 import SelectPay from '../views/List/selectPay';
 import PayEnd from '../views/List/payEnd';
+import webViewItem from '../views/List/webViewItem';
 
 import Edit from '../views/Edit';
 import Add from '../views/Edit/add';
@@ -259,6 +260,18 @@ const Route = () => {
           component={PayEnd}
           options={({navigation, route}) => ({
             title: '付款',
+            headerLeft() {
+              return (
+                <></>
+              );
+            },
+          })}
+        />
+        <Stack.Screen
+          name="webViewItem"
+          component={webViewItem}
+          options={({navigation, route}) => ({
+            title: 'webViewItem',
             headerLeft() {
               return (
                 <></>

@@ -33,6 +33,7 @@ const Parkey = props => {
   const [reload, seReload] = useState(false);
 
   useEffect(() => {
+    if (!loginReducer.login) {
       AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
         let token = data[0][1] || null;
         if (token == 'asdfghjkl410') {
@@ -71,6 +72,8 @@ const Parkey = props => {
           })      
         }
       });
+    }
+
     if (loginReducer.login) {
       getApi(loginReducer,seList,setLoading,reload,seReload,setHasLock)
     }

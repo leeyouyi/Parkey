@@ -55,6 +55,7 @@ const Lock = props => {
       userService
       .userQLPList(req)
       .then(res => {
+        // console.log('userQLPList')
         if (res.data.status === 0) {
             setList(res.data)
             if(userSelectLPReducer.selectLP === '') {

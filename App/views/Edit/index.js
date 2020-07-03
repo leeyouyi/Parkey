@@ -44,6 +44,8 @@ class Edit extends React.Component {
   }
   _login_event(){
     const userInfoReducer =  store.getState().userInfoReducer
+    const loginReducer =  store.getState().loginReducer
+    if(!loginReducer.login){
       AsyncStorage.multiGet(['token', 'login_phone','login_pw','random']).then((data)=>{
         let token = data[0][1] || null;
         if (token == 'asdfghjkl410') {
@@ -82,6 +84,7 @@ class Edit extends React.Component {
           })      
         }
       });
+    }
 
   }
   deleteLP(LPNo,item) {
@@ -323,7 +326,7 @@ class Edit extends React.Component {
       <SafeAreaView style={{flex:1,backgroundColor:'#fff'}}> 
         <View style={styles.title}>
           <Text style={styles.tltleTxt}>車牌管理</Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
                 position: 'absolute',
                 left: 20 ,
@@ -344,7 +347,7 @@ class Edit extends React.Component {
             <Text style={{color: '#ff9500', display: this.state.display2}}>
               取消
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={{
               position: 'absolute',
