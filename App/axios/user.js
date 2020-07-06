@@ -1,20 +1,26 @@
 import qs from 'qs';
 import {api} from './base';
 
+const  addZero = (x, n) =>{
+  while (x.toString().length < n) {
+    x = "0" + x;
+  }
+  return x;
+}
 export const time = ()=>{
         let date = new Date();
         let year = date.getFullYear() ;
-        let month = date.getMonth() + 1 ;
-        let day = date.getDate() ;
-        let hour = date.getHours() ;
-        let minute = date.getMinutes() ;
-        let second = date.getSeconds() ;
-        let milliseconds = date.getMilliseconds() ;
-        if(month <10) month = '0' + month
-        if(day <10) day = '0' + day
-        if(hour <10) hour = '0' + hour
-        if(minute <10) minute = '0' + minute
-        if(second <10) second = '0' + second
+        let month = addZero((date.getMonth() + 1),2);
+        let day = addZero(date.getDate(),2);
+        let hour = addZero(date.getHours(),2);
+        let minute = addZero(date.getMinutes(),2);
+        let second = addZero(date.getSeconds(),2);
+        let milliseconds = addZero(date.getMilliseconds(),3);
+        // if(month <10) month = '0' + month
+        // if(day <10) day = '0' + day
+        // if(hour <10) hour = '0' + hour
+        // if(minute <10) minute = '0' + minute
+        // if(second <10) second = '0' + second
         let now = '' + year + month + day + hour + minute + second + milliseconds
         return  now
   }

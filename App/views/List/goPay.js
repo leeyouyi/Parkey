@@ -1,13 +1,15 @@
-import React ,{useState}from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React ,{useState,useRef}from 'react';
+import {StyleSheet, View, Text, TouchableOpacity,Dimensions} from 'react-native';
 import ButtonItem from '../../component/button';
 import {SvgXml} from 'react-native-svg';
 import newSvgs from '../../img/icon/new/svgs';
 import CheckBox from 'react-native-check-box';
+import Modal from 'react-native-modalbox';
 
 const GoPay = props => {
   const {navigation,route} = props;
   const {tickInfo} = route.params;
+  const modal = useRef('modal');
 
   const buttonData = {
     navigateTxt: 'PayEnd',
@@ -42,6 +44,41 @@ const GoPay = props => {
   // // const[bg,setBg]= useState('#fff')
   return (
     <>
+      <Modal
+        style={styles.modal}
+        ref={modal}
+        isOpen={false}
+        coverScreen={true}
+        position={'center'}>
+        <View
+          style={{
+            width: '100%',
+            height: '70%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={styles.modalItem}>
+            <Text style={styles.modalTitle}></Text>
+          </View>
+          <View style={styles.modalItem2}>
+            <Text style={styles.modalTxt}>
+
+            </Text>
+            <Text style={styles.modalTxt}>
+
+            </Text>
+          </View>
+        </View>
+        <View style={styles.modalButtonIRow}>
+          <TouchableOpacity
+            style={styles.modalButton}
+            onPress={() => {
+              modal.current.close();
+            }}>
+            <Text style={styles.modalButtonTxt}>知道了</Text>
+          </TouchableOpacity>
+        </View>
+        </Modal>
       <View style={styles.container}>
         <View style={styles.titleWrap}>
           <View style={styles.titleItem}>
@@ -136,6 +173,10 @@ const TxtItem = props => {
     {
       txt: '停車單號',
       txt1: tickInfo.TicketNo,
+    },
+    {
+      txt: '開單車號',
+      txt1: `AKB-48`,
     },
     {
       txt: '應付停車費用',
@@ -245,6 +286,67 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     paddingTop:30
-  }
+  },
+  modal: {
+    width: Dimensions.get('window').width * 0.9,
+    height: Dimensions.get('window').height * 0.3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  modalItem: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalItem2: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    width: '100%',
+    fontSize: 24,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  modalTxt: {
+    width: '100%',
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 10,
+  },
+  modalButtonIRow: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderTopColor: '#DEDFE0',
+    borderTopWidth: 1,
+  },
+  modalButton: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalButton1: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalButton2: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderLeftColor: '#DEDFE0',
+    borderLeftWidth: 1,
+  },
+  modalButtonTxt: {
+    color: '#6DA0F3',
+    fontSize: 22,
+  },
 });
 export default GoPay;

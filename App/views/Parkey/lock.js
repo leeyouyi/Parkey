@@ -9,11 +9,11 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
-import { isIphoneX } from 'react-native-iphone-x-helper'
+// import { isIphoneX } from 'react-native-iphone-x-helper'
 import ButtonItem from '../../component/button';
 import MapView, {Marker} from 'react-native-maps';
 import mapStyle from '../../component/mapStyle';
-import {SvgXml, Circle} from 'react-native-svg';
+import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
 import {useSelector, useDispatch} from 'react-redux';
 import * as userService from '../../axios/user';
@@ -45,107 +45,127 @@ const Lock = props => {
   });
   const [flag,setFlag] = useState(true) 
   useEffect(()=>{
-
+ 
     if(loginReducer.login){
       dispatch(userSelectLP('','',''))
-      let req = {
-        PhoneNo: loginReducer.phone,
-        ptime: userService.time(),
-      };
-      userService
-      .userQLPList(req)
-      .then(res => {
-        // console.log('userQLPList')
-        if (res.data.status === 0) {
-            setList(res.data)
-            if(userSelectLPReducer.selectLP === '') {
-              // setLPNo(res.data.data[0].LPNo)
-              // dispatch(userSelectLP(
-              //     res.data.data[0].LPNo,
-              //     res.data.data[0].LPNickname,
-              //     res.data.data[0].LPType
-              //   ))
-            }else if(propsLP !== ''){
-              setLPNo(propsLP)
-              res.data.data.forEach(item => {
-                if(item.LPNo === propsLP){
-                  dispatch(userSelectLP(
-                    item.LPNo,
-                    item.LPNickname,
-                    item.LPType
-                  ))
-                }
-              });
-            }else{
-              setLPNo(userSelectLPReducer.selectLP)
-            }
-        }else{
-          console.log(res.data.msg);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-      let req2 = {
-        PhoneNo: loginReducer.phone,
-        devid:devid,
-        ptime: userService.time(),
-      };
-      userService
-      .userQDevice(req2)
-      .then(res => {
-        // console.log(res.data)
-        if (res.data.status === 0) {
-          setParking(res.data.data[0])
-          setRegion({
-            latitude: res.data.data[0].lat,
-            longitude: res.data.data[0].lon,
-            latitudeDelta: 0,
-            longitudeDelta: 0.05,
-          })
-          if(res.data.data[0].Lock === '0'){
-            setFlag(false)
+      if(list.length === 0){
+        let req = {
+          PhoneNo: loginReducer.phone,
+          ptime: userService.time(),
+        };
+        userService
+        .userQLPList(req)
+        .then(res => {
+          // console.log('userQLPList')
+          if (res.data.status === 0) {
+              setList(res.data)
+              // if(userSelectLPReducer.selectLP === '') {
+              //   // setLPNo(res.data.data[0].LPNo)
+              //   // dispatch(userSelectLP(
+              //   //     res.data.data[0].LPNo,
+              //   //     res.data.data[0].LPNickname,
+              //   //     res.data.data[0].LPType
+              //   //   ))
+              // }else if(propsLP !== ''){
+              //   setLPNo(propsLP)
+              //   res.data.data.forEach(item => {
+              //     if(item.LPNo === propsLP){
+              //       dispatch(userSelectLP(
+              //         item.LPNo,
+              //         item.LPNickname,
+              //         item.LPType
+              //       ))
+              //     }
+              //   });
+              // }else{
+              //   setLPNo(userSelectLPReducer.selectLP)
+              // }
+          }else{
+            console.log(res.data.msg);
           }
-          if(res.data.data[0].Lock === '1'){
-            let LPNo = res.data.data[0].LPNo
-            if(LPNo === '0'){
+        })
+        .catch(err => {
+          console.log(err);
+        });
+        let req2 = {
+          PhoneNo: loginReducer.phone,
+          devid:devid,
+          ptime: userService.time(),
+        };
+        userService
+        .userQDevice(req2)
+        .then(res => {
+          // console.log(res.data)
+          if (res.data.status === 0) {
+            setParking(res.data.data[0])
+            setRegion({
+              latitude: res.data.data[0].lat,
+              longitude: res.data.data[0].lon,
+              latitudeDelta: 0,
+              longitudeDelta: 0.05,
+            })
+            if(res.data.data[0].Lock === '0'){
               setFlag(false)
-              setLocked(true)
-              setButtonData({
-                navigateTxt: 'Locked',
-                buttonTxt: '確認綁定我的機車',
-              });
-              navigation.setOptions({title: '綁定車鎖與機車車牌'});
-            }else if(LPNo === '1'){
-              navigation.navigate('Parkey');
-              Alert.alert(
-                '錯誤',
-                '此車鎖已上鎖，選擇其他車鎖綁定。',
-                [
-                  {text: '確定'},
-                ]
-              )
-            }else{
-              if(flag){
+            }
+            if(res.data.data[0].Lock === '1'){
+              let LPNo = res.data.data[0].LPNo
+              if(LPNo === '0'){
+                setFlag(false)
+                setLocked(true)
+                setButtonData({
+                  navigateTxt: 'Locked',
+                  buttonTxt: '確認綁定我的機車',
+                });
+                navigation.setOptions({title: '綁定車鎖與機車車牌'});
+              }else if(LPNo === '1'){
                 navigation.navigate('Parkey');
                 Alert.alert(
                   '錯誤',
-                  '您已上鎖，車牌為:'+ LPNo,
+                  '此車鎖已上鎖，選擇其他車鎖綁定。',
                   [
                     {text: '確定'},
                   ]
                 )
+              }else{
+                if(flag){
+                  navigation.navigate('Parkey');
+                  Alert.alert(
+                    '錯誤',
+                    '您已上鎖，車牌為:'+ LPNo,
+                    [
+                      {text: '確定'},
+                    ]
+                  )
+                }
+  
               }
-
-            }
-          } 
-        }else{
-          console.log(res.data.msg);
+            } 
+          }else{
+            console.log(res.data.msg);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }else{       
+        if(userSelectLPReducer.selectLP !== ''){
+          if(propsLP !== ''){
+            setLPNo(propsLP)
+            list.forEach(item => {
+              if(item.LPNo === propsLP){
+                dispatch(userSelectLP(
+                  item.LPNo,
+                  item.LPNickname,
+                  item.LPType
+                ))
+              }
+            });
+          }else{
+            setLPNo(userSelectLPReducer.selectLP)
+          }
         }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      }
+
     }
   },[userSelectLPReducer.selectLP])
 

@@ -679,6 +679,7 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
     LPNo: lockData.LPNo,
     ptime: userService.time(),
   };
+  // console.log(req)
   userService
     .userBindDevice(req)
     .then(res => {
@@ -734,7 +735,7 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
 };
 // 確認繳費
 const payTicket = (phone,tickInfo,navigation, navigateTxt,dispatch)=>{
-  console.log('payTicket')
+  // console.log('payTicket')
   let req = {
     PhoneNo: phone,
     TicketNo: tickInfo.TicketNo,

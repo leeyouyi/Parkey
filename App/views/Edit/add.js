@@ -147,18 +147,23 @@ const Add = props => {
               <TextInput
                 style={styles.textInput}
                 onChangeText={text => {
-                  dispatch(
-                    userAddLP(
-                      userAddLPReducer.LPpicker,
-                      userAddLPReducer.LPcheckBox1,
-                      userAddLPReducer.LPcheckBox2,
-                      text,
-                      userAddLPReducer.LPNo1,
-                      userAddLPReducer.LPNo2,
-                      userAddLPReducer.DType,
-                      true,
-                    ),
-                  );
+                  let regex = new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5]+$")
+                  if(text !=='' && !regex.test(text)){
+                    alert('不允許空格與特殊字元')
+                  }else{
+                    dispatch(
+                      userAddLP(
+                        userAddLPReducer.LPpicker,
+                        userAddLPReducer.LPcheckBox1,
+                        userAddLPReducer.LPcheckBox2,
+                        text,
+                        userAddLPReducer.LPNo1,
+                        userAddLPReducer.LPNo2,
+                        userAddLPReducer.DType,
+                        true,
+                      ),
+                    )
+                  }
                 }}
               />
             </View>

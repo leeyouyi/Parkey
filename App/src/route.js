@@ -234,9 +234,20 @@ const Route = () => {
           component={Ticket}
           options={({navigation, route}) =>({
             title: '單筆停車紀錄',
-            headerLeft() {
+            headerBackImage() {
+              let pay = route.params.pay
               return (
-                <></>
+                <>
+                {
+                  pay &&
+                    <SvgXml
+                    xml={Svgs.back}
+                    width="20"
+                    height="20"
+                    />
+                }
+                </>
+
               );
             }
           })}

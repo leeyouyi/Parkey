@@ -161,7 +161,7 @@ class Ticket extends React.Component {
               </View>
             </View>
           ) : (
-            <></>
+          <></>
           )}
 
       </>
@@ -254,19 +254,21 @@ const TxtItem = props => {
                     </TouchableOpacity>
                   )
                   :
-                  item.model?(
-                    <TouchableOpacity
-                    onPress={()=>{
-                      propsThis.refs['modal'].open();
-                    }}
-                    >
-                      <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
-                    </TouchableOpacity>
-                  )
-                  :
-                  (
+                  // item.model?(
+                  //   <TouchableOpacity
+                  //   onPress={()=>{
+                  //     propsThis.refs['modal'].open();
+                  //   }}
+                  //   >
+                  //     <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
+                  //   </TouchableOpacity>
+                  // )
+                  // :
+                  // (
+                    
                     <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
-                  ) : (
+                  // ) 
+                  : (
                     <></>
                   )}
                   {item.payTxt && !pay ? (

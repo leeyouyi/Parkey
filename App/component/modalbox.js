@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   transparent: {
-    zIndex: 2,
+    zIndex: 10,
     backgroundColor: 'rgba(0,0,0,0)'
   },
   absolute: {

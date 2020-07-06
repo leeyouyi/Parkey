@@ -467,9 +467,9 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
           BStatus = Promise.resolve(userQDeviceFn(phone ,lockData ,status))
           count = count + 1 
            BStatus.then(function(result) {
-             console.log('result.BStatus',result.BStatus)
+            //  console.log('result.BStatus',result.BStatus)
+             status = result.BStatus
              if(result.BStatus === 3) {
-               status = result.BStatus
                clearInterval(interval)
                let {TicketNo} = result
                let req3 = {
@@ -638,7 +638,7 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
 
 const userQDeviceFn= (phone,lockData,status)=>{
   if(status === 3) return false
-  console.log('status',status)
+  // console.log('status',status)
   let req= {
     PhoneNo: phone,
     devid: parseInt(lockData.devid),
