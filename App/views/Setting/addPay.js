@@ -6,24 +6,15 @@ import newSvgs from '../../img/icon/new/svgs';
 const SelectPay = props => {
   const {navigation,route} = props;
   const data = [
-    {txt: '**** 1234', svg: newSvgs.visa, style:30,marginLeft:30},
-    // {txt: '**** 1234', svg: newSvgs.master, style:30,marginLeft:30},
-    {txt: '悠遊付', svg: newSvgs.easy, style:80,marginLeft:25},
-    {txt: '前往付款設定綁定其他付款方式', svg: false},
+    {txt: '綁定信用卡', svg: newSvgs.card ,style:30,marginLeft:30,navigateTxt: 'Binding',},
+    {txt: '綁定悠遊付', svg: newSvgs.easy ,style:80,marginLeft:25,navigateTxt: 'AddPay',}
   ];
-  const tick = [];
-  const setTick = [];
-  for (let i = 0; i < data.length; i++) {
-    [tick[i], setTick[i]] = useState(false);
-  }
-  useEffect(() => {
-    setTick[0](true);
-  }, []);
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.topItem}>
-          <Text style={styles.topItemTxt}>選擇付款方式</Text>
+          <Text style={styles.topItemTxt}>付款類型</Text>
         </View>
         {data.map((item, index) => {
           return (
@@ -31,42 +22,25 @@ const SelectPay = props => {
               style={styles.touchableOpacity}
               activeOpacity={1}
               onPress={() => {
-                for (let i = 0; i < data.length; i++) {
-                  setTick[i](false);
-                }
-                setTick[index](true);
+                navigation.navigate(item.navigateTxt)
               }}>
               <View style={styles.itemWrap}>
                 {
-                  item.svg ?
+                  item.svg &&
                   <View style={styles.row}>
-                    <View style={{width:'30%',alignItems:'flex-start',justifyContent:'center'}}>
+                    <View style={{justifyContent:'flex-start',width:'20%'}}>
                       <SvgXml
                         xml={item.svg}
                         width={item.style}
                         height={item.style}
-                        style={{marginLeft:item.marginLeft, marginRight: 15}}
+                        style={{marginLeft: item.marginLeft, marginRight: 15}}
                       />
                     </View>
-                    <View style={{width:'70%'}}>
-                      <Text style={{fontWeight:'bold',fontSize:16}}>{item.txt}</Text>
-                    </View>
-                  {tick[index] &&  (
-                    <SvgXml
-                      xml={newSvgs.tick}
-                      width="30"
-                      height="30"
-                      style={{position: 'absolute', right: 10}}
-                    />
-                  ) }
+                  <View style={{justifyContent:'center',alignItems:'center', width:'60%'}}>
+                    <Text style={{fontWeight:'bold',fontSize:18}}>{item.txt}</Text>
+                  </View>
                 </View>
-                :
-                <TouchableOpacity style={styles.row}
-                onPress={() => {
-                  navigation.navigate('Pay')
-                }}>
-                  <Text style={{color:'#27A48E',marginLeft: 30}}>{item.txt}</Text>
-                </TouchableOpacity>
+
                 }
 
               </View>
@@ -91,8 +65,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height:70,
     paddingBottom:10,
-    borderBottomColor:'#F4F4F5',
-    borderBottomWidth:3,
   },
 
   topItemTxt:{
@@ -108,15 +80,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   itemWrap: {
-    width: '100%',
+    width: '90%',
     height: 60,
+    borderRadius:15,
+    marginBottom:10,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    borderBottomColor:'#F4F4F5',
-    borderBottomWidth:3,
-
+    elevation: 2,
+    shadowColor: '#000000',
+    shadowOpacity: 0.4,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
   },
   row: {
+    width:'100%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',

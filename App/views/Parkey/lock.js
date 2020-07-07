@@ -26,7 +26,7 @@ const Lock = props => {
   const {loading} = userLoadingReducer
   const dispatch = useDispatch();
   const {navigation, route} = props;
-  const devid = parseInt(route.params.devid ? route.params.devid : null);
+  const devid = route.params.devid ? route.params.devid : null;
   const propsLPNo = route.params.LPNo ? route.params.LPNo : '';
   const [propsLP,setPropsLP] = useState(propsLPNo)
   const [locked,setLocked] = useState(false)
@@ -45,7 +45,7 @@ const Lock = props => {
   });
   const [flag,setFlag] = useState(true) 
   useEffect(()=>{
- 
+   
     if(loginReducer.login){
       dispatch(userSelectLP('','',''))
       if(list.length === 0){
@@ -92,6 +92,7 @@ const Lock = props => {
           devid:devid,
           ptime: userService.time(),
         };
+        // console.log(req2)
         userService
         .userQDevice(req2)
         .then(res => {

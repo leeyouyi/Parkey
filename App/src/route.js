@@ -28,6 +28,7 @@ import GoPay from '../views/List/goPay';
 import SelectPay from '../views/List/selectPay';
 import PayEnd from '../views/List/payEnd';
 import webViewItem from '../views/List/webViewItem';
+import payFailed from '../views/List/payFailed';
 
 import Edit from '../views/Edit';
 import Add from '../views/Edit/add';
@@ -49,6 +50,8 @@ import Reset from '../views/Setting/reset';
 import News from '../views/Setting/news';
 import Verification from '../views/Setting/verification';
 import OldMember from '../views/Setting/oldMember';
+import AddPay from '../views/Setting/addPay';
+import Binding from '../views/Setting/binding';
 
 const Stack = createStackNavigator();
 
@@ -279,6 +282,14 @@ const Route = () => {
           })}
         />
         <Stack.Screen
+          name="payFailed"
+          component={payFailed}
+          options={({navigation, route}) => ({
+            title: '繳費失敗',
+            headerShown: false,
+          })}
+        />
+        <Stack.Screen
           name="webViewItem"
           component={webViewItem}
           options={({navigation, route}) => ({
@@ -375,8 +386,8 @@ const Route = () => {
           name="Pay"
           component={Pay}
           options={{
-            title: '設定付款方式',
-            headerBackTitleVisible: true,
+            title: '付款設定',
+            headerBackTitleVisible: false,
           }}
         />
         <Stack.Screen
@@ -447,6 +458,23 @@ const Route = () => {
             },
           })}
         />
+        <Stack.Screen
+          name="AddPay"
+          component={AddPay}
+          options={{
+            title: '選擇綁定',
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Binding"
+          component={Binding}
+          options={{
+            title: '綁定信用卡',
+            headerBackTitleVisible: false,
+          }}
+        />
+        
       </Stack.Navigator>
 
     </NavigationContainer>

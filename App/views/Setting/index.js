@@ -25,7 +25,7 @@ const Setting = props => {
     {txt: '最新消息', navigationTxt: 'News'},
     {txt: '聯絡客服', navigationTxt: 'CustomerService'},
     {txt: '關於我們', navigationTxt: 'About'},
-    {txt: 'webViewItem', navigationTxt: 'webViewItem'},
+    // {txt: 'webViewItem', navigationTxt: 'webViewItem'},
   ];
 
   useEffect(() => {

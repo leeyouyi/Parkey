@@ -175,8 +175,10 @@ const ButtonItem = props => {
             tickInfo:tickInfo
           })
         }else if (buttonTxt === '確認繳費'){
-          let tickInfo = props.tickInfo;
-          payTicket(userInfoReducer.phone,tickInfo,navigation, navigateTxt,dispatch)
+          // let tickInfo = props.tickInfo;
+          let {modal} = props
+          modal.current.open();
+          // payTicket(userInfoReducer.phone,tickInfo,navigation, navigateTxt,dispatch)
         }else if (buttonTxt === '新增車牌'){
           let QLPList = props.QLPList;
           if(QLPList.length < 10 ){
@@ -733,30 +735,30 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
       btnFlag = true
     });
 };
-// 確認繳費
-const payTicket = (phone,tickInfo,navigation, navigateTxt,dispatch)=>{
-  // console.log('payTicket')
-  let req = {
-    PhoneNo: phone,
-    TicketNo: tickInfo.TicketNo,
-    LPNo: tickInfo.LpNo,
-    ptime: userService.time(),
-  };
-  // console.log(req)
-  userService
-    .userPayTicket(req)
-    .then(res => {
-      if (res.data.status === 0) {
-        navigation.navigate(navigateTxt);
-        dispatch(userUpdateList(true))
-      } else {
-        Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
+// // 確認繳費
+// const payTicket = (phone,tickInfo,navigation, navigateTxt,dispatch)=>{
+//   // console.log('payTicket')
+//   let req = {
+//     PhoneNo: phone,
+//     TicketNo: tickInfo.TicketNo,
+//     LPNo: tickInfo.LpNo,
+//     ptime: userService.time(),
+//   };
+//   // console.log(req)
+//   userService
+//     .userPayTicket(req)
+//     .then(res => {
+//       if (res.data.status === 0) {
+//         navigation.navigate(navigateTxt);
+//         dispatch(userUpdateList(true))
+//       } else {
+//         Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+//       }
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// }
 const getRandom =(min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);

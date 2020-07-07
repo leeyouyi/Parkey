@@ -3,45 +3,25 @@ import {StyleSheet, View, Text, TouchableOpacity,Dimensions} from 'react-native'
 import ButtonItem from '../../component/button';
 import {SvgXml} from 'react-native-svg';
 import newSvgs from '../../img/icon/new/svgs';
-import CheckBox from 'react-native-check-box';
+// import CheckBox from 'react-native-check-box';
 import Modal from 'react-native-modalbox';
-
+import {useSelector, useDispatch} from 'react-redux';
+import * as userService from '../../axios/user';
+import {
+  userUpdateList
+} from '../../src/action';
 const GoPay = props => {
   const {navigation,route} = props;
   const {tickInfo} = route.params;
   const modal = useRef('modal');
-
+  const userInfoReducer = useSelector(state => state.userInfoReducer);
+  const dispatch = useDispatch();
   const buttonData = {
-    navigateTxt: 'PayEnd',
+    navigateTxt: 'payEnd',
+    // navigateTxt: 'payFailed',
     buttonTxt: '確認繳費',
   };
-  // const checkBox = []
-  // const setCheckBox = []
-  // const bg = []
-  // const setBg = []
 
-  // for (let i = 0; i < 3; i++) {
-  //   // [checkBox[i], setCheckBox[i]] = useState(false);
-  //   [bg[i],setBg[i]]= useState('#fff')
-  // }
-  // const data = [
-  //   {
-  //     txt:'信用卡一次付清',
-  //     // checkox:checkBox[0],
-  //     id:0
-  //   },
-  //   {
-  //     txt:'悠遊付',
-  //     // checkox:checkBox[1],
-  //     id:1
-  //   },
-  //   {
-  //     txt:'前往Pay Taipei網頁版頁面',
-  //     // checkox:checkBox[2],
-  //     id:2
-  //   },
-  // ]
-  // // const[bg,setBg]= useState('#fff')
   return (
     <>
       <Modal
@@ -58,24 +38,30 @@ const GoPay = props => {
             alignItems: 'center',
           }}>
           <View style={styles.modalItem}>
-            <Text style={styles.modalTitle}></Text>
+            <Text style={styles.modalTitle}>
+              付款確認
+            </Text>
           </View>
           <View style={styles.modalItem2}>
             <Text style={styles.modalTxt}>
-
-            </Text>
-            <Text style={styles.modalTxt}>
-
+              您將支付停車費，請問您確定要付款嗎 ?
             </Text>
           </View>
         </View>
         <View style={styles.modalButtonIRow}>
-          <TouchableOpacity
-            style={styles.modalButton}
+        <TouchableOpacity
+            style={styles.modalButton1}
             onPress={() => {
               modal.current.close();
             }}>
-            <Text style={styles.modalButtonTxt}>知道了</Text>
+            <Text style={styles.modalButtonTxt}>取消</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalButton2}
+            onPress={() => {
+              payTicket(userInfoReducer.phone, tickInfo, navigation, buttonData.navigateTxt, dispatch, modal)
+            }}>
+            <Text style={styles.modalButtonTxt}>確認</Text>
           </TouchableOpacity>
         </View>
         </Modal>
@@ -94,47 +80,7 @@ const GoPay = props => {
             <Text style={styles.titleTxt1}>付款方式</Text>
           </View>
         </View>
-        {
-          // data.map((item,index)=>{
-          //   return(
-          //     <View style={styles.txtItemWrap}>
-          //     <View style={styles.payItem}>
-          //       <View style={styles.row}>
-          //         {/* <TouchableOpacity
-          //           style={{
-          //             width:20,
-          //             height:20,
-          //             borderColor:'#000',
-          //             borderWidth:1,
-          //             borderStyle:'solid',
-          //             borderRadius:10,
-          //             backgroundColor:bg[index]
-          //           }}
-          //           onPress={() => {
-          //             // if(item.id === index){
-    
-          //             // }
-          //             if(bg[index] === '#fff'){
-          //               setBg[index]('#f00')
-          //             }else{
-          //               setBg[index]('#fff')
-          //             }
-          //           }}
-                
-
-          //         {/* <SvgXml 
-          //             xml={newSvgs.visa}
-          //             width="30"
-          //             height="30"
-          //             style={{marginLeft:15}}
-          //         /> */}
-          //         <Text style={styles.payTxt}>{item.txt}</Text>
-          //       </View>
-          //     </View>
-          //   </View>
-          //   )
-          // })
-        }
+  
 
         <TouchableOpacity style={styles.txtItemWrap}
         onPress={() => {
@@ -149,7 +95,7 @@ const GoPay = props => {
                   height="30"
                   style={{marginLeft:15}}
               />
-              <Text style={styles.payTxt}>**** 3233</Text>
+              <Text style={styles.payTxt}>**** 1234</Text>
             </View>
             <SvgXml 
                 xml={newSvgs.right_gray}
@@ -160,7 +106,7 @@ const GoPay = props => {
           </View>
         </TouchableOpacity>
         <View style={styles.button}>
-          <ButtonItem  data={buttonData} navigation={navigation} tickInfo={tickInfo}></ButtonItem>
+          <ButtonItem  data={buttonData} navigation={navigation} modal={modal} ></ButtonItem>
         </View>
        
       </View>
@@ -203,6 +149,30 @@ const TxtItem = props => {
     </>
   );
 };
+
+// 確認繳費
+const payTicket = (phone,tickInfo,navigation, navigateTxt,dispatch,modal)=>{
+  let req = {
+    PhoneNo: phone,
+    TicketNo: tickInfo.TicketNo,
+    LPNo: tickInfo.LpNo,
+    ptime: userService.time(),
+  };
+  userService
+    .userPayTicket(req)
+    .then(res => {
+      if (res.data.status === 0) {
+        modal.current.close();
+        navigation.navigate(navigateTxt);
+        dispatch(userUpdateList(true))
+      } else {
+        Alert.alert('錯誤', res.data.msg, [{text: '確定'}]);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
