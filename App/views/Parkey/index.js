@@ -275,7 +275,7 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
             userService
               .userQDevice(req2)
               .then(res2 => {
-                // console.log(res.data)
+                // console.log(item.LPNo)
                 if (res2.data.status === 0) {
                   for (let i = 0; i < res2.data.data.length; i++) {
                     let paking = res2.data.data[i];

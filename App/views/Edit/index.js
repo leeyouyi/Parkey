@@ -21,6 +21,7 @@ import * as userService from '../../axios/user';
 import store from '../../src/store';
 import {userAddLP, userModifyLP,login,userinfo,userSelectLP} from '../../src/action';
 import { isIphoneX } from 'react-native-iphone-x-helper'
+import Modal from '../../component/modalbox';
 
 class Edit extends React.Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class Edit extends React.Component {
       loading: true,
       QLPList:[],
       height: isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250,
-      phone: store.getState().loginReducer.phone
+      phone: store.getState().loginReducer.phone,
+      delete_Lp :'',
+      delete_item:''
     };
 
   }
@@ -88,6 +91,7 @@ class Edit extends React.Component {
 
   }
   deleteLP(LPNo,item) {
+
     const userInfoReducer = this.store.userInfoReducer;
     let req = {
       PhoneNo: userInfoReducer.phone,
@@ -101,9 +105,14 @@ class Edit extends React.Component {
           let dragItemData = this.state.dragItemData;
           let index = dragItemData.indexOf(item);
           dragItemData.splice(index, 1);
-          this.setState({dragItemData: dragItemData});
+          this.setState({
+            dragItemData,
+            delete_Lp:'',
+            delete_item:''
+          });
           store.dispatch(userSelectLP('','',''))
           this.getList();
+          this.refs.modal.close();
         }else{
           if(res.data.msg === '錯誤的登入資訊'){
             console.log(res.data.msg);
@@ -260,10 +269,13 @@ class Edit extends React.Component {
               onPress={() => {
                 let dragItemData = this.state.dragItemData;
                 let index = dragItemData.indexOf(item);
-
-                this.deleteLP(item.data[index].txt1,item);
-                // dragItemData.splice(index, 1);
-                // this.setState({dragItemData: dragItemData});
+                let delete_Lp = item.data[index].txt1
+                let delete_item = item
+                this.setState({
+                  delete_Lp,
+                  delete_item
+                })
+                this.refs.modal.open();
               }}>
               <SvgXml
                 xml={formSvgs.delete}
@@ -296,12 +308,7 @@ class Edit extends React.Component {
               </Text>
             </View>
             <View style={{position: 'absolute', right: 20}}>
-              {/* <SvgXml
-                xml={formSvgs.order}
-                width="25"
-                height="25"
-                style={{display: this.state.display2}}
-              /> */}
+
             </View>
           </TouchableOpacity>
         </View>
@@ -323,31 +330,51 @@ class Edit extends React.Component {
     const height = this.state.height
     return (
       <>
+        <Modal
+        style={styles.modal}
+        ref={'modal'}
+        isOpen={false}
+        coverScreen={true}
+        position={'center'}>
+        <View
+          style={{
+            width: '100%',
+            height: '70%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={styles.modalItem}>
+            <Text style={styles.modalTitle}>
+              確定刪除車牌
+            </Text>
+          </View>
+          <View style={styles.modalItem2}>
+            <Text style={styles.modalTxt}>
+              您即將刪除此車牌，請問您確定要刪除此車牌嗎 ?
+            </Text>
+          </View>
+        </View>
+        <View style={styles.modalButtonIRow}>
+        <TouchableOpacity
+            style={styles.modalButton1}
+            onPress={() => {
+              this.refs.modal.close();
+            }}>
+            <Text style={styles.modalButtonTxt}>取消</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.modalButton2}
+            onPress={() => {
+              this.deleteLP(this.state.delete_Lp,this.state.item);
+            }}>
+            <Text style={styles.modalButtonTxt}>確認</Text>
+          </TouchableOpacity>
+        </View>
+        </Modal>
       <SafeAreaView style={{flex:1,backgroundColor:'#fff'}}> 
         <View style={styles.title}>
           <Text style={styles.tltleTxt}>車牌管理</Text>
-          {/* <TouchableOpacity
-            style={{
-                position: 'absolute',
-                left: 20 ,
-              }}
-            onPress={() => {
-              navigation.navigate('Edit');
-              const css = this.state.display === 'none' ? 'flex' : 'none';
-              const css2 = this.state.display2 === 'none' ? 'flex' : 'none';
-              const platformHight = isIphoneX()? 300 : Platform.OS === 'ios' ? 200 : 250
-              const changeHight = height === platformHight ? platformHight - 50 : platformHight
-              this.setState({display: css});
-              this.setState({display2: css2});
-              this.setState({height: changeHight});
-              this.setState({
-                refresh: !this.state.refresh,
-              });
-            }}>
-            <Text style={{color: '#ff9500', display: this.state.display2}}>
-              取消
-            </Text>
-          </TouchableOpacity> */}
+
           <TouchableOpacity
             style={{
               position: 'absolute',
@@ -484,6 +511,67 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modal: {
+    width: Dimensions.get('window').width * 0.9,
+    height: Dimensions.get('window').height * 0.3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  modalItem: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalItem2: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    width: '100%',
+    fontSize: 24,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  modalTxt: {
+    width: '100%',
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 10,
+  },
+  modalButtonIRow: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderTopColor: '#DEDFE0',
+    borderTopWidth: 1,
+  },
+  modalButton: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalButton1: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalButton2: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderLeftColor: '#DEDFE0',
+    borderLeftWidth: 1,
+  },
+  modalButtonTxt: {
+    color: '#6DA0F3',
+    fontSize: 22,
   },
 });
 export default Edit;

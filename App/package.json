@@ -16,7 +16,7 @@
     "@react-navigation/native": "^5.0.3",
     "@react-navigation/stack": "^5.0.5",
     "axios": "^0.19.2",
-    "metro": "^0.59.0",
+    "metro": "^0.60.0",
     "react": "16.9.0",
     "react-native": "^0.62.0",
     "react-native-app-intro-slider": "^3.0.0",

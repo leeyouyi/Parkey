@@ -147,10 +147,10 @@ const Add = props => {
               <TextInput
                 style={styles.textInput}
                 onChangeText={text => {
-                  let regex = new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5]+$")
-                  if(text !=='' && !regex.test(text)){
-                    alert('不允許空格與特殊字元')
-                  }else{
+                  // let regex = new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5]+$")
+                  // if(text !=='' && !regex.test(text)){
+                  //   // alert('不允許空格與特殊字元')
+                  // }else{
                     dispatch(
                       userAddLP(
                         userAddLPReducer.LPpicker,
@@ -163,7 +163,7 @@ const Add = props => {
                         true,
                       ),
                     )
-                  }
+                  // }
                 }}
               />
             </View>

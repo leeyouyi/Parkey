@@ -1,15 +1,22 @@
 import React ,{useState,useRef}from 'react';
-import {StyleSheet, View, Text, TouchableOpacity,Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  View, 
+  Text, 
+  TouchableOpacity,
+  Dimensions,Alert
+} from 'react-native';
 import ButtonItem from '../../component/button';
 import {SvgXml} from 'react-native-svg';
 import newSvgs from '../../img/icon/new/svgs';
 // import CheckBox from 'react-native-check-box';
-import Modal from 'react-native-modalbox';
+import Modal from '../../component/modalbox';
 import {useSelector, useDispatch} from 'react-redux';
 import * as userService from '../../axios/user';
 import {
   userUpdateList
 } from '../../src/action';
+
 const GoPay = props => {
   const {navigation,route} = props;
   const {tickInfo} = route.params;
@@ -17,7 +24,7 @@ const GoPay = props => {
   const userInfoReducer = useSelector(state => state.userInfoReducer);
   const dispatch = useDispatch();
   const buttonData = {
-    navigateTxt: 'payEnd',
+    navigateTxt: 'PayEnd',
     // navigateTxt: 'payFailed',
     buttonTxt: '確認繳費',
   };

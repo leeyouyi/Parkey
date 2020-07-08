@@ -17,7 +17,7 @@ import mapStyle from '../../component/mapStyle';
 import * as userService from '../../axios/user';
 import {userSelectLP,userUpdateLP} from '../../src/action';
 import store from '../../src/store';
-import Modal from 'react-native-modalbox';
+import Modal from '../../component/modalbox';
 
 
 class Locked extends React.Component {

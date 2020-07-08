@@ -311,9 +311,10 @@ class Home extends React.Component {
           list.map((item,index)=>{
   
             let str = !info[index] ? '' : info[index].BZTime
-             strAry[index] = str ? str.split('') : ''
+            //  strAry[index] = str ? str.split('') : ''
+            console.log(str.trim())
             let str2 = !info[index] ? '' : info[index].FeeRate
-            strAry2[index] = str2 ? str2.split('') : ''
+            // strAry2[index] = str2 ? str2.split('') : ''
             return(
               <Modal
               style={styles.modal2}
@@ -321,7 +322,7 @@ class Home extends React.Component {
               isOpen={false}
               position={'bottom'}
               backdropOpacity={0.5}
-              top={ Dimensions.get('window').height * 0.6}
+              top={ Dimensions.get('window').height * 0.15}
               >
                 {
                   modalLoading ? 
@@ -375,6 +376,7 @@ class Home extends React.Component {
                   <View style={styles.modal2Item2}>
                     <Text style={styles.modal2Txt2}>剩餘車位</Text>
                   </View>
+
                   <View style={styles.modal2Row}>
                     <View
                       style={{
@@ -382,7 +384,7 @@ class Home extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
-                      <Text style={styles.modal2Txt3}>一般車位 : { !info[index] ? 0 : info[index].FreeSp}席</Text>
+                      <Text style={styles.modal2Txt1}>一般車位 : { !info[index] ? 0 : info[index].FreeSp}席</Text>
                       
                     </View>
                     <View
@@ -391,13 +393,31 @@ class Home extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
-                      <Text style={styles.modal2Txt3}>殘障車位 : { !info[index] ? 0 : info[index].FreeHandicapeSp}席</Text>
+                      <Text style={styles.modal2Txt1}>殘障車位 : { !info[index] ? 0 : info[index].FreeHandicapeSp}席</Text>
                     </View>
                   </View>
-  
-                  
+                    <View style={styles.modal2Row1}>
+                    <View
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                      }}>
+                      <Text style={styles.modal2Txt3}>收費狀態 : </Text>
+                      
+                    </View>
+                    <View
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                      }}>
+                      <Text style={styles.modal2Txt3}>目前費率 : {str2}</Text>
+                    </View>
+                  </View>
                   <View style={styles.modal2Row2}>
-                    <Text style={styles.modal2Txt4}>收費時段:周</Text>
+                  <Text style={styles.modal2Txt3}>收費方式 : {str} </Text>
+                    {/* <Text style={styles.modal2Txt4}>收費時段:周</Text>
                     <Text style={styles.modal2Txt5}>{strAry[index][1]}</Text>
                     <Text style={styles.modal2Txt4}>至周</Text>
                     <Text style={styles.modal2Txt5}>{strAry[index][4]}</Text>
@@ -408,7 +428,7 @@ class Home extends React.Component {
                     <Text style={styles.modal2Txt4}>時 </Text>
                     <Text style={styles.modal2Txt4}> 停車費率:每小時</Text>
                     <Text style={styles.modal2Txt5}>{strAry2[index][0]}{strAry2[index][1]}</Text>
-                    <Text style={styles.modal2Txt4}>元</Text>
+                    <Text style={styles.modal2Txt4}>元</Text> */}
                   </View>
                 </View>
   
@@ -657,6 +677,7 @@ class Home extends React.Component {
                               ary[item.ID] = data
                               ary.push(data) 
                               this.setState({info: ary})
+                              console.log(ary)
                             }
                           })
                           .catch(err => {
@@ -919,22 +940,23 @@ const styles = StyleSheet.create({
   },
   modal2: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.3,
-    justifyContent: 'center',
+    height: Dimensions.get('window').height * 0.7,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     borderRadius: 10,
   },
   modal2Wrap: {
-    width: '90%',
-    justifyContent: 'center',
+    width: '100%',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   modal2Item: {
-    width: '100%',
-    height: '25%',
+    width: '90%',
+    height: 50,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    marginTop:20
   },
   modal2Button: {
     backgroundColor: '#1ee494',
@@ -949,28 +971,44 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   modal2Item2: {
-    width: '100%',
-    height: '20%',
+    width: '90%',
+    height: 50,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   modal2Row: {
-    width: '100%',
-    height: '25%',
+    width: '90%',
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  modal2Row2: {
+  modal2Row1: {
     width: '100%',
-    height: '25%',
+    height: 50,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
+    borderBottomColor:'#ccc',
+    borderBottomWidth:1,
+    paddingLeft:'5%',
+    paddingRight:'5%'
+  },
+  modal2Row2: {
+    width: '90%',
+    height: 50,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+    // backgroundColor:'#cff',
   },
   modal2Txt: {
     color: '#757575',
     fontSize: 24,
+  },
+  modal2Txt1: {
+    color: '#757575',
+    fontSize: 22,
   },
   modal2Txt2: {
     color: '#009378',
@@ -978,7 +1016,7 @@ const styles = StyleSheet.create({
   },
   modal2Txt3: {
     color: '#757575',
-    fontSize: 20,
+    fontSize: 17,
   },
   modal2Txt4: {
     color: '#757575',
