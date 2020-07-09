@@ -13,8 +13,8 @@ import MapView, {Marker} from 'react-native-maps';
 import mapStyle from '../../component/mapStyle';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
-import Modal from 'react-native-modalbox';
-
+// import Modal from 'react-native-modalbox';
+import Modal from '../../component/modalbox';
 class Ticket extends React.Component {
   constructor(props) {
     super(props)

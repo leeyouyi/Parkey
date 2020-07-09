@@ -187,30 +187,6 @@ class Home extends React.Component {
             resAry[el.ID]= el
            });
           this.setState({list: resAry})
-          // this.setState({list: res.data.data})
-          // let list = this.state.list
-          // let ary = []
-          // list.forEach(item=>{
-          //   let req2 = {
-          //     PhoneNo: '',
-          //     ID:item.ID,
-          //     QType: 0,          
-          //     ptime: userService.time()
-          //   }
-          //   userService.userQMapPin(req2)
-          //   .then(res => {
-          //     if (res.data.status === 0) {
-          //       let data ={ ...res.data,ID:item.ID}
-          //       // ary.push(data)
-          //       ary[item.ID] = data
-          //       // this.setState({info: ary})
-          //       // this.setState({modalLoading:false})
-          //     }
-          //   })
-          //   .catch(err => {
-          //     console.log(err)
-          //   })
-          // })
         }
      
         this.setState({loading: false})
@@ -684,7 +660,7 @@ class Home extends React.Component {
                               ary[item.ID] = data
                               ary.push(data) 
                               this.setState({info: ary})
-                              console.log(ary)
+                              // console.log(ary)
                             }
                           })
                           .catch(err => {
