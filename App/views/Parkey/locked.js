@@ -7,8 +7,9 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
-import { isIphoneX } from 'react-native-iphone-x-helper'
+// import { isIphoneX } from 'react-native-iphone-x-helper'
 import ButtonItem from '../../component/button';
 import {SvgXml} from 'react-native-svg';
 import Svgs from '../../img/icon/new/svgs';
@@ -18,7 +19,6 @@ import * as userService from '../../axios/user';
 import {userSelectLP,userUpdateLP} from '../../src/action';
 import store from '../../src/store';
 import Modal from '../../component/modalbox';
-
 
 class Locked extends React.Component {
   constructor(props) {
@@ -37,6 +37,9 @@ class Locked extends React.Component {
       Modal2_title: '您確定現在要解鎖您的機車嗎',
       Modal2_description:
         '確認解鎖機車後Parkey智慧車鎖會立即解鎖，並且會立即開立停車單據。',
+      Modal3_title: '系統無回應，請再次嘗試解鎖。',
+      Modal3_description:
+        '系統回復逾時，請您再次按下解鎖鍵解鎖機車，或連繫客服，請專人為您服務。',
       pakingInfo: {},
       loading:false,
       LPNickname : '',
@@ -307,6 +310,60 @@ class Locked extends React.Component {
             </TouchableOpacity>
           </View>
         </Modal>
+        <Modal
+          style={styles.modal2}
+          ref={'modal3'}
+          isOpen={false}
+          coverScreen={true}
+          position={'center'}>
+          <View
+            style={{
+              width: '100%',
+              height: '70%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {loading ? (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                position:'absolute',
+                zIndex:2,
+                width: Dimensions.get('window').width,
+                height: Dimensions.get('window').height - 90,
+              }}>
+              <ActivityIndicator size="large" color="#ff9500" />
+            </View>
+          ) : (
+            <></>
+          )} 
+            <View style={styles.modalItem}>
+              <Text style={styles.modalTitle}>{this.state.Modal3_title}</Text>
+            </View>
+            <View style={styles.modalItem2}>
+              <Text style={styles.modalTxt}>
+                {this.state.Modal3_description}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.modalButtonIRow}>
+            <TouchableOpacity
+              style={styles.modalButton1}
+              onPress={() => {
+                Linking.openURL('tel:02-2222-2065')
+              }}>
+              <Text style={styles.modalButtonTxt}>聯繫客服</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalButton2}
+              onPress={() => {
+                this.refs.modal3.close();
+              }}>
+              <Text style={styles.modalButtonTxt}>確認</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
         <ScrollView style={styles.scrollView}>
           <View style={styles.container}>
             <View style={styles.titleItemWrap}>
@@ -459,7 +516,7 @@ const TxtItem = props => {
 
 //解鎖機車
 const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUpdateLPReducer,component,devid) => {
-  const {updateLP} =userUpdateLPReducer
+  // const {updateLP} =userUpdateLPReducer
   let req = {
     PhoneNo: phone,
     devid: parseInt(lockData.devid),
@@ -555,92 +612,16 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
                clearInterval(interval)
               component.setState({loading:false})
               component.refs.modal2.close();
-              alert('超時')
+              component.refs.modal3.open();
              }
            })
          },1000)
-        // let req2 = {
-        //   PhoneNo: phone,
-        //   devid:devid,
-        //   ptime: userService.time(),
-        // };
-        // userService
-        // .userQDevice(req2)
-        // .then(res => {
-        //   // console.log(res.data)
-        //   if (res.data.status === 0) {
-        //     let {TicketNo} = res.data.data[0]
-        //     // console.log(TicketNo)
-        //     let req3 = {
-        //       PhoneNo: phone,
-        //       ptime: userService.time(),
-        //     };
-        //     userService
-        //     .userQTickets(req3)
-        //     .then(res => {
-        //       // console.log(res.data)
-        //       if (res.data.status === 0) {
-        //         let data = res.data.data
-        //         let filterData = data.filter(item=>{
-        //           return item.TicketNo === TicketNo
-        //         })
-        //         // console.log(filterData)
-        //         filterData.forEach(item=>{
-        //           let date = [];
-        //           date[0] = item.BeginTime.substr(0, 4);
-        //           date[1] = item.BeginTime.substr(4, 2);
-        //           date[2] = item.BeginTime.substr(6, 2);
-        //           date[3] = item.BeginTime.substr(8, 2);
-        //           date[4] = item.BeginTime.substr(10, 2);
-        //           let dateTxt =
-        //             date[0] +
-        //             '/' +
-        //             date[1] +
-        //             '/' +
-        //             date[2] +
-        //             ' ' +
-        //             date[3] +
-        //             ':' +
-        //             date[4];
-        //           let pay = item.PStatus === 1 ? true : false;
-        //           navigation.navigate('Ticket', {
-        //             pay: pay,
-        //             tickInfo:{
-        //               TicketNo:item.TicketNo,
-        //               SC:item.SC,
-        //               ParkNo:item.ParkNo,
-        //               lat:item.lat,
-        //               lon:item.lon,
-        //               Amount:item.Amount,
-        //               BeginTime:dateTxt,
-        //               ParkTime:item.ParkTime,
-        //               LpNo:item.LPNo,
-        //               Nick:item.Nick,
-        //               CarType:item.CarType,
-        //               Area:item.Area,
-        //               FeeRate:item.FeeRate,
-        //               BZTime:item.BZTime
-        //             }
-        //           });
-        //           component.setState({loading:false})
-        //           component.refs.modal2.close();
-        //         })
 
-        //       }
-        //     })
-        //     .catch(err => {
-        //       console.log(err);
-        //     });
-
-        //   }else{
-        //     console.log(res.data.msg);
-        //   }
-        // })
-        // .catch(err => {
-        //   console.log(err);
-        // });
       } else {
         console.log(res.data.msg);
+        alert(res.data.msg)
+        component.setState({loading:false})
+        component.refs.modal2.close();
       }
     })
     .catch(err => {
@@ -650,7 +631,6 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
 
 const userQDeviceFn= (phone,lockData,status)=>{
   if(status === 3) return false
-  // console.log('status',status)
   let req= {
     PhoneNo: phone,
     devid: parseInt(lockData.devid),

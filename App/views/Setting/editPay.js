@@ -7,7 +7,7 @@ import Modal from '../../component/modalbox';
 const EditPay = props => {
   const {navigation,route} = props;
   const {type} = route.params;
-  console.log(type)
+  // console.log(type)
   const buttonData = {
     navigateTxt: 'EditCard',
     buttonTxt: '編輯信用卡',
