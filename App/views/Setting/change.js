@@ -21,7 +21,6 @@ const Change = props => {
     {txt: '請再輸入一次新密碼'},
   ];
 
-  const [value, setValue] = useState('');
   return (
     <>
       <ScrollView style={{backgroundColor: '#fafafa'}}>

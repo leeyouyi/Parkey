@@ -6,9 +6,9 @@ import newSvgs from '../../img/icon/new/svgs';
 const SelectPay = props => {
   const {navigation,route} = props;
   const data = [
-    {txt: '**** 1234', svg: newSvgs.visa, style:30, marginLeft:30 ,expired:true},
-    {txt: '**** 5678', svg: newSvgs.master, style:40, marginLeft:25 ,main:true},
-    {txt: '悠遊付', svg: newSvgs.easy, style:80, marginLeft:25,},
+    {txt: '**** 1234', svg: newSvgs.visa, style:30, marginLeft:30 ,expired:true,type:'card'},
+    {txt: '**** 5678', svg: newSvgs.master, style:40, marginLeft:25 ,main:true,type:'card'},
+    {txt: '悠遊付', svg: newSvgs.easy, style:80, marginLeft:25,type:'easy'},
     {txt: '新增付款方式', svg: false},
   ];
 
@@ -26,7 +26,7 @@ const SelectPay = props => {
               style={styles.touchableOpacity}
               activeOpacity={1}
               onPress={() => {
-   
+                navigation.navigate('EditPay',{type:item.type})
               }}>
               <View style={styles.itemWrap}>
                 {

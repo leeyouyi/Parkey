@@ -15,7 +15,6 @@ import {
   userAddLP,
   userModifyLP,
   userUpdateLP,
-  userUpdateList
 } from '../src/action';
 
 const ButtonItem = props => {
@@ -192,6 +191,9 @@ const ButtonItem = props => {
               ]
             );
           }
+        }else if(buttonTxt === '編輯信用卡' || buttonTxt === '儲存' && props.page === 'editCaed'){
+          let {type} = props
+          navigation.navigate(navigateTxt,{type});
         }
         else {
           navigation.navigate(navigateTxt);

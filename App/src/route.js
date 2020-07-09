@@ -52,6 +52,8 @@ import Verification from '../views/Setting/verification';
 import OldMember from '../views/Setting/oldMember';
 import AddPay from '../views/Setting/addPay';
 import Binding from '../views/Setting/binding';
+import EditPay from '../views/Setting/editPay';
+import EditCard from '../views/Setting/editCard';
 
 const Stack = createStackNavigator();
 
@@ -474,7 +476,32 @@ const Route = () => {
             headerBackTitleVisible: false,
           }}
         />
-        
+        <Stack.Screen
+          name="EditPay"
+          component={EditPay}
+          options={{
+            title: '編輯付款方式',
+            headerBackTitleVisible: true,
+            headerTitle() {
+              style: {
+                fontSize: 0;
+              }
+            },
+          }}
+        />
+        <Stack.Screen
+          name="EditCard"
+          component={EditCard}
+          options={{
+            title: '編輯信用卡',
+            headerBackTitleVisible: true,
+            headerTitle() {
+              style: {
+                fontSize: 0;
+              }
+            },
+          }}
+        />
       </Stack.Navigator>
 
     </NavigationContainer>

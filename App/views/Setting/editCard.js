@@ -2,14 +2,15 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import newSvgs from '../../img/icon/new/svgs';
-import CheckBox from 'react-native-check-box';
 import ButtonItem from '../../component/button';
 
-const SelectPay = props => {
+const EditCard = props => {
   const {navigation,route} = props;
+  const {type} = route.params;
+  const page = 'editCard'
   const buttonData = {
-    navigateTxt: 'Pay',
-    buttonTxt: '確認綁定',
+    navigateTxt: 'EditPay',
+    buttonTxt: '儲存',
   };
   const [checkBox,setCheckBox] = useState(false)
 
@@ -107,19 +108,10 @@ const SelectPay = props => {
             />
             <Text style={{color:'#C1C1C1'}}>本服務採用瑞喬科技 TapPay SSL交易系統</Text>
           </View>
-          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'flex-start',width:'80%',marginTop:15}}>
-            <CheckBox
-              style={{padding:15}}
-              isChecked={checkBox}
-              onClick={() => {
-                setCheckBox(!checkBox);
-              }}
-            />
-            <Text style={{fontSize:16}}>設為主要付款方式</Text>
-          </View>
+
         </View>
         <View style={styles.button}>
-          <ButtonItem data={buttonData} navigation={navigation}></ButtonItem>
+          <ButtonItem data={buttonData} navigation={navigation} type={type} page={page}></ButtonItem>
         </View>
 
       </View>
@@ -201,4 +193,4 @@ const styles = StyleSheet.create({
     marginBottom:30,
   },
 });
-export default SelectPay;
+export default EditCard;
