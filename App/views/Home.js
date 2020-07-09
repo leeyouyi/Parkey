@@ -280,8 +280,6 @@ class Home extends React.Component {
     const num = 0;
     const list =this.state.list
     const info = this.state.info
-    const strAry = []
-    const strAry2 = []
     const userParking = this.state.userParking
     const predictions = this.state.predictions
     const marker = this.state.marker
@@ -311,17 +309,17 @@ class Home extends React.Component {
           list.map((item,index)=>{
   
             let str = !info[index] ? '' : info[index].BZTime
-            //  strAry[index] = str ? str.split('') : ''
-            console.log(str.trim())
-            let str2 = !info[index] ? '' : info[index].FeeRate
-            // strAry2[index] = str2 ? str2.split('') : ''
+            let str2 = !info[index] ? '' : info[index].Remark
+            let str3 = !info[index] ? '' : info[index].FeeRate
+            // console.log(str2)
+            // let strAry= str2.split(',')
             return(
               <Modal
               style={styles.modal2}
               ref={'modal'+item.ID}
               isOpen={false}
               position={'bottom'}
-              backdropOpacity={0.5}
+              backdropOpacity={0}
               top={ Dimensions.get('window').height * 0.15}
               >
                 {
@@ -412,24 +410,33 @@ class Home extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'flex-start',
                       }}>
-                      <Text style={styles.modal2Txt3}>目前費率 : {str2}</Text>
+                      <Text style={styles.modal2Txt3}>目前費率 : {str3}</Text>
                     </View>
                   </View>
-                  <View style={styles.modal2Row2}>
-                  <Text style={styles.modal2Txt3}>收費方式 : {str} </Text>
-                    {/* <Text style={styles.modal2Txt4}>收費時段:周</Text>
-                    <Text style={styles.modal2Txt5}>{strAry[index][1]}</Text>
-                    <Text style={styles.modal2Txt4}>至周</Text>
-                    <Text style={styles.modal2Txt5}>{strAry[index][4]}</Text>
-                    <Text style={styles.modal2Txt4}>，</Text>
-                    <Text style={styles.modal2Txt5}>{strAry[index][5]}</Text>
-                    <Text style={styles.modal2Txt4}>至</Text>
-                    <Text style={styles.modal2Txt5}>{strAry[index][8]}{strAry[index][9]}</Text>
-                    <Text style={styles.modal2Txt4}>時 </Text>
-                    <Text style={styles.modal2Txt4}> 停車費率:每小時</Text>
-                    <Text style={styles.modal2Txt5}>{strAry2[index][0]}{strAry2[index][1]}</Text>
-                    <Text style={styles.modal2Txt4}>元</Text> */}
+                  <View style={styles.modal2Row2 }>
+                    <Text style={styles.modal2Txt30}>收費方式 : </Text>
+                    <Text style={styles.modal2Txt31}>{str} </Text>
                   </View>
+                  <View style={styles.modal2Row2 }>
+                    <View style={{width:'15%'}}>
+                      <Text style={styles.modal2Txt30}>備註 : </Text>
+                    </View>
+                    <View style={{width:'75%',justifyContent:'flex-start'}}>
+                    <Text style={styles.modal2Txt32}>{str2}</Text>
+                   
+                      {/* {
+                        strAry.map(item=>{
+                          return(
+                            <Text style={styles.modal2Txt32}> {item} </Text>
+                          )
+                        })
+                      }   */}
+                    </View>
+                   
+
+                 
+                  </View>
+
                 </View>
   
                 }
@@ -1000,8 +1007,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    // backgroundColor:'#cff',
+    marginTop:15,
+    marginBottom:15
   },
+ 
   modal2Txt: {
     color: '#757575',
     fontSize: 24,
@@ -1015,6 +1024,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   modal2Txt3: {
+    color: '#757575',
+    fontSize: 17,
+  },
+  modal2Txt30: {
+    color: '#757575',
+    fontSize: 17,
+  },
+  modal2Txt31: {
+    width:'70%',
+    color: '#757575',
+    fontSize: 17,
+  },
+  modal2Txt32: {
+    width:'100%',
     color: '#757575',
     fontSize: 17,
   },

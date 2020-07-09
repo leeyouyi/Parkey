@@ -32,8 +32,8 @@ class Locked extends React.Component {
       },
       reload: false,
       Modal1_title: '中山南路二場',
-      Modal1_description: '費率: 5元/1小時',
-      Modal1_description2: '收費時間: 周一至周六 9:00至17:00',
+      Modal1_description: '',
+      Modal1_description2: '',
       Modal2_title: '您確定現在要解鎖您的機車嗎',
       Modal2_description:
         '確認解鎖機車後Parkey智慧車鎖會立即解鎖，並且會立即開立停車單據。',
@@ -105,8 +105,8 @@ class Locked extends React.Component {
           
           if(res.data.data[0].BeginTime){
             this.setState({Modal1_title:res.data.data[0].Area})
-            this.setState({Modal1_description:`費率: ${res.data.data[0].FeeRate}`})
-            this.setState({Modal1_description2:`收費時間: ${res.data.data[0].BZTime}`})
+            this.setState({Modal1_description:`${res.data.data[0].BZTime}`})
+            this.setState({Modal1_description2:`${res.data.data[0].Remark}`})
             let date = [];
             date[0] = res.data.data[0].BeginTime.substr(0, 4) || 0;
             date[1] = res.data.data[0].BeginTime.substr(4, 2) || 0;
@@ -205,20 +205,32 @@ class Locked extends React.Component {
           <View
             style={{
               width: '100%',
-              height: '70%',
+              height: '75%',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <View style={styles.modalItem}>
               <Text style={styles.modalTitle}>{this.state.Modal1_title}</Text>
             </View>
-            <View style={styles.modalItem2}>
-              <Text style={styles.modalTxt}>
-                {this.state.Modal1_description}
-              </Text>
-              <Text style={styles.modalTxt}>
-                {this.state.Modal1_description2}
-              </Text>
+            <View style={styles.modalItem3}>
+              <View style={{width:'30%'}}>
+                <Text style={styles.modalTxt}>收費方式 : </Text>
+              </View>
+              <View style={{width:'70%',justifyContent:'flex-start'}}>
+                <Text style={styles.modalTxt}>
+                  {this.state.Modal1_description}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.modalItem3}>
+              <View style={{width:'20%'}}>
+                <Text style={styles.modalTxt}>備註 : </Text>
+              </View>
+              <View style={{width:'80%',justifyContent:'flex-start'}}>
+                <Text style={styles.modalTxt}>
+                  {this.state.Modal1_description2}
+                </Text>
+              </View>
             </View>
           </View>
           <View style={styles.modalButtonIRow}>
@@ -232,7 +244,7 @@ class Locked extends React.Component {
           </View>
         </Modal>
         <Modal
-          style={styles.modal}
+          style={styles.modal2}
           ref={'modal2'}
           isOpen={false}
           coverScreen={true}
@@ -654,6 +666,13 @@ const userQDeviceFn= (phone,lockData,status)=>{
 const styles = StyleSheet.create({
   modal: {
     width: Dimensions.get('window').width * 0.9,
+    height: Dimensions.get('window').height * 0.4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  modal2: {
+    width: Dimensions.get('window').width * 0.9,
     height: Dimensions.get('window').height * 0.3,
     justifyContent: 'center',
     alignItems: 'center',
@@ -663,11 +682,21 @@ const styles = StyleSheet.create({
     width: '60%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:10,
+    marginBottom:15
   },
   modalItem2: {
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modalItem3: {
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'row',
+    marginTop:10,
+    marginBottom:10
   },
   modalTitle: {
     width: '100%',
@@ -678,8 +707,8 @@ const styles = StyleSheet.create({
   modalTxt: {
     width: '100%',
     fontSize: 16,
-    textAlign: 'center',
-    padding: 10,
+    textAlign: 'left',
+    // padding: 10,
   },
   modalButtonIRow: {
     flex: 1,

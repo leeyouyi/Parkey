@@ -56,30 +56,8 @@ const Lock = props => {
         userService
         .userQLPList(req)
         .then(res => {
-          // console.log('userQLPList')
           if (res.data.status === 0) {
               setList(res.data)
-              // if(userSelectLPReducer.selectLP === '') {
-              //   // setLPNo(res.data.data[0].LPNo)
-              //   // dispatch(userSelectLP(
-              //   //     res.data.data[0].LPNo,
-              //   //     res.data.data[0].LPNickname,
-              //   //     res.data.data[0].LPType
-              //   //   ))
-              // }else if(propsLP !== ''){
-              //   setLPNo(propsLP)
-              //   res.data.data.forEach(item => {
-              //     if(item.LPNo === propsLP){
-              //       dispatch(userSelectLP(
-              //         item.LPNo,
-              //         item.LPNickname,
-              //         item.LPType
-              //       ))
-              //     }
-              //   });
-              // }else{
-              //   setLPNo(userSelectLPReducer.selectLP)
-              // }
           }else{
             console.log(res.data.msg);
           }
@@ -92,7 +70,6 @@ const Lock = props => {
           devid:devid,
           ptime: userService.time(),
         };
-        // console.log(req2)
         userService
         .userQDevice(req2)
         .then(res => {
@@ -215,15 +192,53 @@ const Lock = props => {
           <Item data={data1} navigation={navigation} list={list} setPropsLP={setPropsLP}></Item>
           <Item data={data2} navigation={navigation} list={list} locked={locked} setPropsLP={setPropsLP}></Item>
           <View style={styles.bottomItem}>
+            <View style={styles.bottomItemRow1}>
+                <View
+                  style={{
+                    width: '50%',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                  }}>
+                  <Text style={styles.bottomItemTxt3}>收費狀態 : </Text>
+                  
+                </View>
+                <View
+                  style={{
+                    width: '50%',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                  }}>
+                  <Text style={styles.bottomItemTxt3}>目前費率 : {paking.FeeRate}</Text>
+                </View>
+              </View>
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
                 paddingLeft: 10,
+                flexDirection:'row',
+                marginBottom:15
               }}>
-              <Text style={styles.bottomItemTxt}>車格費率：{paking.FeeRate}</Text>
               <Text style={styles.bottomItemTxt}>
-                收費時段： {paking.BZTime}
+                收費方式： 
+              </Text>
+              <Text style={styles.bottomItemTxt1}>
+               {paking.BZTime}
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                paddingLeft: 10,
+                flexDirection:'row',
+                marginBottom:15
+              }}>
+              <Text style={styles.bottomItemTxt2}>
+                備註： 
+              </Text>
+              <Text style={styles.bottomItemTxt1}>
+               {paking.Remark}
               </Text>
             </View>
             <View style={styles.mapItem} pointerEvents="none">
@@ -371,7 +386,21 @@ const styles = StyleSheet.create({
     paddingTop:5,
   },
   bottomItemTxt: {
-    width:'100%',
+    width:'25%',
+    paddingTop:5,
+    paddingBottom:5,
+    fontSize: 14,
+    color: '#757575',
+  },
+  bottomItemTxt1: {
+    width:'75%',
+    paddingTop:5,
+    paddingBottom:5,
+    fontSize: 14,
+    color: '#757575',
+  },
+  bottomItemTxt2: {
+    width:'15%',
     paddingTop:5,
     paddingBottom:5,
     fontSize: 14,
@@ -412,6 +441,20 @@ const styles = StyleSheet.create({
   buttonItemTxt: {
     fontSize: 18,
     color: '#7C7C7E',
+  },
+  bottomItemRow1: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingLeft:10,
+    paddingRight:10
+  },
+  bottomItemTxt3: {
+    color: '#757575',
+    fontSize: 15,
+    fontWeight:'bold'
   },
 });
 export default Lock;
