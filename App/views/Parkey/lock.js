@@ -199,7 +199,11 @@ const Lock = props => {
                     justifyContent: 'center',
                     alignItems: 'flex-start',
                   }}>
-                  <Text style={styles.bottomItemTxt3}>收費狀態 : </Text>
+                  <Text style={styles.bottomItemTxt3}>收費狀態 : 
+                  {
+                    paking.OpenState === 1 ? str4 = '營業中': '休息打烊'
+                  }
+                  </Text>
                   
                 </View>
                 <View

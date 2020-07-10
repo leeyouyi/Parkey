@@ -287,8 +287,8 @@ class Home extends React.Component {
             let str = !info[index] ? '' : info[index].BZTime
             let str2 = !info[index] ? '' : info[index].Remark
             let str3 = !info[index] ? '' : info[index].FeeRate
-            // console.log(str2)
-            // let strAry= str2.split(',')
+            let str4 = !info[index] ? '' : info[index].OpenState
+
             return(
               <Modal
               style={styles.modal2}
@@ -377,7 +377,11 @@ class Home extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'flex-start',
                       }}>
-                      <Text style={styles.modal2Txt3}>收費狀態 : </Text>
+                      <Text style={styles.modal2Txt3}>收費狀態 :  
+                        {
+                          str4 === 1 ? str4 = '營業中' : '休息打烊'
+                        } 
+                      </Text>
                       
                     </View>
                     <View
