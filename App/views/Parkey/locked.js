@@ -104,10 +104,10 @@ class Locked extends React.Component {
     userService
       .userQLockedDevice(req2)
       .then(res => {
+        // console.log(res.data)
         if (res.data.status === 0) {
-          
           if(res.data.data[0].BeginTime){
-            this.setState({Modal1_title:res.data.data[0].Area})
+            this.setState({Modal1_title:res.data.data[0].SC})
             this.setState({Modal1_description:`${res.data.data[0].BZTime}`})
             this.setState({Modal1_description2:`${res.data.data[0].Remark}`})
             let date = [];
@@ -673,7 +673,7 @@ const styles = StyleSheet.create({
   modalItem3: {
     width: '80%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection:'row',
     marginTop:10,
     marginBottom:10

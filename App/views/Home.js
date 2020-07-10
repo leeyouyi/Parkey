@@ -288,7 +288,7 @@ class Home extends React.Component {
             let str2 = !info[index] ? '' : info[index].Remark
             let str3 = !info[index] ? '' : info[index].FeeRate
             let str4 = !info[index] ? '' : info[index].OpenState
-
+            // console.log(str2)
             return(
               <Modal
               style={styles.modal2}
@@ -395,14 +395,14 @@ class Home extends React.Component {
                   </View>
                   <View style={styles.modal2Row2 }>
                     <Text style={styles.modal2Txt30}>收費方式 : </Text>
-                    <Text style={styles.modal2Txt31}>{str} </Text>
+                    <Text style={styles.modal2Txt31}>{str}</Text>
                   </View>
-                  <View style={styles.modal2Row2 }>
+                  <View style={styles.modal2Row3 }>
                     <View style={{width:'15%'}}>
                       <Text style={styles.modal2Txt30}>備註 : </Text>
                     </View>
-                    <View style={{width:'75%',justifyContent:'flex-start'}}>
-                    <Text style={styles.modal2Txt32}>{str2}</Text>
+                    <View style={{width:'75%',justifyContent:'flex-start',alignItems:'flex-start',paddingTop:1}}>
+                      <Text style={styles.modal2Txt32}>{str2}</Text>
                    
                       {/* {
                         strAry.map(item=>{
@@ -983,14 +983,20 @@ const styles = StyleSheet.create({
   },
   modal2Row2: {
     width: '90%',
-    height: 50,
+    // height: 80,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row',
     marginTop:15,
-    marginBottom:15
+    marginBottom:15,
   },
- 
+  modal2Row3: {
+    width: '90%',
+    // height: 80,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+  },
   modal2Txt: {
     color: '#757575',
     fontSize: 24,
@@ -1014,12 +1020,13 @@ const styles = StyleSheet.create({
   modal2Txt31: {
     width:'70%',
     color: '#757575',
-    fontSize: 17,
+    fontSize: 14,
+    paddingTop:1
   },
   modal2Txt32: {
     width:'100%',
     color: '#757575',
-    fontSize: 17,
+    fontSize: 14,
   },
   modal2Txt4: {
     color: '#757575',

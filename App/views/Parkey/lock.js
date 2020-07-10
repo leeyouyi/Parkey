@@ -218,10 +218,10 @@ const Lock = props => {
             <View
               style={{
                 justifyContent: 'flex-start',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 paddingLeft: 10,
                 flexDirection:'row',
-                marginBottom:15
+                marginBottom:15,
               }}>
               <Text style={styles.bottomItemTxt}>
                 收費方式： 
