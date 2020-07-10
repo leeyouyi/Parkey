@@ -73,7 +73,7 @@ const Lock = props => {
         userService
         .userQDevice(req2)
         .then(res => {
-          // console.log(res.data)
+          // console.log(res.data.data[0])
           if (res.data.status === 0) {
             setParking(res.data.data[0])
             setRegion({
@@ -159,8 +159,10 @@ const Lock = props => {
     text3: paking.SC + ' 第'+paking.ParkNo +'號車格',
     navigationTxt: 'Camera',
   };
+  let str = paking.OpenState === 1 ? '營業中': '休息打烊'
 
   return (
+    
     <>
       <ScrollView style={styles.scrollView}>
       {loading ? (
@@ -200,9 +202,7 @@ const Lock = props => {
                     alignItems: 'flex-start',
                   }}>
                   <Text style={styles.bottomItemTxt3}>收費狀態 : 
-                  {
-                    // paking.OpenState === 1 ? paking.OpenState = '營業中': '休息打烊'
-                  }
+                  { str }
                   </Text>
                   
                 </View>
