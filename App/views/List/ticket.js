@@ -243,34 +243,19 @@ const TxtItem = props => {
                 </View>
                 <View style={styles.column}>
                   <Text style={styles.txtItemTxt}>{item.txt1}</Text>
-                  {item.txt2 ? 
-                  item.uri ? (
-                    <TouchableOpacity
-                    onPress={()=>{
-                      Linking.openURL('https://parkingfee.pma.gov.taipei/')
-                    }}
-                    >
-                      <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
-                    </TouchableOpacity>
-                  )
-                  :
-                  // item.model?(
-                  //   <TouchableOpacity
-                  //   onPress={()=>{
-                  //     propsThis.refs['modal'].open();
-                  //   }}
-                  //   >
-                  //     <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
-                  //   </TouchableOpacity>
-                  // )
-                  // :
-                  // (
-                    
-                    <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
-                  // ) 
-                  : (
-                    <></>
-                  )}
+                  {item.txt2 &&
+                    item.uri && (
+                      <TouchableOpacity
+                      onPress={()=>{
+                        Linking.openURL('https://parkingfee.pma.gov.taipei/')
+                      }}
+                      >
+                        <Text style={styles.txtItemTxt1}>{item.txt2}</Text>
+                      </TouchableOpacity>
+                    )
+
+                  }
+
                   {item.payTxt && !pay ? (
                     <Text style={styles.txtItemTxt2}>{item.payTxt}</Text>
                   ) : item.payTxt2 && pay ? (

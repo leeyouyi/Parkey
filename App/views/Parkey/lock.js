@@ -201,7 +201,7 @@ const Lock = props => {
                   }}>
                   <Text style={styles.bottomItemTxt3}>收費狀態 : 
                   {
-                    paking.OpenState === 1 ? str4 = '營業中': '休息打烊'
+                    // paking.OpenState === 1 ? paking.OpenState = '營業中': '休息打烊'
                   }
                   </Text>
                   
