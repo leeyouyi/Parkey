@@ -519,7 +519,7 @@ const unlockDevice = (phone, lockData, navigation, navigateTxt, dispatch, userUp
   // const {updateLP} =userUpdateLPReducer
   let req = {
     PhoneNo: phone,
-    devid: parseInt(lockData.devid),
+    devid: lockData.devid,
     LPNo: lockData.LPNo,
     ptime: userService.time(),
   };
@@ -633,7 +633,7 @@ const userQDeviceFn= (phone,lockData,status)=>{
   if(status === 3) return false
   let req= {
     PhoneNo: phone,
-    devid: parseInt(lockData.devid),
+    devid: lockData.devid,
     ptime: userService.time(),
   };
   return userService.userQDevice(req).then(res =>{

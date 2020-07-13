@@ -679,7 +679,7 @@ const modifyLpFn = (phone, chengeData, dispatch, navigation, navigateTxt) => {
 const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,btnFlag) => {
   let req = {
     PhoneNo: phone,
-    devid: parseInt(lockData.devid),
+    devid: lockData.devid,
     LPNo: lockData.LPNo,
     ptime: userService.time(),
   };
@@ -771,7 +771,7 @@ const userQDeviceFn= (phone,lockData,status)=>{
   if(status === 1) return false
   let req= {
     PhoneNo: phone,
-    devid: parseInt(lockData.devid),
+    devid: lockData.devid,
     ptime: userService.time(),
   };
   return userService.userQDevice(req).then(res =>{

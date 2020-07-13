@@ -260,6 +260,7 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
   userService
     .userQBoundDevices(req)
     .then(res => {
+      // console.log(res.data)
       if (res.data.status === 0) {
         if (!res.data.data) setHasLock(false);
         if (res.data.data) setHasLock(true);
@@ -272,10 +273,11 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
               devid: item.devid,
               ptime: userService.time(),
             };
+            console.log(req2)
             userService
               .userQDevice(req2)
               .then(res2 => {
-                // console.log(item.LPNo)
+                console.log(res2.data)
                 if (res2.data.status === 0) {
                   for (let i = 0; i < res2.data.data.length; i++) {
                     let paking = res2.data.data[i];
