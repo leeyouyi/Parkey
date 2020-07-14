@@ -273,11 +273,11 @@ const  getApi = (loginReducer,seList,setLoading,reload,seReload,setHasLock)=>{
               devid: item.devid,
               ptime: userService.time(),
             };
-            console.log(req2)
+            // console.log(req2)
             userService
               .userQDevice(req2)
               .then(res2 => {
-                console.log(res2.data)
+                // console.log(res2.data)
                 if (res2.data.status === 0) {
                   for (let i = 0; i < res2.data.data.length; i++) {
                     let paking = res2.data.data[i];

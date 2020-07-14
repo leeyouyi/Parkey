@@ -45,7 +45,7 @@ const Lock = props => {
   });
   const [flag,setFlag] = useState(true) 
   useEffect(()=>{
-    console.log(devid)
+    // console.log(devid)
     if(loginReducer.login){
       dispatch(userSelectLP('','',''))
       if(list.length === 0){
@@ -70,7 +70,7 @@ const Lock = props => {
           devid:devid,
           ptime: userService.time(),
         };
-        console.log(req2)
+        // console.log(req2)
         userService
         .userQDevice(req2)
         .then(res => {
