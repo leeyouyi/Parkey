@@ -706,7 +706,14 @@ const bindDevice = (phone, lockData, navigation, navigateTxt, paking, dispatch,b
                 btnFlag = true
               }
               if(result === 2){
-                alert('上鎖失敗')
+                Alert.alert(
+                  "請將車輛正確停放",
+                  "您的車輛並未準確停放於Parkey車鎖，請將車輛正確至車鎖上後,再操作上鎖。",
+                  [
+                    { text: "確認" }
+                  ]
+                );
+                clearInterval(interval)
               }
               if(count === 10){
                 clearInterval(interval)

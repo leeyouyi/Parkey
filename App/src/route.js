@@ -239,17 +239,26 @@ const Route = () => {
           component={Ticket}
           options={({navigation, route}) =>({
             title: '單筆停車紀錄',
+            headerBackTitleVisible:false,
             headerBackImage() {
               let pay = route.params.pay
               return (
                 <>
                 {
                   pay &&
+                  <View
+                  style={{
+                    position:'relative',
+                    left:5,
+                    padding:5
+                  }}>
                     <SvgXml
                     xml={Svgs.back}
                     width="20"
                     height="20"
                     />
+                  </View>
+
                 }
                 </>
 
