@@ -16,6 +16,7 @@ import * as userService from '../../axios/user';
 import {
   userUpdateList
 } from '../../src/action';
+import { WebView } from 'react-native-webview';
 
 const GoPay = props => {
   const {navigation,route} = props;
@@ -90,12 +91,15 @@ const GoPay = props => {
   
 
         <TouchableOpacity style={styles.txtItemWrap}
-        onPress={() => {
-          navigation.navigate('SelectPay')
-        }}
+          onPress={() => {
+            navigation.navigate('SelectPay')
+          }}
         >
+         
           <View style={styles.payItem}>
+          {/* <WebView source={{ uri: 'http://60.245.62.191:8080/' }} /> */}
             <View style={styles.row}>
+
               <SvgXml 
                   xml={newSvgs.visa}
                   width="30"
