@@ -19,6 +19,7 @@ import * as userService from '../../axios/user';
 import {userSelectLP,userUpdateLP} from '../../src/action';
 import store from '../../src/store';
 import Modal from '../../component/modalbox';
+import { useIsFocused } from '@react-navigation/native';
 
 class Locked extends React.Component {
   constructor(props) {
@@ -47,10 +48,18 @@ class Locked extends React.Component {
       LPType: '',
     };
   }
-
   componentDidMount() {
     this.getApi();
   }
+  componentDidUpdate(prevProps){
+    const { isFocused } = this.props;
+    if (this.props !== prevProps) {
+      if(isFocused){
+        this.getApi()
+      }
+    }
+  }
+
   getApi() {
     const loginReducer = store.getState().loginReducer;
     const {LPNo} = this.props.route.params.lockData;
@@ -63,6 +72,7 @@ class Locked extends React.Component {
       .then(res => {
         if (res.data.status === 0) {
           res.data.data.forEach(item => {
+            // console.log(item)
             if (item.LPNo === LPNo) {
               store.dispatch(
                 userSelectLP(item.LPNo, item.LPNickname, item.LPType),
@@ -197,6 +207,7 @@ class Locked extends React.Component {
     const LPNickname = this.state.LPNickname
     const selectLP = this.state.selectLP
     const devid = route.params.lockData.devid 
+
     return (
       <>
         <Modal
@@ -858,4 +869,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
-export default Locked;
+// export default Locked;
+
+
+export default function(props) {
+  const isFocused = useIsFocused();
+
+  return <Locked {...props} isFocused={isFocused} />;
+}
